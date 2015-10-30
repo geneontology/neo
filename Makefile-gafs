@@ -1,3 +1,12 @@
+neo-Hsap.obo: goa_ref_human.gaf.gz
+	gzip -dc $< | gaf2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
 
 neo-Scer.obo: sgd.gaf.gz
-	gzip -dc sgd.gaf.gz | gaf2obo.pl -s Scer > $@.tmp && mv $@.tmp $@
+	gzip -dc $< | gaf2obo.pl -s Scer > $@.tmp && mv $@.tmp $@
+
+neo-Mmus.obo: mgi.gaf.gz
+	gzip -dc $< | gaf2obo.pl -s Mmus > $@.tmp && mv $@.tmp $@
+
+all_obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo
+neo.obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo
+	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@
