@@ -1,0 +1,3 @@
+
+neo-Scer.obo: sgd.gaf.gz
+	gzip -dc sgd.gaf.gz | gaf2obo.pl -s Scer > $@.tmp && mv $@.tmp $@
