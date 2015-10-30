@@ -3,6 +3,7 @@ use strict;
 my %smap = (
     Scer => 'sgd',
     Mmus => 'mgi',
+    Drer => 'zfin',
     Hsap => 'goa_ref_human'
     );
 

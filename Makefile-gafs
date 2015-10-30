@@ -7,6 +7,9 @@ neo-Scer.obo: sgd.gaf.gz
 neo-Mmus.obo: mgi.gaf.gz
 	gzip -dc $< | gaf2obo.pl -s Mmus > $@.tmp && mv $@.tmp $@
 
-all_obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo
-neo.obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo
+neo-Drer.obo: zfin.gaf.gz
+	gzip -dc $< | gaf2obo.pl -s Drer > $@.tmp && mv $@.tmp $@
+
+all_obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo neo-Drer.obo
+neo.obo: neo-Hsap.obo neo-Scer.obo neo-Mmus.obo neo-Drer.obo
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@

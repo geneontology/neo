@@ -1,6 +1,8 @@
 
 all: all_obo neo.obo neo.owl
 
+test: all_obo
+
 trigger:
 	touch $@
 
