@@ -2,6 +2,7 @@
 use strict;
 my %smap = (
     Scer => 'sgd',
+    Spom => 'pombase',
     Mmus => 'mgi',
     Drer => 'zfin',
     Hsap => 'goa_ref_human'
