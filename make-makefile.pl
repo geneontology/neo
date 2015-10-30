@@ -14,7 +14,7 @@ foreach (keys %smap) {
     push(@tgts, $tgt);
     my $n = $smap{$_};
     print "$tgt: $n.gaf.gz\n";
-    print "\tgzip -dc \$< | gaf2obo.pl -s $_ > \$@.tmp && mv \$@.tmp \$@\n\n";
+    print "\tgzip -dc \$< | ./gaf2obo.pl -s $_ > \$@.tmp && mv \$@.tmp \$@\n\n";
 }
 
 print "all_obo: @tgts\n";
