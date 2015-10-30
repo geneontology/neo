@@ -5,6 +5,12 @@ my %smap = (
     Spom => 'pombase',
     Mmus => 'mgi',
     Drer => 'zfin',
+    Rnor => 'rgd',
+    Ddis => 'dictyBase',
+    Dmel => 'fb',
+    Atal => 'tair',
+    Cele => 'wb',
+    Oryza => 'gramene_oryza',
     Hsap => 'goa_ref_human'
     );
 

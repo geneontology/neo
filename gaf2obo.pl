@@ -22,6 +22,8 @@ while(<>) {
     my $db = $vals[0];
     my $id = $db eq 'MGI' ? $vals[1] : "$db:$vals[1]";
 
+    $id = expand($id);
+
     next if $done{$id};
 
     my $n = $vals[2];
@@ -47,3 +49,13 @@ print "xref: RO:0002162\n";
 
 
 # PR:000000001 ! protein
+exit 0;
+
+# todo: derive this from CURIE map
+sub expand {
+    my $id = shift;
+    $_ = $id;
+    s@^MGI:@http://www.informatics.jax.org/accession/@;
+    return $_;
+    
+}
