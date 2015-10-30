@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geneontology/neo.svg?branch=master)](https://travis-ci.org/geneontology/neo)
+
 # Noctua Entity Ontology
 
 Creates classes required by Noctua/Minerva for representing entities
