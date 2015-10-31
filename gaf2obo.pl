@@ -24,13 +24,35 @@ while(<>) {
 
     $id = expand($id);
 
-    next if $done{$id};
 
     my $n = $vals[2];
     $n =~ tr/a-zA-Z0-9_//cd;
     my $type = $vals[11];
     my $taxid = $vals[12];
     $taxid =~ s/^taxon:/NCBITaxon:/;
+
+    my $iso = $vals[16];
+
+    if ($iso && $iso =~ /(\S+)\-(\d+)/) {
+        my $num = $2;
+        $iso =~ s/^PR:/UniProtKB:/;
+
+        if (!$done{$iso}) {
+
+            print "[Term]\n";
+            print "id: $iso\n";
+            print "name: $n isoform $num $spn\n";
+            print "is_a: $id\n";
+            #print "is_a: PR:000000001 ! protein\n";
+            print "relationship: in_taxon $taxid\n";
+            print "\n";
+
+        }
+        $done{$iso}++;
+    }
+
+    next if $done{$id};
+
     
     print "[Term]\n";
     print "id: $id\n";
