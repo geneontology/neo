@@ -19,3 +19,8 @@ neo.owl: neo.obo
 
 Makefile-gafs:
 	./make-makefile.pl > $@.tmp && mv $@.tmp $@
+
+RNACFTP=ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/releases/3.0/genome_coordinates/
+
+Homo_sapiens.GRCh38.gff3.gz:
+	wget $(RNCFTP)/$@ -O $@

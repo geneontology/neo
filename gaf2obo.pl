@@ -11,6 +11,8 @@ while (@ARGV) {
     }
 }
 
+my $is_rat = $spn eq 'Rnor';
+
 print "ontology: go/noctua/$spn\n";
 print "\n";
 
@@ -18,6 +20,10 @@ my %done = ();
 while(<>) {
     chomp;
     next if m@^\!@;
+
+    # RGD redundantly include annotations to UniProtKB, duplicating genes
+    next if $is_rat && m@^UniProt@;
+
     my @vals = split(/\t/,$_);
     my $db = $vals[0];
     my $id = $db eq 'MGI' ? $vals[1] : "$db:$vals[1]";
@@ -77,7 +83,6 @@ exit 0;
 sub expand {
     my $id = shift;
     $_ = $id;
-    s@^MGI:@http://www.informatics.jax.org/accession/@;
+    s@^MGI:@http://www.informatics.jax.org/accession/MGI:@;
     return $_;
-    
 }
