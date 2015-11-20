@@ -33,4 +33,4 @@ neo-Atal.obo: tair.gaf.gz
 
 all_obo: neo-Hsap.obo neo-Scer.obo neo-Rnor.obo neo-Oryza.obo neo-Spom.obo neo-Cele.obo neo-Drer.obo neo-Dmel.obo neo-Mmus.obo neo-Ddis.obo neo-Atal.obo
 neo.obo: neo-Hsap.obo neo-Scer.obo neo-Rnor.obo neo-Oryza.obo neo-Spom.obo neo-Cele.obo neo-Drer.obo neo-Dmel.obo neo-Mmus.obo neo-Ddis.obo neo-Atal.obo
-	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@
+	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@

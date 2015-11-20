@@ -26,4 +26,4 @@ foreach (keys %smap) {
 print "all_obo: @tgts\n";
 
 print "neo.obo: @tgts\n";
-print "\towltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl \$^ --merge-support-ontologies  -o -f obo \$@\n";
+print "\towltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl \$^ --merge-support-ontologies  -o -f obo \$@.tmp && grep -v ^owl-axioms \$@.tmp > \$@\n";
