@@ -83,6 +83,9 @@ exit 0;
 sub expand {
     my $id = shift;
     $_ = $id;
-    s@^MGI:@http://www.informatics.jax.org/accession/MGI:@;
+    #s@^MGI:@http://www.informatics.jax.org/accession/MGI:@;
+
+    # perpetuate MGI awfulness for now
+    s@^MGI:@MGI:MGI:@;
     return $_;
 }
