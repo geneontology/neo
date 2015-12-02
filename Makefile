@@ -1,5 +1,6 @@
 
 all: all_obo neo.obo neo.owl
+test: all
 
 test: touch_trigger all_obo
 
