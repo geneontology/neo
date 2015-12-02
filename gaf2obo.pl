@@ -32,7 +32,17 @@ while(<>) {
 
 
     my $n = $vals[2];
-    $n =~ tr/a-zA-Z0-9_//cd;
+    $n =~ tr/a-zA-Z0-9\-_//cd;
+
+    my $fullname = $vals[9];
+    $fullname =~ tr/a-zA-Z0-9\- //cd;
+
+    if ($n eq $fullname) {
+        $fullname = undef;
+    }
+
+    my @syns = split(/\|/,$vals[10]);
+
     my $type = $vals[11];
     my $taxid = $vals[12];
     $taxid =~ s/^taxon:/NCBITaxon:/;
@@ -63,6 +73,7 @@ while(<>) {
     print "[Term]\n";
     print "id: $id\n";
     print "name: $n $spn\n";
+    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname;
     print "synonym: \"$n\" BROAD []\n";
     print "is_a: CHEBI:23367 ! molecular entity\n";
     print "relationship: in_taxon $taxid\n";
