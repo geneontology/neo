@@ -11,7 +11,8 @@ my %smap = (
     Atal => 'tair',
     Cele => 'wb',
     Oryza => 'gramene_oryza',
-    Hsap => 'goa_ref_human'
+    Hsap => 'goa_merged_human'
+    #Hsap => 'goa_ref_human'
     );
 
 my @tgts = ();

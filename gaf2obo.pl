@@ -69,11 +69,17 @@ while(<>) {
 
     next if $done{$id};
 
+    if ($n =~ m@(.*)_(\d+)$@) {
+        my ($n2,$ntaxid) = ($1,$2);
+        if ($taxid eq "NCBITaxon:$ntaxid") {
+            $n =~ s@_\d+$@@;
+        }
+    }
     
     print "[Term]\n";
     print "id: $id\n";
     print "name: $n $spn\n";
-    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname;
+    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
     print "synonym: \"$n\" BROAD []\n";
     print "is_a: CHEBI:23367 ! molecular entity\n";
     print "relationship: in_taxon $taxid\n";
