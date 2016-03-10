@@ -15,6 +15,12 @@ before_script:
 # command to run tests
 script: make test
 
+# a set of utilities meant to aid in testing modules on travis-ci. It will automatically build perl if the version requested doesn't exist
+# from: http://blogs.perl.org/users/davewood/2014/09/using-travis-with-distzilla-projects.html
+before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init --auto
+
 #after_success:
 #  coveralls
 
