@@ -24,6 +24,8 @@ foreach (keys %smap) {
     print "\tgzip -dc \$< | ./gaf2obo.pl -s $_ > \$@.tmp && mv \$@.tmp \$@\n\n";
 }
 
+push(@tgts, 'neo-RNA.obo');
+
 print "all_obo: @tgts\n";
 
 print "neo.obo: @tgts\n";

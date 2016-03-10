@@ -1,11 +1,17 @@
-neo-Hsap.obo: goa_ref_human.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+neo-Cele.obo: wb.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Cele > $@.tmp && mv $@.tmp $@
+
+neo-Dmel.obo: fb.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Dmel > $@.tmp && mv $@.tmp $@
 
 neo-Scer.obo: sgd.gaf.gz
 	gzip -dc $< | ./gaf2obo.pl -s Scer > $@.tmp && mv $@.tmp $@
 
-neo-Rnor.obo: rgd.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Rnor > $@.tmp && mv $@.tmp $@
+neo-Hsap.obo: goa_merged_human.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+
+neo-Drer.obo: zfin.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Drer > $@.tmp && mv $@.tmp $@
 
 neo-Oryza.obo: gramene_oryza.gaf.gz
 	gzip -dc $< | ./gaf2obo.pl -s Oryza > $@.tmp && mv $@.tmp $@
@@ -13,24 +19,18 @@ neo-Oryza.obo: gramene_oryza.gaf.gz
 neo-Spom.obo: pombase.gaf.gz
 	gzip -dc $< | ./gaf2obo.pl -s Spom > $@.tmp && mv $@.tmp $@
 
-neo-Cele.obo: wb.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Cele > $@.tmp && mv $@.tmp $@
-
-neo-Drer.obo: zfin.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Drer > $@.tmp && mv $@.tmp $@
-
-neo-Dmel.obo: fb.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Dmel > $@.tmp && mv $@.tmp $@
-
-neo-Mmus.obo: mgi.gaf.gz
-	gzip -dc $< | ./gaf2obo.pl -s Mmus > $@.tmp && mv $@.tmp $@
+neo-Rnor.obo: rgd.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Rnor > $@.tmp && mv $@.tmp $@
 
 neo-Ddis.obo: dictyBase.gaf.gz
 	gzip -dc $< | ./gaf2obo.pl -s Ddis > $@.tmp && mv $@.tmp $@
 
+neo-Mmus.obo: mgi.gaf.gz
+	gzip -dc $< | ./gaf2obo.pl -s Mmus > $@.tmp && mv $@.tmp $@
+
 neo-Atal.obo: tair.gaf.gz
 	gzip -dc $< | ./gaf2obo.pl -s Atal > $@.tmp && mv $@.tmp $@
 
-all_obo: neo-Hsap.obo neo-Scer.obo neo-Rnor.obo neo-Oryza.obo neo-Spom.obo neo-Cele.obo neo-Drer.obo neo-Dmel.obo neo-Mmus.obo neo-Ddis.obo neo-Atal.obo
-neo.obo: neo-Hsap.obo neo-Scer.obo neo-Rnor.obo neo-Oryza.obo neo-Spom.obo neo-Cele.obo neo-Drer.obo neo-Dmel.obo neo-Mmus.obo neo-Ddis.obo neo-Atal.obo
+all_obo: neo-Cele.obo neo-Dmel.obo neo-Scer.obo neo-Hsap.obo neo-Drer.obo neo-Oryza.obo neo-Spom.obo neo-Rnor.obo neo-Ddis.obo neo-Mmus.obo neo-Atal.obo neo-RNA.obo
+neo.obo: neo-Cele.obo neo-Dmel.obo neo-Scer.obo neo-Hsap.obo neo-Drer.obo neo-Oryza.obo neo-Spom.obo neo-Rnor.obo neo-Ddis.obo neo-Mmus.obo neo-Atal.obo neo-RNA.obo
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
