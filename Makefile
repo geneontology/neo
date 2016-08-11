@@ -1,3 +1,4 @@
+OBO = http://purl.obolibrary.org/obo
 
 all: all_obo neo.obo neo.owl
 test: all
@@ -19,7 +20,14 @@ goa_merged_human.gaf.gz: goa_ref_human.gaf.gz goa_human.gaf.gz
 	cat tmp1 tmp2 > goa_merged_human.gaf &&\
 	gzip goa_merged_human.gaf
 
-
+# Sub-makefile
+#
+# contains targets:
+#  - neo-{Gspe}.obo
+#  - all_obo
+#  neo.obo
+#
+# see below for regenerating this
 include Makefile-gafs
 
 neo.owl: neo.obo
@@ -28,7 +36,30 @@ neo.owl: neo.obo
 Makefile-gafs:
 	./make-makefile.pl > $@.tmp && mv $@.tmp $@
 
+
+GCRP=ftp://ftp.ebi.ac.uk/pub/contrib/goa/gcrp/
+
+
 RNACFTP=ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/releases/3.0/genome_coordinates/
 
 Homo_sapiens.GRCh38.gff3.gz:
 	wget $(RNCFTP)/$@ -O $@
+
+
+rnacentral.gpi.gz:
+	wget ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/.gpi/rnacentral.gpi.gz
+
+rnacentral.gpi: rnacentral.gpi.gz
+	gzip -dc $< > $@
+
+neo-RNA.obo: rnacentral.gpi 
+	./rnacgpi2obo.pl $< > $@.tmp && mv $@.tmp $@
+
+test-mouse.obo: pr.obo
+	robot extract \
+	--input $< \
+	--method MIREOT \
+	--branch-from-term '$(OBO)/NCBITaxon_10090' \
+	annotate \
+	--ontology-iri '$(OBO)/neo/test-mouse.obo' \
+	--output $@
