@@ -42,7 +42,7 @@ def build(datasets, args):
             url = url.replace(todo,"http://s3.amazonaws.com/go-public/gpad-gpi/")
         toks = url.split("/")
         bn = "mirror/"+toks[-1]
-        cmd = obj['type'] +"2obo.pl"
+        cmd = "./" + obj['type'] +"2obo.pl"
         target(bn,[],
                "wget "+url+" -O $@.tmp && mv $@.tmp $@")
         target("target/neo-"+db+".obo",[bn],
