@@ -18,6 +18,7 @@ ontology is:
 
  * Noctua is ontology-driven; curated create links between __instances__ of classes
  * RDF/OWL is the lingua-franca of the Noctua framework, and avoids the need for an ad-hoc format
+ * We can use reasoning to determine if relationships are valid
 
 the GO Noctua instances loads the ontology
 [go-lego.owl](http://purl.obolibrary.org/obo/go/extensions/go-lego.owl),
