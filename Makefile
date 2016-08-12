@@ -1,9 +1,15 @@
 OBO = http://purl.obolibrary.org/obo
 
-all: all_obo neo.obo neo.owl
-test: all
+all: target all_obo neo.obo neo.owl
 
-test: touch_trigger all_obo
+TEST_SRCS = sgd pombase
+SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex
+
+OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
+all_obo: $(OBO_SRCS)
+test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
+
+test: touch_trigger test_obo
 
 touch_trigger:
 	touch trigger
@@ -11,21 +17,22 @@ touch_trigger:
 trigger:
 	touch $@
 
-%.gaf.gz: trigger
-	wget http://geneontology.org/gene-associations/gene_association.$*.gz -O $@ && touch $@
+neo.obo:  $(OBO_SRCS)
+	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
-goa_merged_human.gaf.gz: goa_ref_human.gaf.gz goa_human.gaf.gz
-	gzip -dc goa_ref_human.gaf.gz > tmp1 &&\
-	gzip -dc goa_human.gaf.gz | grep ^RNAcentral > tmp2 &&\
-	cat tmp1 tmp2 > goa_merged_human.gaf &&\
-	gzip goa_merged_human.gaf
+
+
+datasets.json: trigger
+	wget http://s3.amazonaws.com/go-public/metadata/datasets.json -O $@
+
+
+target:
+	mkdir target
 
 # Sub-makefile
 #
 # contains targets:
 #  - neo-{Gspe}.obo
-#  - all_obo
-#  neo.obo
 #
 # see below for regenerating this
 include Makefile-gafs
@@ -34,11 +41,9 @@ neo.owl: neo.obo
 	owltools $< -o $@
 
 Makefile-gafs:
-	./make-makefile.pl > $@.tmp && mv $@.tmp $@
-
+	build-neo-makefile.py > $@.tmp && mv $@.tmp $@
 
 GCRP=ftp://ftp.ebi.ac.uk/pub/contrib/goa/gcrp/
-
 
 RNACFTP=ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/releases/3.0/genome_coordinates/
 
@@ -55,11 +60,3 @@ rnacentral.gpi: rnacentral.gpi.gz
 neo-RNA.obo: rnacentral.gpi 
 	./rnacgpi2obo.pl $< > $@.tmp && mv $@.tmp $@
 
-test-mouse.obo: pr.obo
-	robot extract \
-	--input $< \
-	--method MIREOT \
-	--branch-from-term '$(OBO)/NCBITaxon_10090' \
-	annotate \
-	--ontology-iri '$(OBO)/neo/test-mouse.obo' \
-	--output $@
