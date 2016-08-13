@@ -3,7 +3,7 @@ OBO = http://purl.obolibrary.org/obo
 all: target all_obo neo.obo neo.owl
 
 TEST_SRCS = sgd pombase
-SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex
+SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_pig
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -59,6 +59,6 @@ rnacentral.gpi.gz:
 rnacentral.gpi: rnacentral.gpi.gz
 	gzip -dc $< > $@
 
-neo-RNA.obo: rnacentral.gpi 
-	./rnacgpi2obo.pl $< > $@.tmp && mv $@.tmp $@
+target/neo-rnac.obo: rnacentral.gpi.gz 
+	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 

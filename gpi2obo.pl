@@ -24,6 +24,13 @@ while(<>) {
 
     next unless $db;
 
+    if ($local_id =~ m@^[\w:-]+$@) {
+    }
+    else {
+        print STDERR "BAD ID: $local_id\n";
+        $local_id =~ s@[^\w:-]@-@g;
+    }
+    
     # Temporary, for reducing size of MGI file
     next if $db eq 'EMBL';
     next if $db eq 'ENSEMBL' && $local_id =~ m@ENSMUST@;
@@ -31,10 +38,19 @@ while(<>) {
     my @syns = split(/\|/,$syns_str);
     my @xrefs = split(/\|/,$xrefs_str);
 
+    @syns = map {dequote($_)} @syns;
+    $symbol = dequote($symbol);
+    $fullname = dequote($symbol);
+    
     my $id = $db eq 'MGI' ? $local_id : "$db:$local_id";
 
     $id = expand($id);
 
+    if (!$symbol) {
+        # RNAs coming from UniProt or RNCA lack symbols
+        $symbol = $local_id;
+    }
+    
     $symbol =~ tr/a-zA-Z0-9\-_//cd;
 
     $fullname =~ tr/a-zA-Z0-9\- //cd;
@@ -95,4 +111,11 @@ sub expand {
     # perpetuate MGI awfulness for now
     s@^MGI:@MGI:MGI:@;
     return $_;
+}
+
+sub dequote {
+    my $s = shift;
+    $s =~ s@\"@\'@g;
+    $s =~ s@\{@@g;
+    return $s;
 }
