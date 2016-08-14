@@ -1,147 +1,3 @@
-mirror/gene_association.GeneDB_Tbrucei.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Tbrucei.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-genedb_tbrucei.obo: mirror/gene_association.GeneDB_Tbrucei.gz
-	gzip -dc mirror/gene_association.GeneDB_Tbrucei.gz | ./gaf2obo.pl -s genedb_tbrucei > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.reactome.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.reactome.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-reactome.obo: mirror/gene_association.reactome.gz
-	gzip -dc mirror/gene_association.reactome.gz | ./gaf2obo.pl -s reactome > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_human_isoform.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_human_isoform.obo: mirror/goa_human_isoform.gpi.gz
-	gzip -dc mirror/goa_human_isoform.gpi.gz | ./gpi2obo.pl -s goa_human_isoform > $@.tmp && mv $@.tmp $@
-
-
-mirror/mgi.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-mgi.obo: mirror/mgi.gpi.gz
-	gzip -dc mirror/mgi.gpi.gz | ./gpi2obo.pl -s mgi > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.jcvi.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.jcvi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-jcvi.obo: mirror/gene_association.jcvi.gz
-	gzip -dc mirror/gene_association.jcvi.gz | ./gaf2obo.pl -s jcvi > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_dog.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_dog.obo: mirror/goa_dog.gpi.gz
-	gzip -dc mirror/goa_dog.gpi.gz | ./gpi2obo.pl -s goa_dog > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.cgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-cgd.obo: mirror/gene_association.cgd.gz
-	gzip -dc mirror/gene_association.cgd.gz | ./gaf2obo.pl -s cgd > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_human.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_human.obo: mirror/goa_human.gpi.gz
-	gzip -dc mirror/goa_human.gpi.gz | ./gpi2obo.pl -s goa_human > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_human_complex.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_human_complex.obo: mirror/goa_human_complex.gpi.gz
-	gzip -dc mirror/goa_human_complex.gpi.gz | ./gpi2obo.pl -s goa_human_complex > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.sgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.sgd.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-sgd.obo: mirror/gene_association.sgd.gz
-	gzip -dc mirror/gene_association.sgd.gz | ./gaf2obo.pl -s sgd > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_chicken_complex.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_chicken_complex.obo: mirror/goa_chicken_complex.gpi.gz
-	gzip -dc mirror/goa_chicken_complex.gpi.gz | ./gpi2obo.pl -s goa_chicken_complex > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.gramene_oryza.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.gramene_oryza.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-gramene_oryza.obo: mirror/gene_association.gramene_oryza.gz
-	gzip -dc mirror/gene_association.gramene_oryza.gz | ./gaf2obo.pl -s gramene_oryza > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_pig_rna.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_pig_rna.obo: mirror/goa_pig_rna.gpi.gz
-	gzip -dc mirror/goa_pig_rna.gpi.gz | ./gpi2obo.pl -s goa_pig_rna > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_dog_rna.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_dog_rna.obo: mirror/goa_dog_rna.gpi.gz
-	gzip -dc mirror/goa_dog_rna.gpi.gz | ./gpi2obo.pl -s goa_dog_rna > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_pig_isoform.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_pig_isoform.obo: mirror/goa_pig_isoform.gpi.gz
-	gzip -dc mirror/goa_pig_isoform.gpi.gz | ./gpi2obo.pl -s goa_pig_isoform > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_chicken.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_chicken.obo: mirror/goa_chicken.gpi.gz
-	gzip -dc mirror/goa_chicken.gpi.gz | ./gpi2obo.pl -s goa_chicken > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.sgn.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-sgn.obo: mirror/gene_association.sgn.gz
-	gzip -dc mirror/gene_association.sgn.gz | ./gaf2obo.pl -s sgn > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_dog_isoform.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_dog_isoform.obo: mirror/goa_dog_isoform.gpi.gz
-	gzip -dc mirror/goa_dog_isoform.gpi.gz | ./gpi2obo.pl -s goa_dog_isoform > $@.tmp && mv $@.tmp $@
-
-
 mirror/gene_association.GeneDB_tsetse.gz: 
 	wget http://geneontology.org/gene-associations/gene_association.GeneDB_tsetse.gz -O $@.tmp && mv $@.tmp $@
 
@@ -150,84 +6,20 @@ target/neo-genedb_tsetse.obo: mirror/gene_association.GeneDB_tsetse.gz
 	gzip -dc mirror/gene_association.GeneDB_tsetse.gz | ./gaf2obo.pl -s genedb_tsetse > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.pombase.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.pombase.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_pig.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pombase.obo: mirror/gene_association.pombase.gz
-	gzip -dc mirror/gene_association.pombase.gz | ./gaf2obo.pl -s pombase > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig.obo: mirror/goa_pig.gpi.gz
+	gzip -dc mirror/goa_pig.gpi.gz | ./gpi2obo.pl -s Sscr > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_dog_complex.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.pseudocap.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog_complex.obo: mirror/goa_dog_complex.gpi.gz
-	gzip -dc mirror/goa_dog_complex.gpi.gz | ./gpi2obo.pl -s goa_dog_complex > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.fb.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-fb.obo: mirror/gene_association.fb.gz
-	gzip -dc mirror/gene_association.fb.gz | ./gaf2obo.pl -s fb > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_human_rna.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_human_rna.obo: mirror/goa_human_rna.gpi.gz
-	gzip -dc mirror/goa_human_rna.gpi.gz | ./gpi2obo.pl -s goa_human_rna > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.aspgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.aspgd.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-aspgd.obo: mirror/gene_association.aspgd.gz
-	gzip -dc mirror/gene_association.aspgd.gz | ./gaf2obo.pl -s aspgd > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.PAMGO_Oomycetes.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Oomycetes.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-pamgo_oomycetes.obo: mirror/gene_association.PAMGO_Oomycetes.gz
-	gzip -dc mirror/gene_association.PAMGO_Oomycetes.gz | ./gaf2obo.pl -s pamgo_oomycetes > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.zfin.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.zfin.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-zfin.obo: mirror/gene_association.zfin.gz
-	gzip -dc mirror/gene_association.zfin.gz | ./gaf2obo.pl -s zfin > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_cow_isoform.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_cow_isoform.obo: mirror/goa_cow_isoform.gpi.gz
-	gzip -dc mirror/goa_cow_isoform.gpi.gz | ./gpi2obo.pl -s goa_cow_isoform > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_chicken_isoform.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_chicken_isoform.obo: mirror/goa_chicken_isoform.gpi.gz
-	gzip -dc mirror/goa_chicken_isoform.gpi.gz | ./gpi2obo.pl -s goa_chicken_isoform > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.ecocyc.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
-	gzip -dc mirror/gene_association.ecocyc.gz | ./gaf2obo.pl -s ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-pseudocap.obo: mirror/gene_association.pseudocap.gz
+	gzip -dc mirror/gene_association.pseudocap.gz | ./gaf2obo.pl -s Pseudomonas > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.PAMGO_Atumefaciens.gz: 
@@ -238,52 +30,84 @@ target/neo-pamgo_atumefaciens.obo: mirror/gene_association.PAMGO_Atumefaciens.gz
 	gzip -dc mirror/gene_association.PAMGO_Atumefaciens.gz | ./gaf2obo.pl -s pamgo_atumefaciens > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.wb.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.wb.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-wb.obo: mirror/gene_association.wb.gz
-	gzip -dc mirror/gene_association.wb.gz | ./gaf2obo.pl -s wb > $@.tmp && mv $@.tmp $@
-
-
-mirror/goa_pig.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-goa_pig.obo: mirror/goa_pig.gpi.gz
-	gzip -dc mirror/goa_pig.gpi.gz | ./gpi2obo.pl -s goa_pig > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.pseudocap.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-pseudocap.obo: mirror/gene_association.pseudocap.gz
-	gzip -dc mirror/gene_association.pseudocap.gz | ./gaf2obo.pl -s pseudocap > $@.tmp && mv $@.tmp $@
-
-
 mirror/goa_cow_rna.gpi.gz: 
 	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_rna.obo: mirror/goa_cow_rna.gpi.gz
-	gzip -dc mirror/goa_cow_rna.gpi.gz | ./gpi2obo.pl -s goa_cow_rna > $@.tmp && mv $@.tmp $@
+	gzip -dc mirror/goa_cow_rna.gpi.gz | ./gpi2obo.pl -s Btau > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.gonuts.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.gonuts.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_pig_isoform.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-gonuts.obo: mirror/gene_association.gonuts.gz
-	gzip -dc mirror/gene_association.gonuts.gz | ./gaf2obo.pl -s gonuts > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig_isoform.obo: mirror/goa_pig_isoform.gpi.gz
+	gzip -dc mirror/goa_pig_isoform.gpi.gz | ./gpi2obo.pl -s Sscr > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.GeneDB_Pfalciparum.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Pfalciparum.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_human_complex.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-genedb_pfalciparum.obo: mirror/gene_association.GeneDB_Pfalciparum.gz
-	gzip -dc mirror/gene_association.GeneDB_Pfalciparum.gz | ./gaf2obo.pl -s genedb_pfalciparum > $@.tmp && mv $@.tmp $@
+target/neo-goa_human_complex.obo: mirror/goa_human_complex.gpi.gz
+	gzip -dc mirror/goa_human_complex.gpi.gz | ./gpi2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.PAMGO_Oomycetes.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Oomycetes.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-pamgo_oomycetes.obo: mirror/gene_association.PAMGO_Oomycetes.gz
+	gzip -dc mirror/gene_association.PAMGO_Oomycetes.gz | ./gaf2obo.pl -s pamgo_oomycetes > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_dog.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_dog.obo: mirror/goa_dog.gpi.gz
+	gzip -dc mirror/goa_dog.gpi.gz | ./gpi2obo.pl -s Cfam > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.ecocyc.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
+	gzip -dc mirror/gene_association.ecocyc.gz | ./gaf2obo.pl -s ecocyc > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_chicken_complex.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_chicken_complex.obo: mirror/goa_chicken_complex.gpi.gz
+	gzip -dc mirror/goa_chicken_complex.gpi.gz | ./gpi2obo.pl -s Ggal > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_chicken_rna.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_chicken_rna.obo: mirror/goa_chicken_rna.gpi.gz
+	gzip -dc mirror/goa_chicken_rna.gpi.gz | ./gpi2obo.pl -s Ggal > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.rgd.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-rgd.obo: mirror/gene_association.rgd.gz
+	gzip -dc mirror/gene_association.rgd.gz | ./gaf2obo.pl -s Rnor > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.cgd.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-cgd.obo: mirror/gene_association.cgd.gz
+	gzip -dc mirror/gene_association.cgd.gz | ./gaf2obo.pl -s cgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow_complex.gpi.gz: 
@@ -291,7 +115,7 @@ mirror/goa_cow_complex.gpi.gz:
 
 
 target/neo-goa_cow_complex.obo: mirror/goa_cow_complex.gpi.gz
-	gzip -dc mirror/goa_cow_complex.gpi.gz | ./gpi2obo.pl -s goa_cow_complex > $@.tmp && mv $@.tmp $@
+	gzip -dc mirror/goa_cow_complex.gpi.gz | ./gpi2obo.pl -s Btau > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.GeneDB_Lmajor.gz: 
@@ -302,28 +126,52 @@ target/neo-genedb_lmajor.obo: mirror/gene_association.GeneDB_Lmajor.gz
 	gzip -dc mirror/gene_association.GeneDB_Lmajor.gz | ./gaf2obo.pl -s genedb_lmajor > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_pig_complex.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.dictyBase.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.dictyBase.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig_complex.obo: mirror/goa_pig_complex.gpi.gz
-	gzip -dc mirror/goa_pig_complex.gpi.gz | ./gpi2obo.pl -s goa_pig_complex > $@.tmp && mv $@.tmp $@
+target/neo-dictybase.obo: mirror/gene_association.dictyBase.gz
+	gzip -dc mirror/gene_association.dictyBase.gz | ./gaf2obo.pl -s Ddis > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.PAMGO_Ddadantii.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Ddadantii.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_pig_rna.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pamgo_ddadantii.obo: mirror/gene_association.PAMGO_Ddadantii.gz
-	gzip -dc mirror/gene_association.PAMGO_Ddadantii.gz | ./gaf2obo.pl -s pamgo_ddadantii > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig_rna.obo: mirror/goa_pig_rna.gpi.gz
+	gzip -dc mirror/goa_pig_rna.gpi.gz | ./gpi2obo.pl -s Sscr > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.tair.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.sgn.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-tair.obo: mirror/gene_association.tair.gz
-	gzip -dc mirror/gene_association.tair.gz | ./gaf2obo.pl -s tair > $@.tmp && mv $@.tmp $@
+target/neo-sgn.obo: mirror/gene_association.sgn.gz
+	gzip -dc mirror/gene_association.sgn.gz | ./gaf2obo.pl -s Solanaceae > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.sgd.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.sgd.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-sgd.obo: mirror/gene_association.sgd.gz
+	gzip -dc mirror/gene_association.sgd.gz | ./gaf2obo.pl -s Scer > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_dog_isoform.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_dog_isoform.obo: mirror/goa_dog_isoform.gpi.gz
+	gzip -dc mirror/goa_dog_isoform.gpi.gz | ./gpi2obo.pl -s Cfam > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.fb.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-fb.obo: mirror/gene_association.fb.gz
+	gzip -dc mirror/gene_association.fb.gz | ./gaf2obo.pl -s Dmel > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.PAMGO_Mgrisea.gz: 
@@ -334,12 +182,20 @@ target/neo-pamgo_mgrisea.obo: mirror/gene_association.PAMGO_Mgrisea.gz
 	gzip -dc mirror/gene_association.PAMGO_Mgrisea.gz | ./gaf2obo.pl -s pamgo_mgrisea > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_chicken_rna.gpi.gz: 
-	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.pombase.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.pombase.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken_rna.obo: mirror/goa_chicken_rna.gpi.gz
-	gzip -dc mirror/goa_chicken_rna.gpi.gz | ./gpi2obo.pl -s goa_chicken_rna > $@.tmp && mv $@.tmp $@
+target/neo-pombase.obo: mirror/gene_association.pombase.gz
+	gzip -dc mirror/gene_association.pombase.gz | ./gaf2obo.pl -s Spom > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_pig_complex.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_pig_complex.obo: mirror/goa_pig_complex.gpi.gz
+	gzip -dc mirror/goa_pig_complex.gpi.gz | ./gpi2obo.pl -s Sscr > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow.gpi.gz: 
@@ -347,22 +203,166 @@ mirror/goa_cow.gpi.gz:
 
 
 target/neo-goa_cow.obo: mirror/goa_cow.gpi.gz
-	gzip -dc mirror/goa_cow.gpi.gz | ./gpi2obo.pl -s goa_cow > $@.tmp && mv $@.tmp $@
+	gzip -dc mirror/goa_cow.gpi.gz | ./gpi2obo.pl -s Btau > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.rgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.gramene_oryza.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.gramene_oryza.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-rgd.obo: mirror/gene_association.rgd.gz
-	gzip -dc mirror/gene_association.rgd.gz | ./gaf2obo.pl -s rgd > $@.tmp && mv $@.tmp $@
+target/neo-gramene_oryza.obo: mirror/gene_association.gramene_oryza.gz
+	gzip -dc mirror/gene_association.gramene_oryza.gz | ./gaf2obo.pl -s Oryz > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.dictyBase.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.dictyBase.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_chicken.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-dictybase.obo: mirror/gene_association.dictyBase.gz
-	gzip -dc mirror/gene_association.dictyBase.gz | ./gaf2obo.pl -s dictybase > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken.obo: mirror/goa_chicken.gpi.gz
+	gzip -dc mirror/goa_chicken.gpi.gz | ./gpi2obo.pl -s Ggal > $@.tmp && mv $@.tmp $@
+
+
+mirror/mgi.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-mgi.obo: mirror/mgi.gpi.gz
+	gzip -dc mirror/mgi.gpi.gz | ./gpi2obo.pl -s Mmus > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_cow_isoform.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_cow_isoform.obo: mirror/goa_cow_isoform.gpi.gz
+	gzip -dc mirror/goa_cow_isoform.gpi.gz | ./gpi2obo.pl -s Btau > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.tair.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-tair.obo: mirror/gene_association.tair.gz
+	gzip -dc mirror/gene_association.tair.gz | ./gaf2obo.pl -s Atal > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_human_isoform.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_human_isoform.obo: mirror/goa_human_isoform.gpi.gz
+	gzip -dc mirror/goa_human_isoform.gpi.gz | ./gpi2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.gonuts.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.gonuts.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-gonuts.obo: mirror/gene_association.gonuts.gz
+	gzip -dc mirror/gene_association.gonuts.gz | ./gaf2obo.pl -s gonuts > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.zfin.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.zfin.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-zfin.obo: mirror/gene_association.zfin.gz
+	gzip -dc mirror/gene_association.zfin.gz | ./gaf2obo.pl -s Drer > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_chicken_isoform.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_chicken_isoform.obo: mirror/goa_chicken_isoform.gpi.gz
+	gzip -dc mirror/goa_chicken_isoform.gpi.gz | ./gpi2obo.pl -s Ggal > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.GeneDB_Tbrucei.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Tbrucei.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-genedb_tbrucei.obo: mirror/gene_association.GeneDB_Tbrucei.gz
+	gzip -dc mirror/gene_association.GeneDB_Tbrucei.gz | ./gaf2obo.pl -s genedb_tbrucei > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.wb.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.wb.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-wb.obo: mirror/gene_association.wb.gz
+	gzip -dc mirror/gene_association.wb.gz | ./gaf2obo.pl -s Cele > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_dog_rna.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_dog_rna.obo: mirror/goa_dog_rna.gpi.gz
+	gzip -dc mirror/goa_dog_rna.gpi.gz | ./gpi2obo.pl -s Cfam > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.PAMGO_Ddadantii.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Ddadantii.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-pamgo_ddadantii.obo: mirror/gene_association.PAMGO_Ddadantii.gz
+	gzip -dc mirror/gene_association.PAMGO_Ddadantii.gz | ./gaf2obo.pl -s pamgo_ddadantii > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.reactome.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.reactome.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-reactome.obo: mirror/gene_association.reactome.gz
+	gzip -dc mirror/gene_association.reactome.gz | ./gaf2obo.pl -s reactome > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_dog_complex.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_dog_complex.obo: mirror/goa_dog_complex.gpi.gz
+	gzip -dc mirror/goa_dog_complex.gpi.gz | ./gpi2obo.pl -s Cfam > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.aspgd.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.aspgd.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-aspgd.obo: mirror/gene_association.aspgd.gz
+	gzip -dc mirror/gene_association.aspgd.gz | ./gaf2obo.pl -s Aspergillus > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_human.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_human.obo: mirror/goa_human.gpi.gz
+	gzip -dc mirror/goa_human.gpi.gz | ./gpi2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+
+
+mirror/goa_human_rna.gpi.gz: 
+	wget http://s3.amazonaws.com/go-public/gpad-gpi/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-goa_human_rna.obo: mirror/goa_human_rna.gpi.gz
+	gzip -dc mirror/goa_human_rna.gpi.gz | ./gpi2obo.pl -s Hsap > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.jcvi.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.jcvi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-jcvi.obo: mirror/gene_association.jcvi.gz
+	gzip -dc mirror/gene_association.jcvi.gz | ./gaf2obo.pl -s jcvi > $@.tmp && mv $@.tmp $@
+
+
+mirror/gene_association.GeneDB_Pfalciparum.gz: 
+	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Pfalciparum.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-genedb_pfalciparum.obo: mirror/gene_association.GeneDB_Pfalciparum.gz
+	gzip -dc mirror/gene_association.GeneDB_Pfalciparum.gz | ./gaf2obo.pl -s genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 

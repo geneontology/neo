@@ -36,6 +36,10 @@ def build(datasets, args):
                 smap[dn] = d
     for (db,obj) in smap.items():
         sp = db ## TODO
+        if 'species_code' in obj:
+            sp = obj['species_code']
+            if sp is None:
+                sp = db
         url = obj['url']
         todo = "http://geneontology.org/gpad-gpi/release/"
         if url.startswith(todo):
