@@ -2,6 +2,9 @@ OBO = http://purl.obolibrary.org/obo
 
 all: target all_obo neo.obo neo.owl
 
+clean:
+	rm trigger mirror/*gz target/*.obo
+
 TEST_SRCS = sgd pombase
 SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_pig
 
