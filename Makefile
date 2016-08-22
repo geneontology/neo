@@ -22,7 +22,8 @@ touch_trigger:
 trigger:
 	touch $@
 
-neo.obo:  $(OBO_SRCS)
+IMPORTS = imports/pr_import.obo
+neo.obo:  $(OBO_SRCS) $(IMPORTS)
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
 

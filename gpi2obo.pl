@@ -51,9 +51,9 @@ while(<>) {
         $symbol = $local_id;
     }
     
-    $symbol =~ tr/a-zA-Z0-9\-_//cd;
+    $symbol =~ tr/a-zA-Z0-9\-_\/\.//cd;
 
-    $fullname =~ tr/a-zA-Z0-9\- //cd;
+    $fullname =~ tr/a-zA-Z0-9\- \/\.//cd;
 
     if ($symbol eq $fullname) {
         $fullname = undef;
