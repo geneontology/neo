@@ -1,0 +1,32 @@
+format-version: 1.2
+ontology: go/noctua/imports/pr_import
+
+[Term]
+id: BFO:0000030
+name: object
+is_a: BFO:0000040  ! material entity
+
+[Term]
+id: BFO:0000040
+name: material entity
+
+[Term]
+id: CHEBI:23367
+name: molecular entity
+is_a: BFO:0000030  ! object
+
+[Term]
+id: CHEBI:50047
+name: organic amino compound
+is_a: CHEBI:23367  ! molecular entity
+
+[Term]
+id: PR:000000001
+name: protein
+is_a: PR:000018263  ! amino acid chain
+
+[Term]
+id: PR:000018263
+name: amino acid chain
+is_a: CHEBI:50047  ! organic amino compound
+
