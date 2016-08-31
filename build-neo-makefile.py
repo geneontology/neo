@@ -50,7 +50,7 @@ def build(datasets, args):
         target(bn,[],
                "wget "+url+" -O $@.tmp && mv $@.tmp $@")
         target("target/neo-"+db+".obo",[bn],
-               "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " > $@.tmp && mv $@.tmp $@")
+               "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + " > $@.tmp && mv $@.tmp $@")
             
 
 def target(tgt,deps,cmd):

@@ -3,16 +3,22 @@
 use strict;
 
 my $spn = 'generic';
+my $ontid;
 
 while (@ARGV) {
     my $opt = shift @ARGV;
     if ($opt eq '-s') {
         $spn = shift @ARGV;
     }
+    elsif ($opt eq '-n') {
+        $ontid = shift @ARGV;
+    }
+}
+if (!$ontid) {
+    $ontid = $spn;
 }
 
-
-print "ontology: go/noctua/$spn\n";
+print "ontology: go/noctua/$ontid\n";
 print "\n";
 
 my %done = ();
