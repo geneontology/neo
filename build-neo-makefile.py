@@ -43,7 +43,12 @@ def build(datasets, args):
         url = obj['url']
         todo = "http://geneontology.org/gpad-gpi/release/"
         if url.startswith(todo):
-            url = url.replace(todo,"http://s3.amazonaws.com/go-public/gpad-gpi/")
+            if 'source' in obj:
+                # gpad-gpi is not yet mirrored in
+                url = obj['source']
+            else:
+                # in future releases will be made direct to amazon
+                url.replace(todo,"http://s3.amazonaws.com/go-public/gpad-gpi/")
         toks = url.split("/")
         bn = "mirror/"+toks[-1]
         cmd = "./" + obj['type'] +"2obo.pl"
