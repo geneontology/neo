@@ -3,7 +3,7 @@ OBO = http://purl.obolibrary.org/obo
 all: target all_obo neo.obo neo.owl
 
 clean:
-	rm trigger mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
+	rm trigger datasets.json mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
 
 TEST_SRCS = sgd pombase
 SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_pig
@@ -29,7 +29,7 @@ neo.obo:  $(OBO_SRCS) $(IMPORTS)
 
 
 datasets.json: trigger
-	wget http://s3.amazonaws.com/go-public/metadata/datasets.json -O $@
+	wget http://s3.amazonaws.com/go-public/metadata/datasets.json -O $@ && touch $@
 
 
 target:
@@ -46,8 +46,8 @@ include Makefile-gafs
 neo.owl: neo.obo
 	owltools $< -o $@
 
-Makefile-gafs:
-	build-neo-makefile.py > $@.tmp && mv $@.tmp $@
+Makefile-gafs: datasets.json
+	build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
 
 GCRP=ftp://ftp.ebi.ac.uk/pub/contrib/goa/gcrp/
 
