@@ -47,7 +47,7 @@ neo.owl: neo.obo
 	owltools $< -o $@
 
 Makefile-gafs: datasets.json
-	build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
+	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
 
 GCRP=ftp://ftp.ebi.ac.uk/pub/contrib/goa/gcrp/
 
