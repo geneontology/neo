@@ -3,7 +3,7 @@
 # Noctua Entity Ontology
 
 This repository contains classes required by Noctua/Minerva for
-representing entities that are subject of 'enabled by' relations, and
+representing entities that are object of 'enabled by' relations, and
 similar molecular relationships. This includes:
 
  * genes
@@ -43,7 +43,7 @@ via cloudfront.
 # Contents
 
 The contents of NEO are largely driven by the contents of each GOC
-members GPI file (if a GPI file is not provided, a GAF is used
+member's GPI file (if a GPI file is not provided, a GAF is used
 instead). This allows each MOD or Database to have control over what
 kinds of entities can and cannot be described in Noctua.
 
@@ -57,7 +57,7 @@ process is entirely automated, and no curation is involved. See the
  * The results are concatenated together into neo.obo / neo.owl
 
 For modeling choices, we aim to be consistent with other ontologies
-such as PRO. For example, the `parent` column in a GPI is ised to make
+such as PRO. For example, the `parent` column in a GPI is used to make
 `has_gene_template` relationships between the protein and its gene.
 
 For genes we populate the UniProt Xref as a synonym to enhance
@@ -97,7 +97,7 @@ be difficult to select a protein ID that is guaranteed to permanently
 have the desired semantics of "any product of gene X". To help, we:
 
  * ensure that the gene ID is present as a synonym in the corresponding protein class, to facilitate accurate selection
- * allow MODs control over what protein IDs are used via there GPI files. Thus if a MOD uses their own MOD protein IDs, these can be used. Alternatively the MOD can choose UniProt or PRO
+ * allow MODs control over what protein IDs are used via their GPI files. Thus if a MOD uses their own MOD protein IDs, these can be used. Alternatively the MOD can choose UniProt or PRO
 
 At some stage we will switch out existing gene IDs for designated protein IDs.
 
