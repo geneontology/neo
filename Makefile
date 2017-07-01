@@ -6,7 +6,7 @@ clean:
 	rm trigger datasets.json mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
 
 TEST_SRCS = sgd pombase
-SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_pig
+SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_pig xenbase
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
