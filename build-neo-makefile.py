@@ -52,10 +52,14 @@ def build(datasets, args):
         toks = url.split("/")
         bn = "mirror/"+toks[-1]
         cmd = "./" + obj['type'] +"2obo.pl"
+
+        extra_args = ""
+        if 'isoform' in bn:
+            extra_args += " -I"
         target(bn,[],
                "wget "+url+" -O $@.tmp && mv $@.tmp $@")
         target("target/neo-"+db+".obo",[bn],
-               "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + " > $@.tmp && mv $@.tmp $@")
+               "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
             
 
 def target(tgt,deps,cmd):

@@ -4,6 +4,7 @@ use strict;
 
 my $spn = 'generic';
 my $ontid;
+my $isoform_only = 0;
 
 while (@ARGV) {
     my $opt = shift @ARGV;
@@ -12,6 +13,9 @@ while (@ARGV) {
     }
     elsif ($opt eq '-n') {
         $ontid = shift @ARGV;
+    }
+    elsif ($opt eq '-I') {
+        $isoform_only = 1;
     }
 }
 if (!$ontid) {
@@ -37,6 +41,9 @@ while(<>) {
 
     $id = expand($id);
 
+    next if $isoform_only && $id !~ m@\-\d+$@;
+    
+    
 
     my $n = $vals[2];
     $n =~ tr/a-zA-Z0-9\-_//cd;
