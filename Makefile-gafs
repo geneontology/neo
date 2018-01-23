@@ -1,5 +1,5 @@
 mirror/gene_association.aspgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.aspgd.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.aspgd.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-aspgd.obo: mirror/gene_association.aspgd.gz
@@ -7,7 +7,7 @@ target/neo-aspgd.obo: mirror/gene_association.aspgd.gz
 
 
 mirror/gene_association.cgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-cgd.obo: mirror/gene_association.cgd.gz
@@ -15,7 +15,7 @@ target/neo-cgd.obo: mirror/gene_association.cgd.gz
 
 
 mirror/gene_association.dictyBase.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.dictyBase.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.dictyBase.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-dictybase.obo: mirror/gene_association.dictyBase.gz
@@ -23,7 +23,7 @@ target/neo-dictybase.obo: mirror/gene_association.dictyBase.gz
 
 
 mirror/gene_association.ecocyc.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
@@ -31,7 +31,7 @@ target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
 
 
 mirror/gene_association.fb.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-fb.obo: mirror/gene_association.fb.gz
@@ -39,7 +39,7 @@ target/neo-fb.obo: mirror/gene_association.fb.gz
 
 
 mirror/gene_association.GeneDB_Lmajor.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Lmajor.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.GeneDB_Lmajor.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-genedb_lmajor.obo: mirror/gene_association.GeneDB_Lmajor.gz
@@ -47,7 +47,7 @@ target/neo-genedb_lmajor.obo: mirror/gene_association.GeneDB_Lmajor.gz
 
 
 mirror/gene_association.GeneDB_Pfalciparum.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Pfalciparum.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.GeneDB_Pfalciparum.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-genedb_pfalciparum.obo: mirror/gene_association.GeneDB_Pfalciparum.gz
@@ -55,23 +55,15 @@ target/neo-genedb_pfalciparum.obo: mirror/gene_association.GeneDB_Pfalciparum.gz
 
 
 mirror/gene_association.GeneDB_Tbrucei.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_Tbrucei.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.GeneDB_Tbrucei.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-genedb_tbrucei.obo: mirror/gene_association.GeneDB_Tbrucei.gz
 	gzip -dc mirror/gene_association.GeneDB_Tbrucei.gz | ./gaf2obo.pl -s genedb_tbrucei -n genedb_tbrucei > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.GeneDB_tsetse.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.GeneDB_tsetse.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-genedb_tsetse.obo: mirror/gene_association.GeneDB_tsetse.gz
-	gzip -dc mirror/gene_association.GeneDB_tsetse.gz | ./gaf2obo.pl -s genedb_tsetse -n genedb_tsetse > $@.tmp && mv $@.tmp $@
-
-
 mirror/goa_chicken.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken.obo: mirror/goa_chicken.gpi.gz
@@ -79,7 +71,7 @@ target/neo-goa_chicken.obo: mirror/goa_chicken.gpi.gz
 
 
 mirror/goa_chicken_complex.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_complex.obo: mirror/goa_chicken_complex.gpi.gz
@@ -87,7 +79,7 @@ target/neo-goa_chicken_complex.obo: mirror/goa_chicken_complex.gpi.gz
 
 
 mirror/goa_chicken_isoform.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_isoform.obo: mirror/goa_chicken_isoform.gpi.gz
@@ -95,7 +87,7 @@ target/neo-goa_chicken_isoform.obo: mirror/goa_chicken_isoform.gpi.gz
 
 
 mirror/goa_chicken_rna.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_rna.obo: mirror/goa_chicken_rna.gpi.gz
@@ -103,7 +95,7 @@ target/neo-goa_chicken_rna.obo: mirror/goa_chicken_rna.gpi.gz
 
 
 mirror/goa_cow.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow.obo: mirror/goa_cow.gpi.gz
@@ -111,7 +103,7 @@ target/neo-goa_cow.obo: mirror/goa_cow.gpi.gz
 
 
 mirror/goa_cow_complex.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_complex.obo: mirror/goa_cow_complex.gpi.gz
@@ -119,7 +111,7 @@ target/neo-goa_cow_complex.obo: mirror/goa_cow_complex.gpi.gz
 
 
 mirror/goa_cow_isoform.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_isoform.obo: mirror/goa_cow_isoform.gpi.gz
@@ -127,7 +119,7 @@ target/neo-goa_cow_isoform.obo: mirror/goa_cow_isoform.gpi.gz
 
 
 mirror/goa_cow_rna.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_rna.obo: mirror/goa_cow_rna.gpi.gz
@@ -135,7 +127,7 @@ target/neo-goa_cow_rna.obo: mirror/goa_cow_rna.gpi.gz
 
 
 mirror/goa_dog.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog.obo: mirror/goa_dog.gpi.gz
@@ -143,7 +135,7 @@ target/neo-goa_dog.obo: mirror/goa_dog.gpi.gz
 
 
 mirror/goa_dog_complex.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_complex.obo: mirror/goa_dog_complex.gpi.gz
@@ -151,7 +143,7 @@ target/neo-goa_dog_complex.obo: mirror/goa_dog_complex.gpi.gz
 
 
 mirror/goa_dog_isoform.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_isoform.obo: mirror/goa_dog_isoform.gpi.gz
@@ -159,7 +151,7 @@ target/neo-goa_dog_isoform.obo: mirror/goa_dog_isoform.gpi.gz
 
 
 mirror/goa_dog_rna.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_rna.obo: mirror/goa_dog_rna.gpi.gz
@@ -167,7 +159,7 @@ target/neo-goa_dog_rna.obo: mirror/goa_dog_rna.gpi.gz
 
 
 mirror/goa_human.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human.obo: mirror/goa_human.gpi.gz
@@ -175,7 +167,7 @@ target/neo-goa_human.obo: mirror/goa_human.gpi.gz
 
 
 mirror/goa_human_complex.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_complex.obo: mirror/goa_human_complex.gpi.gz
@@ -183,7 +175,7 @@ target/neo-goa_human_complex.obo: mirror/goa_human_complex.gpi.gz
 
 
 mirror/goa_human_isoform.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_isoform.obo: mirror/goa_human_isoform.gpi.gz
@@ -191,7 +183,7 @@ target/neo-goa_human_isoform.obo: mirror/goa_human_isoform.gpi.gz
 
 
 mirror/goa_human_rna.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_rna.obo: mirror/goa_human_rna.gpi.gz
@@ -199,7 +191,7 @@ target/neo-goa_human_rna.obo: mirror/goa_human_rna.gpi.gz
 
 
 mirror/goa_pig.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig.obo: mirror/goa_pig.gpi.gz
@@ -207,7 +199,7 @@ target/neo-goa_pig.obo: mirror/goa_pig.gpi.gz
 
 
 mirror/goa_pig_complex.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_complex.obo: mirror/goa_pig_complex.gpi.gz
@@ -215,7 +207,7 @@ target/neo-goa_pig_complex.obo: mirror/goa_pig_complex.gpi.gz
 
 
 mirror/goa_pig_isoform.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_isoform.obo: mirror/goa_pig_isoform.gpi.gz
@@ -223,7 +215,7 @@ target/neo-goa_pig_isoform.obo: mirror/goa_pig_isoform.gpi.gz
 
 
 mirror/goa_pig_rna.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_rna.obo: mirror/goa_pig_rna.gpi.gz
@@ -231,7 +223,7 @@ target/neo-goa_pig_rna.obo: mirror/goa_pig_rna.gpi.gz
 
 
 mirror/goa_pdb.gaf.gz: 
-	wget http://geneontology.org/gene-associations/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pdb.obo: mirror/goa_pdb.gaf.gz
@@ -239,7 +231,7 @@ target/neo-goa_pdb.obo: mirror/goa_pdb.gaf.gz
 
 
 mirror/goa_uniprot_all.gpi.gz: 
-	wget http://geneontology.org/gene-associations/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_uniprot_all.obo: mirror/goa_uniprot_all.gpi.gz
@@ -247,7 +239,7 @@ target/neo-goa_uniprot_all.obo: mirror/goa_uniprot_all.gpi.gz
 
 
 mirror/goa_uniprot_gcrp.gpi.gz: 
-	wget http://geneontology.org/gene-associations/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_uniprot_gcrp.obo: mirror/goa_uniprot_gcrp.gpi.gz
@@ -255,7 +247,7 @@ target/neo-goa_uniprot_gcrp.obo: mirror/goa_uniprot_gcrp.gpi.gz
 
 
 mirror/gene_association.gonuts.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.gonuts.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.gonuts.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-gonuts.obo: mirror/gene_association.gonuts.gz
@@ -263,7 +255,7 @@ target/neo-gonuts.obo: mirror/gene_association.gonuts.gz
 
 
 mirror/gene_association.gramene_oryza.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.gramene_oryza.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.gramene_oryza.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-gramene_oryza.obo: mirror/gene_association.gramene_oryza.gz
@@ -271,7 +263,7 @@ target/neo-gramene_oryza.obo: mirror/gene_association.gramene_oryza.gz
 
 
 mirror/gene_association.jcvi.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.jcvi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.jcvi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-jcvi.obo: mirror/gene_association.jcvi.gz
@@ -279,7 +271,7 @@ target/neo-jcvi.obo: mirror/gene_association.jcvi.gz
 
 
 mirror/mgi.gpi.gz: 
-	wget http://www.informatics.jax.org/downloads/reports/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://www.informatics.jax.org/downloads/reports/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-mgi.obo: mirror/mgi.gpi.gz
@@ -287,7 +279,7 @@ target/neo-mgi.obo: mirror/mgi.gpi.gz
 
 
 mirror/gene_association.paint_cgd.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_cgd.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_cgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_cgd.obo: mirror/gene_association.paint_cgd.gaf.gz
@@ -295,7 +287,7 @@ target/neo-paint_cgd.obo: mirror/gene_association.paint_cgd.gaf.gz
 
 
 mirror/gene_association.paint_dictyBase.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_dictyBase.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_dictyBase.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_dictybase.obo: mirror/gene_association.paint_dictyBase.gaf.gz
@@ -303,7 +295,7 @@ target/neo-paint_dictybase.obo: mirror/gene_association.paint_dictyBase.gaf.gz
 
 
 mirror/gene_association.paint_ecocyc.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_ecocyc.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_ecocyc.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_ecocyc.obo: mirror/gene_association.paint_ecocyc.gaf.gz
@@ -311,7 +303,7 @@ target/neo-paint_ecocyc.obo: mirror/gene_association.paint_ecocyc.gaf.gz
 
 
 mirror/gene_association.paint_fb.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_fb.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_fb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_fb.obo: mirror/gene_association.paint_fb.gaf.gz
@@ -319,7 +311,7 @@ target/neo-paint_fb.obo: mirror/gene_association.paint_fb.gaf.gz
 
 
 mirror/gene_association.paint_goa_chicken.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_goa_chicken.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_goa_chicken.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_goa_chicken.obo: mirror/gene_association.paint_goa_chicken.gaf.gz
@@ -327,7 +319,7 @@ target/neo-paint_goa_chicken.obo: mirror/gene_association.paint_goa_chicken.gaf.
 
 
 mirror/gene_association.paint_goa_human.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_goa_human.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_goa_human.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_goa_human.obo: mirror/gene_association.paint_goa_human.gaf.gz
@@ -335,7 +327,7 @@ target/neo-paint_goa_human.obo: mirror/gene_association.paint_goa_human.gaf.gz
 
 
 mirror/gene_association.paint_mgi.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_mgi.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_mgi.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_mgi.obo: mirror/gene_association.paint_mgi.gaf.gz
@@ -343,7 +335,7 @@ target/neo-paint_mgi.obo: mirror/gene_association.paint_mgi.gaf.gz
 
 
 mirror/gene_association.paint_other.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_other.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_other.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_other.obo: mirror/gene_association.paint_other.gaf.gz
@@ -351,7 +343,7 @@ target/neo-paint_other.obo: mirror/gene_association.paint_other.gaf.gz
 
 
 mirror/gene_association.paint_pombase.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_pombase.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_pombase.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_pombase.obo: mirror/gene_association.paint_pombase.gaf.gz
@@ -359,7 +351,7 @@ target/neo-paint_pombase.obo: mirror/gene_association.paint_pombase.gaf.gz
 
 
 mirror/gene_association.paint_rgd.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_rgd.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_rgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_rgd.obo: mirror/gene_association.paint_rgd.gaf.gz
@@ -367,7 +359,7 @@ target/neo-paint_rgd.obo: mirror/gene_association.paint_rgd.gaf.gz
 
 
 mirror/gene_association.paint_sgd.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_sgd.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_sgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_sgd.obo: mirror/gene_association.paint_sgd.gaf.gz
@@ -375,7 +367,7 @@ target/neo-paint_sgd.obo: mirror/gene_association.paint_sgd.gaf.gz
 
 
 mirror/gene_association.paint_tair.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_tair.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_tair.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_tair.obo: mirror/gene_association.paint_tair.gaf.gz
@@ -383,7 +375,7 @@ target/neo-paint_tair.obo: mirror/gene_association.paint_tair.gaf.gz
 
 
 mirror/gene_association.paint_wb.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_wb.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_wb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_wb.obo: mirror/gene_association.paint_wb.gaf.gz
@@ -391,7 +383,7 @@ target/neo-paint_wb.obo: mirror/gene_association.paint_wb.gaf.gz
 
 
 mirror/gene_association.paint_zfin.gaf.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.paint_zfin.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.paint_zfin.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-paint_zfin.obo: mirror/gene_association.paint_zfin.gaf.gz
@@ -399,7 +391,7 @@ target/neo-paint_zfin.obo: mirror/gene_association.paint_zfin.gaf.gz
 
 
 mirror/gene_association.PAMGO_Atumefaciens.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Atumefaciens.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.PAMGO_Atumefaciens.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pamgo_atumefaciens.obo: mirror/gene_association.PAMGO_Atumefaciens.gz
@@ -407,7 +399,7 @@ target/neo-pamgo_atumefaciens.obo: mirror/gene_association.PAMGO_Atumefaciens.gz
 
 
 mirror/gene_association.PAMGO_Ddadantii.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Ddadantii.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.PAMGO_Ddadantii.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pamgo_ddadantii.obo: mirror/gene_association.PAMGO_Ddadantii.gz
@@ -415,7 +407,7 @@ target/neo-pamgo_ddadantii.obo: mirror/gene_association.PAMGO_Ddadantii.gz
 
 
 mirror/gene_association.PAMGO_Mgrisea.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Mgrisea.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.PAMGO_Mgrisea.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pamgo_mgrisea.obo: mirror/gene_association.PAMGO_Mgrisea.gz
@@ -423,7 +415,7 @@ target/neo-pamgo_mgrisea.obo: mirror/gene_association.PAMGO_Mgrisea.gz
 
 
 mirror/gene_association.PAMGO_Oomycetes.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.PAMGO_Oomycetes.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.PAMGO_Oomycetes.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pamgo_oomycetes.obo: mirror/gene_association.PAMGO_Oomycetes.gz
@@ -431,7 +423,7 @@ target/neo-pamgo_oomycetes.obo: mirror/gene_association.PAMGO_Oomycetes.gz
 
 
 mirror/gene_association.pombase.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.pombase.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.pombase.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pombase.obo: mirror/gene_association.pombase.gz
@@ -439,7 +431,7 @@ target/neo-pombase.obo: mirror/gene_association.pombase.gz
 
 
 mirror/gene_association.pseudocap.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-pseudocap.obo: mirror/gene_association.pseudocap.gz
@@ -447,7 +439,7 @@ target/neo-pseudocap.obo: mirror/gene_association.pseudocap.gz
 
 
 mirror/gene_association.reactome.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.reactome.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.reactome.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-reactome.obo: mirror/gene_association.reactome.gz
@@ -455,7 +447,7 @@ target/neo-reactome.obo: mirror/gene_association.reactome.gz
 
 
 mirror/gene_association.rgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-rgd.obo: mirror/gene_association.rgd.gz
@@ -463,7 +455,7 @@ target/neo-rgd.obo: mirror/gene_association.rgd.gz
 
 
 mirror/rnacentral.gpi.gz: 
-	wget ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/gpi/rnacentral.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/gpi/rnacentral.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-rnacentral.obo: mirror/rnacentral.gpi.gz
@@ -471,7 +463,7 @@ target/neo-rnacentral.obo: mirror/rnacentral.gpi.gz
 
 
 mirror/gene_association.sgd.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.sgd.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.sgd.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-sgd.obo: mirror/gene_association.sgd.gz
@@ -479,7 +471,7 @@ target/neo-sgd.obo: mirror/gene_association.sgd.gz
 
 
 mirror/gene_association.sgn.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-sgn.obo: mirror/gene_association.sgn.gz
@@ -487,7 +479,7 @@ target/neo-sgn.obo: mirror/gene_association.sgn.gz
 
 
 mirror/gene_association.tair.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-tair.obo: mirror/gene_association.tair.gz
@@ -495,7 +487,7 @@ target/neo-tair.obo: mirror/gene_association.tair.gz
 
 
 mirror/gene_association.wb.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.wb.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.wb.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-wb.obo: mirror/gene_association.wb.gz
@@ -503,18 +495,18 @@ target/neo-wb.obo: mirror/gene_association.wb.gz
 
 
 mirror/xenbase.gpi.gz: 
-	wget ftp://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-xenbase.obo: mirror/xenbase.gpi.gz
 	gzip -dc mirror/xenbase.gpi.gz | ./gpi2obo.pl -s Xenopus -n xenbase > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.zfin.gz: 
-	wget http://geneontology.org/gene-associations/gene_association.zfin.gz -O $@.tmp && mv $@.tmp $@
+mirror/zfin.gpi.gz: 
+	wget --no-check-certificate https://zfin.org/downloads/zfin.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-zfin.obo: mirror/gene_association.zfin.gz
-	gzip -dc mirror/gene_association.zfin.gz | ./gaf2obo.pl -s Drer -n zfin > $@.tmp && mv $@.tmp $@
+target/neo-zfin.obo: mirror/zfin.gpi.gz
+	gzip -dc mirror/zfin.gpi.gz | ./gpi2obo.pl -s Drer -n zfin > $@.tmp && mv $@.tmp $@
 
 

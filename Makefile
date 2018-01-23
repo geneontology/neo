@@ -35,6 +35,9 @@ datasets.json: trigger
 target:
 	mkdir target
 
+foo:
+	pwd
+
 # Sub-makefile
 #
 # contains targets:

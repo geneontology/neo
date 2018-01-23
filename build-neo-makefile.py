@@ -57,7 +57,7 @@ def build(datasets, args):
         if 'isoform' in bn:
             extra_args += " -I"
         target(bn,[],
-               "wget "+url+" -O $@.tmp && mv $@.tmp $@")
+               "wget --no-check-certificate "+url+" -O $@.tmp && mv $@.tmp $@")
         target("target/neo-"+db+".obo",[bn],
                "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
             
