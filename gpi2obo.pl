@@ -73,9 +73,9 @@ while(<>) {
 
     $tax_id =~ s/^taxon:/NCBITaxon:/;
 
-    my $type = 'CHEBI:23367 ! molecular entity';
+    my $type = 'CHEBI:33695 ! information biomacromolecule';
     if ($type_str eq 'protein') {
-        $type = 'PR:000000001 ! protein';
+        $type = 'CHEBI:36080 ! protein';
     }
     elsif ($type_str eq 'transcript') {
         $type = 'CHEBI:33697 ! ribonucleic acid';
