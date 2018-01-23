@@ -95,7 +95,7 @@ while(<>) {
     print "name: $n $spn\n";
     print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
     print "synonym: \"$n\" BROAD [$taxid]\n";
-    print "is_a: CHEBI:23367 ! molecular entity\n";
+    print "is_a: CHEBI:33695 ! information biomacromolecule\n";
     print "relationship: in_taxon $taxid\n";
     print "\n";
 
