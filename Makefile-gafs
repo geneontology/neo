@@ -486,12 +486,12 @@ target/neo-tair.obo: mirror/gene_association.tair.gz
 	gzip -dc mirror/gene_association.tair.gz | ./gaf2obo.pl -s Atal -n tair > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.wb.gz: 
-	wget --no-check-certificate http://geneontology.org/gene-associations/gene_association.wb.gz -O $@.tmp && mv $@.tmp $@
+mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz: 
+	wget --no-check-certificate ftp://ftp.wormbase.org/pub/wormbase/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-wb.obo: mirror/gene_association.wb.gz
-	gzip -dc mirror/gene_association.wb.gz | ./gaf2obo.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
+target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
+	gzip -dc mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz | ./gpi2obo.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
 
 
 mirror/xenbase.gpi.gz: 

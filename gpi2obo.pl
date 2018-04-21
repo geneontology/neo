@@ -30,11 +30,18 @@ while(<>) {
     chomp;
     next if m@^\!@;
 
-    my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = split(/\t/,$_);
+    my @vals = split(/\t/,$_);
+    my $N = scalar(@vals);
+    if ($N < 7) {
+        print STDERR "EXPECTED 10 COLS: $N :  $_\n";
+        print STDERR "SKIPPING: see https://github.com/geneontology/go-site/issues/595\n";
+        next;
+    }
+    my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
 
     next unless $db;
 
-    if ($local_id =~ m@^[\w:-]+$@) {
+    if ($local_id =~ m@^[\w:\-\.]+$@) {
     }
     else {
         print STDERR "BAD ID: $local_id\n";
