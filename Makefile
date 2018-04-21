@@ -47,7 +47,7 @@ foo:
 include Makefile-gafs
 
 neo.owl: neo.obo
-	owltools $< -o $@
+	owltools $< -o $@.tmp && ./bin/fix-obo-uris.pl $@.tmp > $@.tmp2 && mv $@.tmp2 $@
 
 Makefile-gafs: datasets.json
 	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
