@@ -29,7 +29,8 @@ def build(datasets, args):
     for d in datasets:
         dn = d['dataset']
         t = d['type']
-        if t == 'gpi':
+        # temporary: see https://github.com/geneontology/go-site/issues/595
+        if t == 'gpi' and dn != 'wb':
             smap[dn] = d
         elif t == 'gaf':
             if dn not in smap:
