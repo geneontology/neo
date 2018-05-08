@@ -26,15 +26,17 @@ print "ontology: go/noctua/$ontid\n";
 print "\n";
 
 my %done = ();
+my $line_no=0;
 while(<>) {
     chomp;
+    $line_no++;
     next if m@^\!@;
 
     my @vals = split(/\t/,$_);
     my $N = scalar(@vals);
     if ($N < 7) {
         print STDERR "EXPECTED 10 COLS: $N :  $_\n";
-        print STDERR "SKIPPING: see https://github.com/geneontology/go-site/issues/595\n";
+        print STDERR "SKIPPING line $line_no: see https://github.com/geneontology/go-site/issues/595\n";
         next;
     }
     my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
