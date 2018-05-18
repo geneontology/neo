@@ -69,3 +69,7 @@ rnacentral.gpi: rnacentral.gpi.gz
 target/neo-rnac.obo: rnacentral.gpi.gz 
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
+target/xneo-%.owl: target/neo-%.obo
+	owltools $< -o $@.tmp && mv $@.tmp $@
+target/neo-%.owl: target/xneo-%.owl
+	./bin/fix-obo-uris.pl $< >  $@.tmp && mv $@.tmp $@
