@@ -8,6 +8,8 @@ s@http://purl.obolibrary.org/obo/GR_protein_@http://identifiers.org/uniprot/@g;
 s@http://purl.obolibrary.org/obo/dictyBase#_@http://identifiers.org/dictybase.gene/@g;
 s@http://purl.obolibrary.org/obo/(ZFIN|FB|WB|SGD|PomBase|RGD|MGI|Xenbase|UniProtKB|TAIR:\s+)_@"http://identifiers.org/".fix($1)."/"@eg;
 
+s@http://identifiers.org/mgi/MGI%3A@http://identifiers.org/mgi/MGI:@g;
+
 sub fix {
     $s = lc($_[0]);
     $s =~ s@^fb$@flybase@;
