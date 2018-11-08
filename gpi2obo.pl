@@ -2,10 +2,11 @@
 
 use strict;
 
-my $spn = 'generic';
+my $spn;
 my $ontid;
 my $isoform_only = 0;
 my $is_uniprot = 0;
+my %taxname_map = ();
 
 while (@ARGV) {
     my $opt = shift @ARGV;
@@ -14,6 +15,9 @@ while (@ARGV) {
     }
     elsif ($opt eq '-n') {
         $ontid = shift @ARGV;
+    }
+    elsif ($opt eq '-t' || $opt eq '--taxnames') {
+        parse_taxnames(shift @ARGV);
     }
     elsif ($opt eq '--uniprot') {
         $is_uniprot = 1;
@@ -79,6 +83,7 @@ while(<>) {
     my @xrefs = split(/\|/,$xrefs_str);
 
     @syns = map {dequote($_)} @syns;
+    @syns = grep {lc($_) ne lc($symbol)} @syns;
     $symbol = dequote($symbol);
     $fullname = dequote($symbol);
     
@@ -117,17 +122,20 @@ while(<>) {
         }
     }
 
-    my $qsymbol = "$symbol $spn";
-    my $qfullname = "$fullname $spn";
     if ($is_uniprot) {
         my $taxnum = $tax_id;
+        $taxnum =~ s@NCBITaxon:@@;
         if ($uniprot_exclude{$taxnum}) {
             next;
         }
-        $taxnum =~ s@NCBITaxon:@@;
-        $qsymbol + "$symbol sp:$taxnum";
-        $qfullname + "$fullname sp:$taxnum";
+        $spn = $taxname_map{$tax_id};
+        if (!$spn) {
+            $spn = "sp:$taxnum";
+        }
     }
+    
+    my $qsymbol = "$symbol $spn";
+    my $qfullname = "$fullname $spn";
     
     print "[Term]\n";
     print "id: $id\n";
@@ -171,4 +179,20 @@ sub dequote {
     $s =~ s@\"@\'@g;
     $s =~ s@\{@@g;
     return $s;
+}
+
+sub parse_taxnames {
+    my $f = shift;
+    open(F,$f);
+    while(<F>) {
+        chomp;
+        my ($id,$n) = split(/\t/);
+        if ($n =~ m@^([A-Z])[a-z]+\s+(.*)@) {
+            # abbreviate genus
+            $n = "$1. $2";
+        }
+        $taxname_map{$id} = $n;
+    }
+    close(F);
+        
 }
