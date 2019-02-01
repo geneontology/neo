@@ -46,6 +46,18 @@ foo:
 # see below for regenerating this
 include Makefile-gafs
 
+# This is very hacky:
+#  - The neo solr index has an ID field (which is a CURIE), but no URI
+#  - Minerva requires OWL which uses URIs
+#
+# When loading solr, owltools will use the oboInOwl:id field as priority to load the ID field (see https://github.com/owlcollab/owltools/pull/247)
+# Otherwise, the owltools built-in URI contraction method is used, which assumes OBO purls, with unpredictable behavior non-OBO PURLs
+# 
+# Neo entities are NOT OBO ontologies, so they have a mix of prefixes, including identifiers.org
+#
+# Our hack is as follows. The perl code first generates an OBO file with CURIEs like FlyBase:FBgn111
+# The default owltools expansion makes this an OBO PURLs
+# We then "reverse" this with some hacky regexes...
 neo.owl: neo.obo
 	owltools $< -o $@.tmp && ./bin/fix-obo-uris.pl $@.tmp > $@.tmp2 && mv $@.tmp2 $@
 
