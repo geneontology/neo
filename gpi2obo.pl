@@ -2,9 +2,11 @@
 
 use strict;
 
-my $spn = 'generic';
+my $spn;
 my $ontid;
 my $isoform_only = 0;
+my $is_uniprot = 0;
+my %taxname_map = ();
 
 while (@ARGV) {
     my $opt = shift @ARGV;
@@ -14,6 +16,12 @@ while (@ARGV) {
     elsif ($opt eq '-n') {
         $ontid = shift @ARGV;
     }
+    elsif ($opt eq '-t' || $opt eq '--taxnames') {
+        parse_taxnames(shift @ARGV);
+    }
+    elsif ($opt eq '--uniprot') {
+        $is_uniprot = 1;
+    }
     elsif ($opt eq '-I') {
         $isoform_only = 1;
     }
@@ -21,6 +29,23 @@ while (@ARGV) {
 if (!$ontid) {
     $ontid = $spn;
 }
+
+our %uniprot_exclude = (
+    # mammal
+    '9606' => 1,
+    '10090' => 1,
+
+    '7955' => 1,
+    '10116' => 1,
+    '4896' => 1,
+    '559292' => 1,
+    '3702' => 1,
+    '6239' => 1,
+    
+    # xenbase
+    '8355' => 1,
+    '8364' => 1,
+    );
 
 print "ontology: go/noctua/$ontid\n";
 print "\n";
@@ -58,6 +83,7 @@ while(<>) {
     my @xrefs = split(/\|/,$xrefs_str);
 
     @syns = map {dequote($_)} @syns;
+    @syns = grep {lc($_) ne lc($symbol)} @syns;
     $symbol = dequote($symbol);
     $fullname = dequote($symbol);
     
@@ -96,11 +122,25 @@ while(<>) {
         }
     }
 
+    if ($is_uniprot) {
+        my $taxnum = $tax_id;
+        $taxnum =~ s@NCBITaxon:@@;
+        if ($uniprot_exclude{$taxnum}) {
+            next;
+        }
+        $spn = $taxname_map{$tax_id};
+        if (!$spn) {
+            $spn = "sp:$taxnum";
+        }
+    }
+    
+    my $qsymbol = "$symbol $spn";
+    my $qfullname = "$fullname $spn";
     
     print "[Term]\n";
     print "id: $id\n";
-    print "name: $symbol $spn\n";
-    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
+    print "name: $qsymbol\n";
+    print "synonym: \"$qfullname\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
     print "synonym: \"$symbol\" BROAD []\n";
     print "synonym: \"$_\" RELATED []\n" foreach @syns;
     print "xref: $_\n" foreach @xrefs;
@@ -139,4 +179,20 @@ sub dequote {
     $s =~ s@\"@\'@g;
     $s =~ s@\{@@g;
     return $s;
+}
+
+sub parse_taxnames {
+    my $f = shift;
+    open(F,$f);
+    while(<F>) {
+        chomp;
+        my ($id,$n) = split(/\t/);
+        if ($n =~ m@^([A-Z])[a-z]+\s+(.*)@) {
+            # abbreviate genus
+            $n = "$1. $2";
+        }
+        $taxname_map{$id} = $n;
+    }
+    close(F);
+        
 }

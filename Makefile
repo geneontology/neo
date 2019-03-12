@@ -78,6 +78,10 @@ rnacentral.gpi.gz:
 rnacentral.gpi: rnacentral.gpi.gz
 	gzip -dc $< > $@
 
+target/neo-swissprot_gcrp.obo:
+	curl -L ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_gcrp.gpi.gz | gzip -dc  | grep 'db_subset=Swiss-Prot' | ./gpi2obo.pl -t meta/taxnames.tsv --uniprot -n swissprot_gcpr > $@.tmp && mv $@.tmp $@
+
+
 target/neo-rnac.obo: rnacentral.gpi.gz 
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
@@ -85,3 +89,4 @@ target/xneo-%.owl: target/neo-%.obo
 	owltools $< -o $@.tmp && mv $@.tmp $@
 target/neo-%.owl: target/xneo-%.owl
 	./bin/fix-obo-uris.pl $< >  $@.tmp && mv $@.tmp $@
+
