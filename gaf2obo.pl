@@ -57,7 +57,26 @@ while(<>) {
 
     my @syns = split(/\|/,$vals[10]);
 
-    my $type = $vals[11];
+    my $type_str = $vals[11];
+
+    my $bltype = 'GeneProduct';
+    my $type = 'CHEBI:33695 ! information biomacromolecule';
+
+    # note some groups incorrectly classify their genes as proteins
+    #if ($type_str eq 'protein') {
+    #    $type = 'CHEBI:36080 ! protein';
+    #    $bltype = 'Protein';
+    #}
+    if ($type_str eq 'transcript') {
+        $type = 'CHEBI:33697 ! ribonucleic acid';
+        $bltype = 'RNAProduct';
+    }
+    if ($type_str eq 'complex') {
+        $type = 'GO:0032991 ! macromolecular complex';
+        $bltype = 'MacromolecularComplex';
+    }
+    
+    
     my $taxid = $vals[12];
     $taxid =~ s/^taxon:/NCBITaxon:/;
 
@@ -75,6 +94,8 @@ while(<>) {
             print "is_a: $id\n";
             #print "is_a: PR:000000001 ! protein\n";
             print "relationship: in_taxon $taxid\n";
+            print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
+            print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/GeneProductIsoform\n";
             print "\n";
 
         }
@@ -95,7 +116,9 @@ while(<>) {
     print "name: $n $spn\n";
     print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
     print "synonym: \"$n\" BROAD [$taxid]\n";
-    print "is_a: CHEBI:33695 ! information biomacromolecule\n";
+    print "is_a: $type\n";
+    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
+    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/$bltype\n";
     print "relationship: in_taxon $taxid\n";
     print "\n";
 
