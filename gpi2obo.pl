@@ -82,12 +82,19 @@ while(<>) {
 
     $tax_id =~ s/^taxon:/NCBITaxon:/;
 
+    my $bltype = 'GeneProduct';
     my $type = 'CHEBI:33695 ! information biomacromolecule';
     if ($type_str eq 'protein') {
         $type = 'CHEBI:36080 ! protein';
+        $bltype = 'Protein';
     }
     elsif ($type_str eq 'transcript') {
         $type = 'CHEBI:33697 ! ribonucleic acid';
+        $bltype = 'RNAProduct';
+    }
+    elsif ($type_str eq 'complex') {
+        $type = 'GO:0032991 ! macromolecular complex';
+        $bltype = 'MacromolecularComplex';
     }
 
     foreach my $x (@xrefs) {
@@ -106,6 +113,8 @@ while(<>) {
     print "xref: $_\n" foreach @xrefs;
     print "is_a: $type\n";
     print "relationship: in_taxon $tax_id\n";
+    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
+    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/$bltype\n";
     if ($parent) {
         #$parent = expand($parent);
         print "relationship: has_gene_template $parent\n";
