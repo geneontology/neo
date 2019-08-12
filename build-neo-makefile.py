@@ -15,6 +15,8 @@ def main():
 
     parser.add_argument('-i', '--input', type=str, default='datasets.json', required=False,
                         help='Input metadata file')
+    parser.add_argument('-c', '--curl', action='store_true', required=False,
+                        help='if set use curl not wget')
 
 
     args = parser.parse_args()
@@ -50,8 +52,13 @@ def build(datasets, args):
         extra_args = ""
         if 'isoform' in bn:
             extra_args += " -I"
+
+        if args.curl:
+            wget_cmd = "curl -L -s "+url+" > $@.tmp && mv $@.tmp $@"
+        else:
+            wget_cmd = "wget --no-check-certificate "+url+" -O $@.tmp && mv $@.tmp $@"
         target(bn,[],
-               "wget --no-check-certificate "+url+" -O $@.tmp && mv $@.tmp $@")
+               wget_cmd)
         target("target/neo-"+db+".obo",[bn],
                "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
             

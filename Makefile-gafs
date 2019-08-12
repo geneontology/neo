@@ -31,7 +31,7 @@ target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
 
 
 mirror/gene_association.fb.gz: 
-	wget --no-check-certificate http://geneontology.org/gene-associations/submission/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.flybase.net/releases/current/precomputed_files/go/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-fb.obo: mirror/gene_association.fb.gz
@@ -462,12 +462,12 @@ target/neo-rnacentral.obo: mirror/rnacentral.gpi.gz
 	gzip -dc mirror/rnacentral.gpi.gz | ./gpi2obo.pl -s rnacentral -n rnacentral > $@.tmp && mv $@.tmp $@
 
 
-mirror/gp_information.559292_sgd.gz: 
-	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/contrib/goa/gp_information.559292_sgd.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.sgd.gaf.gz: 
+	wget --no-check-certificate https://sgd-prod-upload.s3.amazonaws.com/latest/gene_association.sgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-sgd.obo: mirror/gp_information.559292_sgd.gz
-	gzip -dc mirror/gp_information.559292_sgd.gz | ./gpi2obo.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
+target/neo-sgd.obo: mirror/gene_association.sgd.gaf.gz
+	gzip -dc mirror/gene_association.sgd.gaf.gz | ./gaf2obo.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.sgn.gz: 
@@ -486,12 +486,12 @@ target/neo-tair.obo: mirror/gene_association.tair.gz
 	gzip -dc mirror/gene_association.tair.gz | ./gaf2obo.pl -s Atal -n tair > $@.tmp && mv $@.tmp $@
 
 
-mirror/c_elegans.PRJNA13758.current.go_annotations.gaf.gz: 
-	wget --no-check-certificate ftp://ftp.wormbase.org/pub/wormbase/species/c_elegans/PRJNA13758/annotation/go_annotations/c_elegans.PRJNA13758.current.go_annotations.gaf.gz -O $@.tmp && mv $@.tmp $@
+mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz: 
+	wget --no-check-certificate ftp://ftp.wormbase.org/pub/wormbase/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.go_annotations.gaf.gz
-	gzip -dc mirror/c_elegans.PRJNA13758.current.go_annotations.gaf.gz | ./gaf2obo.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
+target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
+	gzip -dc mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz | ./gpi2obo.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
 
 
 mirror/xenbase.gpi.gz: 
