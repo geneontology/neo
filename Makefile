@@ -6,7 +6,7 @@ clean:
 	rm trigger datasets.json mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
 
 TEST_SRCS = sgd pombase
-SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb gramene_oryza goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase ecocyc pseudocap
+SRCS = sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase ecocyc pseudocap
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -52,7 +52,7 @@ include Makefile-gafs
 #
 # When loading solr, owltools will use the oboInOwl:id field as priority to load the ID field (see https://github.com/owlcollab/owltools/pull/247)
 # Otherwise, the owltools built-in URI contraction method is used, which assumes OBO purls, with unpredictable behavior non-OBO PURLs
-# 
+#
 # Neo entities are NOT OBO ontologies, so they have a mix of prefixes, including identifiers.org
 #
 # Our hack is as follows. The perl code first generates an OBO file with CURIEs like FlyBase:FBgn111
@@ -78,7 +78,7 @@ rnacentral.gpi.gz:
 rnacentral.gpi: rnacentral.gpi.gz
 	gzip -dc $< > $@
 
-target/neo-rnac.obo: rnacentral.gpi.gz 
+target/neo-rnac.obo: rnacentral.gpi.gz
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
 target/xneo-%.owl: target/neo-%.obo
