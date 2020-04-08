@@ -37,14 +37,14 @@ while(<>) {
 
     my @vals = split(/\t/,$_);
     my $db = $vals[0];
-    my $id = $db eq 'MGI' ? $vals[1] : "$db:$vals[1]";
+    my $local_id = $vals[1];
+    my $id = $db eq 'MGI' ? $local_id : "$db:$local_id";
 
     $id = expand($id);
 
     next if $isoform_only && $id !~ m@\-\d+$@;
     
     
-
     my $n = $vals[2];
     $n =~ tr/a-zA-Z0-9\-_//cd;
 
@@ -56,6 +56,9 @@ while(<>) {
     }
 
     my @syns = split(/\|/,$vals[10]);
+    
+    # See: https://github.com/geneontology/noctua/issues/663
+    push(@syns, $local_id);
 
     my $type_str = $vals[11];
 

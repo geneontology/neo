@@ -57,6 +57,9 @@ while(<>) {
     my @syns = split(/\|/,$syns_str);
     my @xrefs = split(/\|/,$xrefs_str);
 
+    # See: https://github.com/geneontology/noctua/issues/663
+    push(@syns, $local_id);
+
     @syns = map {dequote($_)} @syns;
     $symbol = dequote($symbol);
     $fullname = dequote($symbol);
