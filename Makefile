@@ -40,7 +40,7 @@ foo:
 
 # BUG: temporary hardcode until https://github.com/geneontology/go-site/issues/1431 is resolved and stable GPI URL is established
 mirror/goa_sars-cov-2.gpi.gz:
-	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_sars-cov-2.gpi -O mirror/goa_sars-cov-2.gpi && gzip mirror/goa_sars-cov-2.gpi
+	wget --no-check-certificate ftp://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_sars-cov-2.gpi -O mirror/goa_sars-cov-2.gpi && gzip mirror/goa_sars-cov-2.gpi
 target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 	gzip -dc $< | ./gpi2obo.pl -s Scov2 -n sars-cov-2 > $@.tmp && mv $@.tmp $@
 
