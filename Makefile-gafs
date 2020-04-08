@@ -22,12 +22,12 @@ target/neo-dictybase.obo: mirror/dictyBase.gpi.gz
 	gzip -dc mirror/dictyBase.gpi.gz | ./gpi2obo.pl -s Ddis -n dictybase > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.ecocyc.gz: 
-	wget --no-check-certificate https://ecoliwiki.org/gaf/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
+mirror/ecocyc-src.gaf.gz: 
+	wget --no-check-certificate http://release.geneontology.org/2020-02-26/products/annotations/ecocyc-src.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
-	gzip -dc mirror/gene_association.ecocyc.gz | ./gaf2obo.pl -s ecocyc -n ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-ecocyc.obo: mirror/ecocyc-src.gaf.gz
+	gzip -dc mirror/ecocyc-src.gaf.gz | ./gaf2obo.pl -s ecocyc -n ecocyc > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.fb.gz: 
