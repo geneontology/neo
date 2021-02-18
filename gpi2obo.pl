@@ -27,9 +27,15 @@ print "\n";
 
 my %done = ();
 my $line_no=0;
+my $gpi_version = '1.2';
 while(<>) {
     chomp;
     $line_no++;
+    if (m@^\!@) {
+        if (m@^\!gpi-version: (\S+)@) {
+            $gpi_version = $1;
+        }
+    }
     next if m@^\!@;
 
     my @vals = split(/\t/,$_);
@@ -40,6 +46,16 @@ while(<>) {
         next;
     }
     my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
+    if ($gpi_version =~ m@^2@) {
+        my $global_id;
+        ($global_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
+        if ($global_id =~ m@^(\w+):(\S+)@) {
+            ($db, $local_id) = ($1,$2);
+        }
+        else {
+            die "incorrectly formatted id: $global_id";
+        }
+    }
 
     next unless $db;
 
