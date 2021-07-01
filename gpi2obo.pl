@@ -38,7 +38,7 @@ while(<>) {
     }
     next if m@^\!@;
 
-    my @vals = split(/\t/,$_);
+    my @vals = split(/\t/,$_, -1);
     my $N = scalar(@vals);
     if ($N < 7) {
         print STDERR "EXPECTED 10 COLS: $N :  $_\n";
@@ -65,11 +65,11 @@ while(<>) {
         print STDERR "BAD ID: $local_id\n";
         $local_id =~ s@[^\w:-]@-@g;
     }
-    
+
     # Temporary, for reducing size of MGI file
     next if $db eq 'EMBL';
     next if $db eq 'ENSEMBL' && $local_id =~ m@ENSMUST@;
-    
+
     my @syns = split(/\|/,$syns_str);
     my @xrefs = split(/\|/,$xrefs_str);
 
@@ -79,18 +79,18 @@ while(<>) {
     @syns = map {dequote($_)} @syns;
     $symbol = dequote($symbol);
     $fullname = dequote($symbol);
-    
+
     my $id = $db eq 'MGI' ? $local_id : "$db:$local_id";
 
     $id = expand($id);
 
     next if $isoform_only && $id !~ m@\-\d+$@;
-    
+
     if (!$symbol) {
         # RNAs coming from UniProt or RNCA lack symbols
         $symbol = $local_id;
     }
-    
+
     $symbol =~ tr/a-zA-Z0-9\-_ \/\.//cd;
 
     $fullname =~ tr/a-zA-Z0-9\-_ \/\.//cd;
@@ -122,7 +122,7 @@ while(<>) {
         }
     }
 
-    
+
     print "[Term]\n";
     print "id: $id\n";
     print "name: $symbol $spn\n";
