@@ -29,7 +29,7 @@ neo.obo:  $(OBO_SRCS) $(IMPORTS)
 
 
 datasets.json: trigger
-	wget http://s3.amazonaws.com/go-public/metadata/datasets.json -O $@ && touch $@
+	wget http://s3.amazonaws.com/go-build/metadata/datasets.json -O $@ && touch $@
 
 
 target:
