@@ -3,6 +3,7 @@
 use strict;
 
 my $spn = 'generic';
+my $fill_p = 0; # fill unknown species name with taxon id
 my $ontid;
 my $isoform_only = 0;
 
@@ -10,6 +11,9 @@ while (@ARGV) {
     my $opt = shift @ARGV;
     if ($opt eq '-s') {
         $spn = shift @ARGV;
+    }
+    elsif ($opt eq '-F') {
+        $fill_p = 1;
     }
     elsif ($opt eq '-n') {
         $ontid = shift @ARGV;
@@ -100,6 +104,10 @@ while(<>) {
     }
 
     $tax_id =~ s/^taxon:/NCBITaxon:/;
+
+    if( $fill_p ){
+	$spn = $tax_id;
+    }
 
     my $bltype = 'GeneProduct';
     my $type = 'CHEBI:33695 ! information biomacromolecule';
