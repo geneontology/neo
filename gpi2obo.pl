@@ -106,7 +106,7 @@ while(<>) {
     $tax_id =~ s/^taxon:/NCBITaxon:/;
 
     if( $fill_p ){
-	$spn = $tax_id;
+        $spn = $tax_id;
     }
 
     my $bltype = 'GeneProduct';
