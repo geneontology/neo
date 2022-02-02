@@ -74,7 +74,7 @@ while(<>) {
         $type = 'CHEBI:33697 ! ribonucleic acid';
         $bltype = 'RNAProduct';
     }
-    if ($type_str eq 'complex') {
+    if ($type_str eq 'protein_complex') {
         $type = 'GO:0032991 ! macromolecular complex';
         $bltype = 'MacromolecularComplex';
     }
