@@ -6,7 +6,7 @@ clean:
 	rm trigger datasets.json mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
 
 TEST_SRCS ?= sgd pombase
-SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase ecocyc pseudocap goa_sars-cov-2
+SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase ecocyc pseudocap goa_sars-cov-2 uniprot_reviewed_virus_bacteria
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -43,6 +43,14 @@ mirror/goa_sars-cov-2.gpi.gz:
 	wget --no-check-certificate https://raw.githubusercontent.com/Knowledge-Graph-Hub/kg-covid-19/master/curated/ORFs/uniprot_sars-cov-2.gpi -O mirror/goa_sars-cov-2.gpi && gzip mirror/goa_sars-cov-2.gpi
 target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 	gzip -dc $< | ./gpi2obo.pl -s Scov2 -n sars-cov-2 > $@.tmp && mv $@.tmp $@
+
+## In support of including viruses and bacteria
+## (https://github.com/geneontology/neo/issues/77).
+## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz
+mirror/uniprot_reviewed_virus_bacteria.gpi.gz:
+	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz -O mirror/uniprot_reviewed_virus_bacteria.gpi.gz
+target/neo-uniprot_reviewed_virus_bacteria.obo: mirror/uniprot_reviewed_virus_bacteria.gpi.gz
+	gzip -dc $< | ./gpi2obo.pl -F -n reviewed_virus_bacteria > $@.tmp && mv $@.tmp $@
 
 
 # Sub-makefile

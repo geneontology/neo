@@ -1,9 +1,9 @@
-mirror/gene_association.aspgd.gz: 
-	wget --no-check-certificate http://www.aspergillusgenome.org/download/go/gene_association.aspgd.gz -O $@.tmp && mv $@.tmp $@
+mirror/aspgd-20211215.gaf.gz: 
+	wget --no-check-certificate https://go-public.s3.amazonaws.com/files/aspgd-20211215.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-aspgd.obo: mirror/gene_association.aspgd.gz
-	gzip -dc mirror/gene_association.aspgd.gz | ./gaf2obo.pl -s Aspergillus -n aspgd > $@.tmp && mv $@.tmp $@
+target/neo-aspgd.obo: mirror/aspgd-20211215.gaf.gz
+	gzip -dc mirror/aspgd-20211215.gaf.gz | ./gaf2obo.pl -s Aspergillus -n aspgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.cgd.gz: 
@@ -22,12 +22,12 @@ target/neo-dictybase.obo: mirror/dictyBase.gpi.gz
 	gzip -dc mirror/dictyBase.gpi.gz | ./gpi2obo.pl -s Ddis -n dictybase > $@.tmp && mv $@.tmp $@
 
 
-mirror/ecocyc-src.gaf.gz: 
-	wget --no-check-certificate http://release.geneontology.org/2020-02-26/products/annotations/ecocyc-src.gaf.gz -O $@.tmp && mv $@.tmp $@
+mirror/gene_association.ecocyc.gz: 
+	wget --no-check-certificate https://ecoliwiki.org/gaf/gene_association.ecocyc.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-ecocyc.obo: mirror/ecocyc-src.gaf.gz
-	gzip -dc mirror/ecocyc-src.gaf.gz | ./gaf2obo.pl -s ecocyc -n ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-ecocyc.obo: mirror/gene_association.ecocyc.gz
+	gzip -dc mirror/gene_association.ecocyc.gz | ./gaf2obo.pl -s ecocyc -n ecocyc > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.fb.gz: 
@@ -44,14 +44,6 @@ mirror/Lmajor.gaf.gz:
 
 target/neo-genedb_lmajor.obo: mirror/Lmajor.gaf.gz
 	gzip -dc mirror/Lmajor.gaf.gz | ./gaf2obo.pl -s genedb_lmajor -n genedb_lmajor > $@.tmp && mv $@.tmp $@
-
-
-mirror/gene_association.GeneDB_Pfalciparum.gz: 
-	wget --no-check-certificate http://viewvc.geneontology.org/viewvc/GO-SVN/trunk/gene-associations/submission/gene_association.GeneDB_Pfalciparum.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-genedb_pfalciparum.obo: mirror/gene_association.GeneDB_Pfalciparum.gz
-	gzip -dc mirror/gene_association.GeneDB_Pfalciparum.gz | ./gaf2obo.pl -s genedb_pfalciparum -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 
 mirror/Tbruceibrucei927.gaf.gz: 
@@ -246,6 +238,14 @@ target/neo-goa_uniprot_gcrp.obo: mirror/goa_uniprot_gcrp.gpi.gz
 	gzip -dc mirror/goa_uniprot_gcrp.gpi.gz | ./gpi2obo.pl -s goa_uniprot_gcrp -n goa_uniprot_gcrp > $@.tmp && mv $@.tmp $@
 
 
+mirror/japonicusdb.gpi.gz: 
+	wget --no-check-certificate https://www.japonicusdb.org/data/annotations/Gene_ontology/japonicusdb.gpi.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-japonicusdb.obo: mirror/japonicusdb.gpi.gz
+	gzip -dc mirror/japonicusdb.gpi.gz | ./gpi2obo.pl -s Sjap -n japonicusdb > $@.tmp && mv $@.tmp $@
+
+
 mirror/mgi.gpi.gz: 
 	wget --no-check-certificate http://www.informatics.jax.org/downloads/reports/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
 
@@ -366,12 +366,12 @@ target/neo-paint_zfin.obo: mirror/gene_association.paint_zfin.gaf.gz
 	gzip -dc mirror/gene_association.paint_zfin.gaf.gz | ./gaf2obo.pl -s Drer -n paint_zfin > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.pombase.gz: 
-	wget --no-check-certificate ftp://ftp.pombase.org/pombe/annotations/Gene_ontology/gene_association.pombase.gz -O $@.tmp && mv $@.tmp $@
+mirror/pombase.gpi.gz: 
+	wget --no-check-certificate https://www.pombase.org/data/annotations/Gene_ontology/pombase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pombase.obo: mirror/gene_association.pombase.gz
-	gzip -dc mirror/gene_association.pombase.gz | ./gaf2obo.pl -s Spom -n pombase > $@.tmp && mv $@.tmp $@
+target/neo-pombase.obo: mirror/pombase.gpi.gz
+	gzip -dc mirror/pombase.gpi.gz | ./gpi2obo.pl -s Spom -n pombase > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.pseudocap.gz: 
@@ -406,12 +406,12 @@ target/neo-rnacentral.obo: mirror/rnacentral.gpi.gz
 	gzip -dc mirror/rnacentral.gpi.gz | ./gpi2obo.pl -s rnacentral -n rnacentral > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.sgd.gaf.gz: 
-	wget --no-check-certificate https://sgd-prod-upload.s3.amazonaws.com/latest/gene_association.sgd.gaf.gz -O $@.tmp && mv $@.tmp $@
+mirror/gpi.sgd.gz: 
+	wget --no-check-certificate https://downloads.yeastgenome.org/latest/gpi.sgd.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-sgd.obo: mirror/gene_association.sgd.gaf.gz
-	gzip -dc mirror/gene_association.sgd.gaf.gz | ./gaf2obo.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
+target/neo-sgd.obo: mirror/gpi.sgd.gz
+	gzip -dc mirror/gpi.sgd.gz | ./gpi2obo.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.sgn.gz: 
@@ -439,7 +439,7 @@ target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
 
 
 mirror/xenbase.gpi.gz: 
-	wget --no-check-certificate ftp://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://github.com/geneontology/pipeline/files/7862197/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-xenbase.obo: mirror/xenbase.gpi.gz
