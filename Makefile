@@ -7,7 +7,8 @@ clean:
 
 TEST_SRCS ?= sgd pombase
 #SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap uniprot_reviewed_virus_bacteria
-SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc
+#SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc
+SRCS ?= uniprot_reviewed
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -53,6 +54,13 @@ mirror/uniprot_reviewed_virus_bacteria.gpi.gz:
 target/neo-uniprot_reviewed_virus_bacteria.obo: mirror/uniprot_reviewed_virus_bacteria.gpi.gz
 	gzip -dc $< | ./gpi2obo.pl -F -n reviewed_virus_bacteria > $@.tmp && mv $@.tmp $@
 
+## In support of including all swissprot reviewed.
+## (https://github.com/geneontology/neo/issues/82).
+## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz
+mirror/uniprot_reviewed.gpi.gz:
+	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz
+target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
+	gzip -dc $< | ./gpi2obo.pl -F -n reviewed > $@.tmp && mv $@.tmp $@
 
 # Sub-makefile
 #
