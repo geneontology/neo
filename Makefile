@@ -8,7 +8,8 @@ clean:
 TEST_SRCS ?= sgd pombase
 #SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap uniprot_reviewed_virus_bacteria
 #SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc
-SRCS ?= uniprot_reviewed
+#SRCS ?= uniprot_reviewed
+SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap uniprot_reviewed
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
