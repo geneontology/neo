@@ -29,8 +29,8 @@ IMPORTS = imports/pr_import.obo
 neo.obo:  $(OBO_SRCS) $(IMPORTS)
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
-
-
+## datasets.json is created as a throwaway in the NEO versions of the
+## pipeline and is based on the go-sitr master data.
 datasets.json: trigger
 	wget http://s3.amazonaws.com/go-build/metadata/datasets.json -O $@ && touch $@
 
