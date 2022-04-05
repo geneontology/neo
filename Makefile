@@ -30,7 +30,7 @@ neo.obo:  $(OBO_SRCS) $(IMPORTS)
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
 ## datasets.json is created as a throwaway in the NEO versions of the
-## pipeline and is based on the go-sitr master data.
+## pipeline and is based on the go-site master data.
 datasets.json: trigger
 	wget http://s3.amazonaws.com/go-build/metadata/datasets.json -O $@ && touch $@
 
@@ -61,7 +61,7 @@ target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 mirror/uniprot_reviewed.gpi.gz: datasets.json
 	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz.tmp
 	gzip -dc mirror/uniprot_reviewed.gpi.gz.tmp > mirror/uniprot_reviewed.gpi.tmp
-	perl ./filter.pl -v --metadata ./datasets.json --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
+	perl filter.pl -v --metadata datasets.json --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
 	gzip -c mirror/filtered_uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.gz.tmp
 	mv mirror/filtered_uniprot_reviewed.gpi.gz.tmp mirror/uniprot_reviewed.gpi.gz
 target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
