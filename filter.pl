@@ -2,11 +2,13 @@
 ####
 #### Cheap script to filter out all the "known" species from the
 #### collision-prone uniprot_reviewed file, as described in
-#### https://github.com/geneontology/neo/issues/82#issuecomment-1074494641
-#### .
+#### https://github.com/geneontology/neo/issues/82#issuecomment-1074494641 .
 ####
 #### Usage:
 ####   perl filter.pl -v --metadata /tmp/datasets.json --input /tmp/uniprot_reviewed.gpi > /tmp/clean_file.gpi
+####
+#### Makefile usage:
+####   perl ./filter.pl -v --metadata ./datasets.json --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
 ####
 
 ## Bring in necessaries.

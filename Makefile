@@ -58,8 +58,12 @@ target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 ## In support of including all swissprot reviewed.
 ## (https://github.com/geneontology/neo/issues/82).
 ## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz
-mirror/uniprot_reviewed.gpi.gz:
-	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz
+mirror/uniprot_reviewed.gpi.gz: datasets.json
+	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz.tmp
+	gzip -dc mirror/uniprot_reviewed.gpi.gz.tmp > mirror/uniprot_reviewed.gpi.tmp
+	perl ./filter.pl -v --metadata ./datasets.json --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
+	gzip -c mirror/filtered_uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.gz.tmp
+	mv mirror/filtered_uniprot_reviewed.gpi.gz.tmp mirror/uniprot_reviewed.gpi.gz
 target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
 	gzip -dc $< | ./gpi2obo.pl -F -n reviewed > $@.tmp && mv $@.tmp $@
 
