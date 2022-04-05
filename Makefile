@@ -56,6 +56,7 @@ target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 # 	gzip -dc $< | ./gpi2obo.pl -F -n reviewed_virus_bacteria > $@.tmp && mv $@.tmp $@
 
 ## In support of including all swissprot reviewed.
+## Download and /filter out by species/.
 ## (https://github.com/geneontology/neo/issues/82).
 ## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz
 mirror/uniprot_reviewed.gpi.gz: datasets.json
