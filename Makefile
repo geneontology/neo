@@ -59,6 +59,8 @@ target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 ## Download and /filter out by species/.
 ## (https://github.com/geneontology/neo/issues/82).
 ## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz
+## The filter_list.txt (and option) should not be needed in the future
+## as we should be drawing exclusively from datasets.json.
 mirror/uniprot_reviewed.gpi.gz: datasets.json
 	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz.tmp
 	gzip -dc mirror/uniprot_reviewed.gpi.gz.tmp > mirror/uniprot_reviewed.gpi.tmp
