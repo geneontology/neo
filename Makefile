@@ -1,3 +1,6 @@
+ROBOT_ENV = ROBOT_JAVA_ARGS=-Xmx42G
+ROBOT = $(ROBOT_ENV) robot
+
 OBO = http://purl.obolibrary.org/obo
 
 all: target all_obo neo.obo neo.owl
@@ -25,9 +28,7 @@ trigger:
 
 IMPORTS = imports/pr_import.obo
 neo.obo:  $(OBO_SRCS) $(IMPORTS)
-	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
-
-
+	$(ROBOT) merge $(addprefix -i , $^) annotate -O 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f obo -o $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
 datasets.json: trigger
 	wget http://s3.amazonaws.com/go-build/metadata/datasets.json -O $@ && touch $@
@@ -72,10 +73,10 @@ include Makefile-gafs
 # Neo entities are NOT OBO ontologies, so they have a mix of prefixes, including identifiers.org
 #
 # Our hack is as follows. The perl code first generates an OBO file with CURIEs like FlyBase:FBgn111
-# The default owltools expansion makes this an OBO PURLs
+# The default owlapi expansion makes this an OBO PURLs
 # We then "reverse" this with some hacky regexes...
 neo.owl: neo.obo
-	owltools $< -o $@.tmp && ./bin/fix-obo-uris.pl $@.tmp > $@.tmp2 && mv $@.tmp2 $@
+	$(ROBOT) convert -i $< -f owl -o $@.tmp && ./bin/fix-obo-uris.pl $@.tmp > $@.tmp2 && mv $@.tmp2 $@
 
 Makefile-gafs: datasets.json
 	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
@@ -98,6 +99,7 @@ target/neo-rnac.obo: rnacentral.gpi.gz
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
 target/xneo-%.owl: target/neo-%.obo
-	owltools $< -o $@.tmp && mv $@.tmp $@
+	$(ROBOT) convert -i $< -f owl -o $@.tmp && mv $@.tmp $@
+
 target/neo-%.owl: target/xneo-%.owl
 	./bin/fix-obo-uris.pl $< >  $@.tmp && mv $@.tmp $@
