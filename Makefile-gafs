@@ -39,7 +39,7 @@ target/neo-fb.obo: mirror/gene_association.fb.gz
 
 
 mirror/Lmajor.gaf.gz: 
-	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/project/pathogens/as44/Lmajor.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Lmajor/Lmajor.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-genedb_lmajor.obo: mirror/Lmajor.gaf.gz
@@ -47,11 +47,19 @@ target/neo-genedb_lmajor.obo: mirror/Lmajor.gaf.gz
 
 
 mirror/Tbruceibrucei927.gaf.gz: 
-	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/project/pathogens/as44/Tbruceibrucei927.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Tbruceibrucei927/Tbruceibrucei927.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-genedb_tbrucei.obo: mirror/Tbruceibrucei927.gaf.gz
 	gzip -dc mirror/Tbruceibrucei927.gaf.gz | ./gaf2obo.pl -s genedb_tbrucei -n genedb_tbrucei > $@.tmp && mv $@.tmp $@
+
+
+mirror/Pfalciparum.gaf.gz: 
+	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-genedb_pfalciparum.obo: mirror/Pfalciparum.gaf.gz
+	gzip -dc mirror/Pfalciparum.gaf.gz | ./gaf2obo.pl -s genedb_pfalciparum -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_chicken.gpi.gz: 
@@ -415,7 +423,7 @@ target/neo-sgd.obo: mirror/gpi.sgd.gz
 
 
 mirror/gene_association.sgn.gz: 
-	wget --no-check-certificate ftp://ftp.solgenomics.net/ontology/GO/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://solgenomics.net/ftp/ontology/GO/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-sgn.obo: mirror/gene_association.sgn.gz
@@ -439,7 +447,7 @@ target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
 
 
 mirror/xenbase.gpi.gz: 
-	wget --no-check-certificate https://github.com/geneontology/pipeline/files/7862197/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-xenbase.obo: mirror/xenbase.gpi.gz

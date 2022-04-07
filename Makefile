@@ -3,11 +3,10 @@ OBO = http://purl.obolibrary.org/obo
 all: target all_obo neo.obo neo.owl
 
 clean:
-	rm trigger datasets.json mirror/*gz target/*.obo || echo "not all files present, perhaps last build did not complete"
+	rm trigger datasets.json mirror/*gz mirror/*tmp target/*.obo || echo "not all files present, perhaps last build did not complete"
 
 TEST_SRCS ?= sgd pombase
-#SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap uniprot_reviewed_virus_bacteria
-SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc goa_sars-cov-2
+SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc goa_sars-cov-2 uniprot_reviewed
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -27,8 +26,8 @@ IMPORTS = imports/pr_import.obo
 neo.obo:  $(OBO_SRCS) $(IMPORTS)
 	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
-
-
+## datasets.json is created as a throwaway in the NEO versions of the
+## pipeline and is based on the go-site master data.
 datasets.json: trigger
 	wget http://s3.amazonaws.com/go-build/metadata/datasets.json -O $@ && touch $@
 
@@ -45,14 +44,28 @@ mirror/goa_sars-cov-2.gpi.gz:
 target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 	gzip -dc $< | ./gpi2obo.pl -s Scov2 -n sars-cov-2 > $@.tmp && mv $@.tmp $@
 
-## In support of including viruses and bacteria
-## (https://github.com/geneontology/neo/issues/77).
-## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz
-mirror/uniprot_reviewed_virus_bacteria.gpi.gz:
-	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz -O mirror/uniprot_reviewed_virus_bacteria.gpi.gz
-target/neo-uniprot_reviewed_virus_bacteria.obo: mirror/uniprot_reviewed_virus_bacteria.gpi.gz
-	gzip -dc $< | ./gpi2obo.pl -F -n reviewed_virus_bacteria > $@.tmp && mv $@.tmp $@
+# ## In support of including viruses and bacteria
+# ## (https://github.com/geneontology/neo/issues/77).
+# ## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz
+# mirror/uniprot_reviewed_virus_bacteria.gpi.gz:
+# 	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed_virus_bacteria.gpi.gz -O mirror/uniprot_reviewed_virus_bacteria.gpi.gz
+# target/neo-uniprot_reviewed_virus_bacteria.obo: mirror/uniprot_reviewed_virus_bacteria.gpi.gz
+# 	gzip -dc $< | ./gpi2obo.pl -F -n reviewed_virus_bacteria > $@.tmp && mv $@.tmp $@
 
+## In support of including all swissprot reviewed.
+## Download and /filter out by species/.
+## (https://github.com/geneontology/neo/issues/82).
+## http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz
+## The filter_list.txt (and option) should not be needed in the future
+## as we should be drawing exclusively from datasets.json.
+mirror/uniprot_reviewed.gpi.gz: datasets.json
+	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz.tmp
+	gzip -dc mirror/uniprot_reviewed.gpi.gz.tmp > mirror/uniprot_reviewed.gpi.tmp
+	perl filter.pl -v --metadata datasets.json --filter filter_list.txt --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
+	gzip -c mirror/filtered_uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.gz.tmp
+	mv mirror/filtered_uniprot_reviewed.gpi.gz.tmp mirror/uniprot_reviewed.gpi.gz
+target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
+	gzip -dc $< | ./gpi2obo.pl -F -n reviewed > $@.tmp && mv $@.tmp $@
 
 # Sub-makefile
 #
