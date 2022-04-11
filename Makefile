@@ -20,7 +20,7 @@ test-gha: neo.obo
 ## "Local" tests for full (expensive) data tests.
 #test: touch_trigger test_obo
 test:
-	echo "test disabled until GH is fast enough to allow data build"
+	echo "TODO"
 
 touch_trigger:
 	touch trigger
