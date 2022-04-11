@@ -12,9 +12,15 @@ OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
 test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
 
+## For future tests in a glorious future.
+#test: touch_trigger test_obo
+test-gha: neo.obo
+	echo "test disabled until GH is fast enough to allow data build"
+
+## "Local" tests for full (expensive) data tests.
 #test: touch_trigger test_obo
 test:
-	echo "tests disabled until its easier to run perl on travis"
+	echo "test disabled until GH is fast enough to allow data build"
 
 touch_trigger:
 	touch trigger
