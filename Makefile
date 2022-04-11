@@ -1,6 +1,6 @@
 OBO = http://purl.obolibrary.org/obo
 
-OWLTOOLS_MEMORY ?= 8G
+OWLTOOLS_MEMORY ?= 6G
 
 all: target all_obo neo.obo neo.owl
 
