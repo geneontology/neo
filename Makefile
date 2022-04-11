@@ -14,7 +14,7 @@ test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
 
 ## For future tests in a glorious future.
 #test: touch_trigger test_obo
-test-gha: neo.obo
+test-gha: target all_obo neo.obo
 	echo "test disabled until GH is fast enough to allow data build"
 
 ## "Local" tests for full (expensive) data tests.
