@@ -15,14 +15,19 @@ all_obo: $(OBO_SRCS)
 test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
 
 ## For future tests in a glorious future.
-#test: touch_trigger test_obo
-test-gha: target all_obo neo.obo
+#test-gha: touch_trigger test_obo
+#test-gha: target all_obo neo.obo
+test-gha:
 	echo "test disabled until GH is fast enough to allow data build"
 
 ## "Local" tests for full (expensive) data tests.
 #test: touch_trigger test_obo
 test:
-	echo "TODO"
+ifeq (, $(shell which runoak))
+	echo "test disabled until we have runoak in our environment"
+else
+	runoak --input /tmp/neo.owl info GO:0022008
+endif
 
 touch_trigger:
 	touch trigger
