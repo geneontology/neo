@@ -26,7 +26,7 @@ test:
 ifeq (, $(shell which runoak))
 	echo "test disabled until we have runoak in our environment"
 else
-	runoak --input /tmp/neo.owl info GO:0022008
+	runoak --input neo.owl info GO:0022008
 endif
 
 touch_trigger:
