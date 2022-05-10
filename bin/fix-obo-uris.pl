@@ -7,6 +7,7 @@ s@http://purl.obolibrary.org/obo/TAIR_locus%3A@http://identifiers.org/tair.locus
 s@http://purl.obolibrary.org/obo/GR_protein_@http://identifiers.org/uniprot/@g;
 s@http://purl.obolibrary.org/obo/dictyBase#_@http://identifiers.org/dictybase.gene/@g;
 s@http://purl.obolibrary.org/obo/ComplexPortal_@https://www.ebi.ac.uk/complexportal/complex/@g;
+s@http://purl.obolibrary.org/obo/RNAcentral#_@http://rnacentral.org/rna/@g;
 # The optional hash in the match deals with some odd OWLAPI OBO parser behavior
 s@http://purl.obolibrary.org/obo/(ZFIN|FB|WB|SGD|PomBase|RGD|MGI|Xenbase|UniProtKB|TAIR:\s+)#?_@"http://identifiers.org/".fix($1)."/"@eg;
 
