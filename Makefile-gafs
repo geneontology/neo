@@ -1,11 +1,3 @@
-mirror/aspgd-20211215.gaf.gz: 
-	wget --no-check-certificate https://go-public.s3.amazonaws.com/files/aspgd-20211215.gaf.gz -O $@.tmp && mv $@.tmp $@
-
-
-target/neo-aspgd.obo: mirror/aspgd-20211215.gaf.gz
-	gzip -dc mirror/aspgd-20211215.gaf.gz | ./gaf2obo.pl -s Aspergillus -n aspgd > $@.tmp && mv $@.tmp $@
-
-
 mirror/gene_association.cgd.gz: 
 	wget --no-check-certificate http://www.candidagenome.org/download/go/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
 

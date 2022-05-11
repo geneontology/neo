@@ -1,5 +1,7 @@
 OBO = http://purl.obolibrary.org/obo
 
+OWLTOOLS_MEMORY ?= 6G
+
 all: target all_obo neo.obo neo.owl
 
 clean:
@@ -12,9 +14,20 @@ OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
 test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
 
+## For future tests in a glorious future.
+#test-gha: touch_trigger test_obo
+#test-gha: target all_obo neo.obo
+test-gha:
+	echo "test disabled until GH is fast enough to allow data build"
+
+## "Local" tests for full (expensive) data tests.
 #test: touch_trigger test_obo
 test:
-	echo "tests disabled until its easier to run perl on travis"
+ifeq (, $(shell which runoak))
+	echo "test disabled until we have runoak in our environment"
+else
+	runoak --input neo.owl info GO:0022008
+endif
 
 touch_trigger:
 	touch trigger
@@ -24,7 +37,7 @@ trigger:
 
 IMPORTS = imports/pr_import.obo
 neo.obo:  $(OBO_SRCS) $(IMPORTS)
-	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
+	OWLTOOLS_MEMORY=$(OWLTOOLS_MEMORY) owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
 
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
@@ -61,7 +74,7 @@ target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
 mirror/uniprot_reviewed.gpi.gz: datasets.json
 	wget --no-check-certificate http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz -O mirror/uniprot_reviewed.gpi.gz.tmp
 	gzip -dc mirror/uniprot_reviewed.gpi.gz.tmp > mirror/uniprot_reviewed.gpi.tmp
-	perl filter.pl -v --metadata datasets.json --filter filter_list.txt --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
+	perl filter.pl --metadata datasets.json --filter filter_list.txt --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
 	gzip -c mirror/filtered_uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.gz.tmp
 	mv mirror/filtered_uniprot_reviewed.gpi.gz.tmp mirror/uniprot_reviewed.gpi.gz
 target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
