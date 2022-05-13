@@ -90,8 +90,12 @@ while( <INPUT> ){
   my $line = $_;
   my $good_p = 1;
   for( @taxa ){
-    if( $line =~ $_ ){
+    if( $line =~ "\t$_\t" ){
       ll('SKIPPING: '. $line);
+      # if( $line =~ ':10677' ){
+      # 	ll('ON: '. $_);
+      # 	die;
+      # }
       $good_p = 0;
       last;
     }
