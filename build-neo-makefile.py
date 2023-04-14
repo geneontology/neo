@@ -52,18 +52,16 @@ def build(datasets, args):
             extra_args += " -I"
         target(bn,[],
                "wget --no-check-certificate "+url+" -O $@.tmp && mv $@.tmp $@")
-        target("target/neo-"+db+".obo",[bn],
-               "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
-            
+        if 'compression' in obj:
+            target("target/neo-"+db+".obo",[bn], "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
+        else:
+            target("target/neo-"+db+".obo",[bn], "cat "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
 
 def target(tgt,deps,cmd):
     print(tgt+": "+" ".join(deps))
     print("\t"+cmd)
     print("\n")
-        
+
 
 if __name__ == "__main__":
     main()
-
-    
-    
