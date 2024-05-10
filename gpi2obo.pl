@@ -123,6 +123,11 @@ while(<>) {
         $type = 'GO:0032991 ! macromolecular complex';
         $bltype = 'MacromolecularComplex';
     }
+    ## Attempt to address https://github.com/geneontology/noctua/issues/880
+    elsif ($type_str eq 'GO:0032991') {
+        $type = 'GO:0032991 ! macromolecular complex';
+        $bltype = 'MacromolecularComplex';
+    }
 
     foreach my $x (@xrefs) {
         if ($x =~ m@:(\S+)@) {
