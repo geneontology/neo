@@ -102,7 +102,7 @@ Homo_sapiens.GRCh38.gff3.gz:
 
 
 rnacentral.gpi.gz:
-	wget ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/.gpi/rnacentral.gpi.gz
+	wget ftp://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/gpi/rnacentral.gpi.gz
 
 rnacentral.gpi: rnacentral.gpi.gz
 	gzip -dc $< > $@
