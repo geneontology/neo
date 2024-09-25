@@ -6,6 +6,8 @@ my $spn = 'generic';
 my $fill_p = 0; # fill unknown species name with taxon id
 my $ontid;
 my $isoform_only = 0;
+open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+my $prefixes = do { local $/; <$fh> };
 
 while (@ARGV) {
     my $opt = shift @ARGV;
@@ -26,6 +28,8 @@ if (!$ontid) {
     $ontid = $spn;
 }
 
+print "format-version: 1.2\n";
+print $prefixes;
 print "ontology: go/noctua/$ontid\n";
 print "\n";
 

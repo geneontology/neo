@@ -88,7 +88,7 @@ include Makefile-gafs
 # The default owltools expansion makes this an OBO PURLs
 # We then "reverse" this with some hacky regexes...
 neo.owl: neo.obo
-	owltools $< -o $@.tmp && ./bin/fix-obo-uris.pl $@.tmp > $@.tmp2 && mv $@.tmp2 $@
+	robot convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
 
 Makefile-gafs: datasets.json
 	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
@@ -110,7 +110,5 @@ rnacentral.gpi: rnacentral.gpi.gz
 target/neo-rnac.obo: rnacentral.gpi.gz
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
-target/xneo-%.owl: target/neo-%.obo
-	owltools $< -o $@.tmp && mv $@.tmp $@
-target/neo-%.owl: target/xneo-%.owl
-	./bin/fix-obo-uris.pl $< >  $@.tmp && mv $@.tmp $@
+target/neo-%.owl: target/neo-%.obo
+	robot convert -i $< -o $@.tmp -f owl && mv $@.tmp $@

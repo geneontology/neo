@@ -18,8 +18,12 @@ our @taxa = qw(
 );
 
 my %tm = map {($_=>1)} @taxa;
-    
 
+open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+my $prefixes = do { local $/; <$fh> };
+
+print "format-version: 1.2\n";
+print $prefixes;
 print "ontology: go/noctua/rnac\n";
 print "\n";
 
