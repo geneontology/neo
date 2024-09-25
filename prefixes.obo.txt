@@ -1,4 +1,4 @@
-idspace: AGI_LocusCode http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=
+idspace: AGI_LocusCode http://arabidopsis.org/servlets/TairObject?type=locus&name=
 idspace: ComplexPortal https://www.ebi.ac.uk/complexportal/complex/
 idspace: dictyBase http://identifiers.org/dictybase.gene/
 idspace: FB http://identifiers.org/flybase/
