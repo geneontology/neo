@@ -7,6 +7,8 @@ clean:
 
 TEST_SRCS ?= sgd pombase
 SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_complex goa_human_rna goa_human_isoform goa_pig xenbase pseudocap ecocyc goa_sars-cov-2 uniprot_reviewed
+ROBOT_ENV = ROBOT_JAVA_ARGS=-Xmx12G
+ROBOT = $(ROBOT_ENV) robot
 
 OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
 all_obo: $(OBO_SRCS)
@@ -23,8 +25,8 @@ trigger:
 	touch $@
 
 IMPORTS = imports/pr_import.obo
-neo.obo:  $(OBO_SRCS) $(IMPORTS)
-	owltools --create-ontology http://purl.obolibrary.org/obo/go/noctua/neo.owl $^ --merge-support-ontologies  -o -f obo $@.tmp && grep -v ^owl-axioms $@.tmp > $@
+neo.obo: $(OBO_SRCS) $(IMPORTS)
+	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f obo -o $@.tmp && grep -v ^owl-axioms $@.tmp >$@
 
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
@@ -75,20 +77,13 @@ target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
 # see below for regenerating this
 include Makefile-gafs
 
-# This is very hacky:
-#  - The neo solr index has an ID field (which is a CURIE), but no URI
-#  - Minerva requires OWL which uses URIs
+#  The neo solr index has an ID field (which is a CURIE), but no URI
+#  Minerva requires OWL which uses URIs
 #
 # When loading solr, owltools will use the oboInOwl:id field as priority to load the ID field (see https://github.com/owlcollab/owltools/pull/247)
 # Otherwise, the owltools built-in URI contraction method is used, which assumes OBO purls, with unpredictable behavior non-OBO PURLs
-#
-# Neo entities are NOT OBO ontologies, so they have a mix of prefixes, including identifiers.org
-#
-# Our hack is as follows. The perl code first generates an OBO file with CURIEs like FlyBase:FBgn111
-# The default owltools expansion makes this an OBO PURLs
-# We then "reverse" this with some hacky regexes...
 neo.owl: neo.obo
-	robot convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
+	$(ROBOT) convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
 
 Makefile-gafs: datasets.json
 	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
@@ -111,4 +106,4 @@ target/neo-rnac.obo: rnacentral.gpi.gz
 	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
 
 target/neo-%.owl: target/neo-%.obo
-	robot convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
+	$(ROBOT) convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
