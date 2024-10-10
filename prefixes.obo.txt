@@ -1,15 +1,22 @@
-idspace: AGI_LocusCode http://arabidopsis.org/servlets/TairObject?type=locus&name=
-idspace: ComplexPortal https://www.ebi.ac.uk/complexportal/complex/
-idspace: dictyBase http://identifiers.org/dictybase.gene/
-idspace: FB http://identifiers.org/flybase/
-idspace: GR_protein http://identifiers.org/uniprot/
-idspace: MGI http://identifiers.org/mgi/
-idspace: PomBase http://identifiers.org/pombase/
-idspace: RGD http://identifiers.org/rgd/
-idspace: RNAcentral http://rnacentral.org/rna/
-idspace: SGD http://identifiers.org/sgd/
-idspace: TAIR_locus http://identifiers.org/tair.locus/
-idspace: UniProtKB http://identifiers.org/uniprot/
-idspace: WB http://identifiers.org/wormbase/
-idspace: Xenbase http://identifiers.org/xenbase/
-idspace: ZFIN http://identifiers.org/zfin/
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(vocab:=<https://w3id.org/biolink/vocab/>)
+Prefix(oboInOwl:=<http://www.geneontology.org/formats/oboInOwl#>)
+Prefix(AGI_LocusCode:=<http://arabidopsis.org/servlets/TairObject?type=locus&name=>)
+Prefix(ComplexPortal:=<https://www.ebi.ac.uk/complexportal/complex/>)
+Prefix(dictyBase:=<http://identifiers.org/dictybase.gene/>)
+Prefix(FB:=<http://identifiers.org/flybase/>)
+Prefix(GR_protein:=<http://identifiers.org/uniprot/>)
+Prefix(MGI:=<http://identifiers.org/mgi/>)
+Prefix(PomBase:=<http://identifiers.org/pombase/>)
+Prefix(RGD:=<http://identifiers.org/rgd/>)
+Prefix(RNAcentral:=<http://rnacentral.org/rna/>)
+Prefix(SGD:=<http://identifiers.org/sgd/>)
+Prefix(TAIR_locus:=<http://identifiers.org/tair.locus/>)
+Prefix(UniProtKB:=<http://identifiers.org/uniprot/>)
+Prefix(WB:=<http://identifiers.org/wormbase/>)
+Prefix(Xenbase:=<http://identifiers.org/xenbase/>)
+Prefix(ZFIN:=<http://identifiers.org/zfin/>)
