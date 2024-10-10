@@ -5,7 +5,7 @@ use strict;
 my $spn = 'generic';
 my $ontid;
 my $isoform_only = 0;
-open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+open my $fh, '<', 'prefixes.ofn.txt' or die "error opening prefixes.obo.txt: $!";
 my $prefixes = do { local $/; <$fh> };
 
 while (@ARGV) {
@@ -26,9 +26,8 @@ if (!$ontid) {
 
 my $is_rat = $spn eq 'Rnor';
 
-print "format-version: 1.2\n";
 print $prefixes;
-print "ontology: go/noctua/$ontid\n";
+print "Ontology(<http://purl.obolibrary.org/obo/go/noctua/$ontid.owl>\n";
 print "\n";
 
 my %done = ();
@@ -67,19 +66,19 @@ while(<>) {
     my $type_str = $vals[11];
 
     my $bltype = 'GeneProduct';
-    my $type = 'CHEBI:33695 ! information biomacromolecule';
+    my $type = 'CHEBI:33695'; #information biomacromolecule
 
     # note some groups incorrectly classify their genes as proteins
     #if ($type_str eq 'protein') {
-    #    $type = 'CHEBI:36080 ! protein';
+    #    $type = 'CHEBI:36080'; #protein
     #    $bltype = 'Protein';
     #}
     if ($type_str eq 'transcript') {
-        $type = 'CHEBI:33697 ! ribonucleic acid';
+        $type = 'CHEBI:33697'; #ribonucleic acid
         $bltype = 'RNAProduct';
     }
     if ($type_str eq 'protein_complex') {
-        $type = 'GO:0032991 ! macromolecular complex';
+        $type = 'GO:0032991'; #macromolecular complex
         $bltype = 'MacromolecularComplex';
     }
     
@@ -95,14 +94,11 @@ while(<>) {
 
         if (!$done{$iso}) {
 
-            print "[Term]\n";
-            print "id: $iso\n";
-            print "name: $n isoform $num $spn\n";
-            print "is_a: $id\n";
-            #print "is_a: PR:000000001 ! protein\n";
-            print "relationship: in_taxon $taxid\n";
-            print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
-            print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/GeneProductIsoform\n";
+            print "AnnotationAssertion(rdfs:label $iso \"$n isoform $num $spn\")\n";
+            print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
+            print "AnnotationAssertion(biolink:category $id biolink:GeneProductIsoform)\n";
+            print "SubClassOf($iso $id)\n";
+            print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
             print "\n";
 
         }
@@ -118,23 +114,24 @@ while(<>) {
         }
     }
     
-    print "[Term]\n";
-    print "id: $id\n";
-    print "name: $n $spn\n";
-    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
-    print "synonym: \"$n\" BROAD [$taxid]\n";
-    print "is_a: $type\n";
-    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
-    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/$bltype\n";
-    print "relationship: in_taxon $taxid\n";
+    print "AnnotationAssertion(rdfs:label $id \"$n $spn\")\n";
+    print "AnnotationAssertion(oboInOwl:hasExactSynonym $id \"$fullname $spn\")\n"  if $fullname && $fullname !~ m@homo sapiens@i;
+    print "AnnotationAssertion(oboInOwl:hasBroadSynonym $id \"$n\")\n";
+    print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
+    print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
+    print "SubClassOf($id $type)\n";
+    print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
+    if ($parent) {
+        #$parent = expand($parent);
+        print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $parent))\n";
+    }
     print "\n";
 
     $done{$id}++;
 }
 
-print "[Typedef]\n";
-print "id: in_taxon\n";
-print "xref: RO:0002162\n";
+
+print ")\n";
 
 
 # PR:000000001 ! protein

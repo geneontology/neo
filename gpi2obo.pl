@@ -6,7 +6,7 @@ my $spn = 'generic';
 my $fill_p = 0; # fill unknown species name with taxon id
 my $ontid;
 my $isoform_only = 0;
-open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+open my $fh, '<', 'prefixes.ofn.txt' or die "error opening prefixes.obo.txt: $!";
 my $prefixes = do { local $/; <$fh> };
 
 while (@ARGV) {
@@ -28,9 +28,8 @@ if (!$ontid) {
     $ontid = $spn;
 }
 
-print "format-version: 1.2\n";
 print $prefixes;
-print "ontology: go/noctua/$ontid\n";
+print "Ontology(<http://purl.obolibrary.org/obo/go/noctua/$ontid.owl>\n";
 print "\n";
 
 my %done = ();
@@ -114,22 +113,22 @@ while(<>) {
     }
 
     my $bltype = 'GeneProduct';
-    my $type = 'CHEBI:33695 ! information biomacromolecule';
+    my $type = 'CHEBI:33695'; #information biomacromolecule
     if ($type_str eq 'protein') {
-        $type = 'CHEBI:36080 ! protein';
+        $type = 'CHEBI:36080'; #protein
         $bltype = 'Protein';
     }
     elsif ($type_str eq 'transcript') {
-        $type = 'CHEBI:33697 ! ribonucleic acid';
+        $type = 'CHEBI:33697'; #ribonucleic acid
         $bltype = 'RNAProduct';
     }
     elsif ($type_str eq 'protein_complex') {
-        $type = 'GO:0032991 ! macromolecular complex';
+        $type = 'GO:0032991'; #macromolecular complex
         $bltype = 'MacromolecularComplex';
     }
     ## Attempt to address https://github.com/geneontology/noctua/issues/880
     elsif ($type_str eq 'GO:0032991') {
-        $type = 'GO:0032991 ! macromolecular complex';
+        $type = 'GO:0032991'; #macromolecular complex
         $bltype = 'MacromolecularComplex';
     }
 
@@ -140,29 +139,26 @@ while(<>) {
     }
 
 
-    print "[Term]\n";
-    print "id: $id\n";
-    print "name: $symbol $spn\n";
-    print "synonym: \"$fullname $spn\" EXACT []\n" if $fullname && $fullname !~ m@homo sapiens@i;
-    print "synonym: \"$symbol\" BROAD []\n";
-    print "synonym: \"$_\" RELATED []\n" foreach @syns;
-    print "xref: $_\n" foreach @xrefs;
-    print "is_a: $type\n";
-    print "relationship: in_taxon $tax_id\n";
-    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/MacromolecularMachine\n";
-    print "property_value: https://w3id.org/biolink/vocab/category https://w3id.org/biolink/vocab/$bltype\n";
+    print "AnnotationAssertion(rdfs:label $id \"$symbol $spn\")\n";
+    print "AnnotationAssertion(oboInOwl:hasExactSynonym $id \"$fullname $spn\")\n"  if $fullname && $fullname !~ m@homo sapiens@i;
+    print "AnnotationAssertion(oboInOwl:hasBroadSynonym $id \"$symbol\")\n";
+    print "AnnotationAssertion(oboInOwl:hasRelatedSynonym $id \"$_\")\n" foreach @syns;
+    print "AnnotationAssertion(oboInOwl:hasDbXref $id \"$_\")\n" foreach @xrefs;
+    print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
+    print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
+    print "SubClassOf($id $type)\n";
+    print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
     if ($parent) {
         #$parent = expand($parent);
-        print "relationship: has_gene_template $parent\n";
+        print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $parent))\n";
     }
     print "\n";
 
     $done{$id}++;
 }
 
-print "[Typedef]\n";
-print "id: in_taxon\n";
-print "xref: RO:0002162\n";
+
+print ")\n";
 
 
 # PR:000000001 ! protein
