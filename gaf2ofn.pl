@@ -120,7 +120,7 @@ while(<>) {
     print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
     print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
     print "SubClassOf($id $type)\n";
-    print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
+    print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
     if ($parent) {
         #$parent = expand($parent);
         print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $parent))\n";

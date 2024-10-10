@@ -19,12 +19,12 @@ our @taxa = qw(
 
 my %tm = map {($_=>1)} @taxa;
 
-open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+open my $fh, '<', 'prefixes.ofn.txt' or die "error opening prefixes.obo.txt: $!";
 my $prefixes = do { local $/; <$fh> };
 
 print "format-version: 1.2\n";
 print $prefixes;
-print "ontology: go/noctua/rnac\n";
+print "Ontology(<http://purl.obolibrary.org/obo/go/noctua/rnac.owl>\n";
 print "\n";
 
 my %done = ();
@@ -43,20 +43,17 @@ while(<>) {
     #print STDERR "$taxid\n";
     next unless $tm{$taxid};
 
-    print "[Term]\n";
-    print "id: $id\n";
-    print "name: $n\n";
-    print "synonym: \"$n\" BROAD []\n";
-    print "is_a: CHEBI:33697 ! ribonucleic acid\n";
-    print "relationship: in_taxon NCBITaxon:$taxid\n";
+    print "AnnotationAssertion(rdfs:label $n\")\n";
+    print "AnnotationAssertion(oboInOwl:hasBroadSynonym $n\")\n";
+    print "SubClassOf($id CHEBI:33697)\n";
+    print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
     print "\n";
 
     $done{$id}++;
 }
 
-print "[Typedef]\n";
-print "id: in_taxon\n";
-print "xref: RO:0002162\n";
+
+print ")\n";
 
 
 # PR:000000001 ! protein
