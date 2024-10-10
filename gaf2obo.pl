@@ -5,6 +5,8 @@ use strict;
 my $spn = 'generic';
 my $ontid;
 my $isoform_only = 0;
+open my $fh, '<', 'prefixes.obo.txt' or die "error opening prefixes.obo.txt: $!";
+my $prefixes = do { local $/; <$fh> };
 
 while (@ARGV) {
     my $opt = shift @ARGV;
@@ -24,6 +26,8 @@ if (!$ontid) {
 
 my $is_rat = $spn eq 'Rnor';
 
+print "format-version: 1.2\n";
+print $prefixes;
 print "ontology: go/noctua/$ontid\n";
 print "\n";
 
