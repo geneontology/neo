@@ -43,8 +43,10 @@ while(<>) {
     #print STDERR "$taxid\n";
     next unless $tm{$taxid};
 
-    print "AnnotationAssertion(rdfs:label $n\")\n";
-    print "AnnotationAssertion(oboInOwl:hasBroadSynonym $n\")\n";
+    print "Declaration(Class($id))\n";
+    print "AnnotationAssertion(rdfs:label $id $n\")\n";
+    print "AnnotationAssertion(oboInOwl:id $id \"$id\")\n";
+    print "AnnotationAssertion(oboInOwl:hasBroadSynonym $id $n\")\n";
     print "SubClassOf($id CHEBI:33697)\n";
     print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
     print "\n";

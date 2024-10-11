@@ -139,7 +139,9 @@ while(<>) {
     }
 
 
+    print "Declaration(Class($id))\n";
     print "AnnotationAssertion(rdfs:label $id \"$symbol $spn\")\n";
+    print "AnnotationAssertion(oboInOwl:id $id \"$id\")\n";
     print "AnnotationAssertion(oboInOwl:hasExactSynonym $id \"$fullname $spn\")\n"  if $fullname && $fullname !~ m@homo sapiens@i;
     print "AnnotationAssertion(oboInOwl:hasBroadSynonym $id \"$symbol\")\n";
     print "AnnotationAssertion(oboInOwl:hasRelatedSynonym $id \"$_\")\n" foreach @syns;
@@ -179,5 +181,6 @@ sub dequote {
     my $s = shift;
     $s =~ s@\"@\'@g;
     $s =~ s@\{@@g;
+    $s =~ s@\\@\\\\@g;
     return $s;
 }

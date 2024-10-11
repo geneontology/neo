@@ -1,6 +1,6 @@
 OBO = http://purl.obolibrary.org/obo
 
-all: target all_obo neo.obo neo.owl
+all: target all_ofn neo.obo neo.owl
 
 clean:
 	rm trigger datasets.json mirror/*gz mirror/*tmp target/*.obo || echo "not all files present, perhaps last build did not complete"
@@ -10,9 +10,9 @@ SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_human_comple
 ROBOT_ENV = ROBOT_JAVA_ARGS=-Xmx12G
 ROBOT = $(ROBOT_ENV) robot
 
-OBO_SRCS = $(patsubst %,target/neo-%.obo,$(SRCS))
-all_obo: $(OBO_SRCS)
-test_obo: target $(patsubst %,target/neo-%.obo,$(TEST_SRCS))
+OFN_SRCS = $(patsubst %,target/neo-%.ofn,$(SRCS))
+all_ofn: $(OFN_SRCS)
+test_ofn: target $(patsubst %,target/neo-%.ofn,$(TEST_SRCS))
 
 #test: touch_trigger test_obo
 test:
@@ -25,8 +25,8 @@ trigger:
 	touch $@
 
 IMPORTS = imports/pr_import.obo
-neo.obo: $(OBO_SRCS) $(IMPORTS)
-	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f obo -o $@.tmp && grep -v ^owl-axioms $@.tmp >$@
+neo.owl: $(OFN_SRCS) $(IMPORTS)
+	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f owl -o $@.tmp && mv $@.tmp $@
 
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
@@ -43,8 +43,8 @@ foo:
 # BUG: temporary hardcode until https://github.com/geneontology/go-site/issues/1431 is resolved and stable GPI URL is established
 mirror/goa_sars-cov-2.gpi.gz:
 	wget --no-check-certificate https://raw.githubusercontent.com/Knowledge-Graph-Hub/kg-covid-19/master/curated/ORFs/uniprot_sars-cov-2.gpi -O mirror/goa_sars-cov-2.gpi && gzip mirror/goa_sars-cov-2.gpi
-target/neo-goa_sars-cov-2.obo: mirror/goa_sars-cov-2.gpi.gz
-	gzip -dc $< | ./gpi2obo.pl -s Scov2 -n sars-cov-2 > $@.tmp && mv $@.tmp $@
+target/neo-goa_sars-cov-2.ofn: mirror/goa_sars-cov-2.gpi.gz
+	gzip -dc $< | ./gpi2ofn.pl -s Scov2 -n sars-cov-2 > $@.tmp && mv $@.tmp $@
 
 # ## In support of including viruses and bacteria
 # ## (https://github.com/geneontology/neo/issues/77).
@@ -66,8 +66,8 @@ mirror/uniprot_reviewed.gpi.gz: datasets.json
 	perl filter.pl -v --metadata datasets.json --filter filter_list.txt --input mirror/uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.tmp
 	gzip -c mirror/filtered_uniprot_reviewed.gpi.tmp > mirror/filtered_uniprot_reviewed.gpi.gz.tmp
 	mv mirror/filtered_uniprot_reviewed.gpi.gz.tmp mirror/uniprot_reviewed.gpi.gz
-target/neo-uniprot_reviewed.obo: mirror/uniprot_reviewed.gpi.gz
-	gzip -dc $< | ./gpi2obo.pl -F -n reviewed > $@.tmp && mv $@.tmp $@
+target/neo-uniprot_reviewed.ofn: mirror/uniprot_reviewed.gpi.gz
+	gzip -dc $< | ./gpi2ofn.pl -F -n reviewed > $@.tmp && mv $@.tmp $@
 
 # Sub-makefile
 #
@@ -82,8 +82,8 @@ include Makefile-gafs
 #
 # When loading solr, owltools will use the oboInOwl:id field as priority to load the ID field (see https://github.com/owlcollab/owltools/pull/247)
 # Otherwise, the owltools built-in URI contraction method is used, which assumes OBO purls, with unpredictable behavior non-OBO PURLs
-neo.owl: neo.obo
-	$(ROBOT) convert -i $< -o $@.tmp -f owl && mv $@.tmp $@
+neo.obo: neo.owl
+	$(ROBOT) convert -i $< -o $@.tmp -f obo && grep -v ^owl-axioms $@.tmp >$@
 
 Makefile-gafs: datasets.json
 	./build-neo-makefile.py -i $< > $@.tmp && mv $@.tmp $@
@@ -102,8 +102,8 @@ rnacentral.gpi.gz:
 rnacentral.gpi: rnacentral.gpi.gz
 	gzip -dc $< > $@
 
-target/neo-rnac.obo: rnacentral.gpi.gz
-	gzip -dc $< | ./rnacgpi2obo.pl > $@.tmp && mv $@.tmp $@
+target/neo-rnac.ofn: rnacentral.gpi.gz
+	gzip -dc $< | ./rnacgpi2ofn.pl > $@.tmp && mv $@.tmp $@
 
-target/neo-%.owl: target/neo-%.obo
+target/neo-%.owl: target/neo-%.ofn
 	$(ROBOT) convert -i $< -o $@.tmp -f owl && mv $@.tmp $@

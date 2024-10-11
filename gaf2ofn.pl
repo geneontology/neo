@@ -94,11 +94,13 @@ while(<>) {
 
         if (!$done{$iso}) {
 
+            print "Declaration(Class($iso))\n";
             print "AnnotationAssertion(rdfs:label $iso \"$n isoform $num $spn\")\n";
-            print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
-            print "AnnotationAssertion(biolink:category $id biolink:GeneProductIsoform)\n";
+            print "AnnotationAssertion(oboInOwl:id $iso \"$iso\")\n";
+            print "AnnotationAssertion(biolink:category $iso biolink:MacromolecularMachine)\n";
+            print "AnnotationAssertion(biolink:category $iso biolink:GeneProductIsoform)\n";
             print "SubClassOf($iso $id)\n";
-            print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
+            print "SubClassOf($iso ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
             print "\n";
 
         }
@@ -114,17 +116,15 @@ while(<>) {
         }
     }
     
+    print "Declaration(Class($id))\n";
     print "AnnotationAssertion(rdfs:label $id \"$n $spn\")\n";
+    print "AnnotationAssertion(oboInOwl:id $id \"$id\")\n";
     print "AnnotationAssertion(oboInOwl:hasExactSynonym $id \"$fullname $spn\")\n"  if $fullname && $fullname !~ m@homo sapiens@i;
     print "AnnotationAssertion(oboInOwl:hasBroadSynonym $id \"$n\")\n";
     print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
     print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
     print "SubClassOf($id $type)\n";
     print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $taxid))\n";
-    if ($parent) {
-        #$parent = expand($parent);
-        print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $parent))\n";
-    }
     print "\n";
 
     $done{$id}++;
