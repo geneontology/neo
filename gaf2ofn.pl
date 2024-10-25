@@ -145,5 +145,7 @@ sub expand {
 
     # perpetuate MGI awfulness for now
     s@^MGI:@MGI:MGI:@;
+    # Work around colon in TAIR prefix
+    s@^TAIR:locus:@TAIR_locus:@;
     return $_;
 }

@@ -45,7 +45,7 @@ def build(datasets, args):
         url = obj['source']
         toks = url.split("/")
         bn = "mirror/"+toks[-1]
-        cmd = "./" + obj['type'] +"2obo.pl"
+        cmd = "./" + obj['type'] +"2ofn.pl"
 
         extra_args = ""
         if 'isoform' in bn:
@@ -53,9 +53,9 @@ def build(datasets, args):
         target(bn,[],
                "wget --no-check-certificate "+url+" -O $@.tmp && mv $@.tmp $@")
         if 'compression' in obj:
-            target("target/neo-"+db+".obo",[bn], "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
+            target("target/neo-"+db+".ofn",[bn], "gzip -dc "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
         else:
-            target("target/neo-"+db+".obo",[bn], "cat "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
+            target("target/neo-"+db+".ofn",[bn], "cat "+bn+" | " + cmd + " -s "+ sp + " -n " + db + extra_args + " > $@.tmp && mv $@.tmp $@")
 
 def target(tgt,deps,cmd):
     print(tgt+": "+" ".join(deps))
