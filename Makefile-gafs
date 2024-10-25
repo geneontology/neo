@@ -14,20 +14,20 @@ target/neo-dictybase.ofn: mirror/dictyBase.gpi.gz
 	gzip -dc mirror/dictyBase.gpi.gz | ./gpi2ofn.pl -s Ddis -n dictybase > $@.tmp && mv $@.tmp $@
 
 
-mirror/18.E_coli_MG1655.goa: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/proteomes/18.E_coli_MG1655.goa -O $@.tmp && mv $@.tmp $@
+mirror/ecocyc.gpi.gz: 
+	wget --no-check-certificate https://www.ai.sri.com/~kr/go/latest/ecocyc.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-ecocyc.ofn: mirror/18.E_coli_MG1655.goa
-	cat mirror/18.E_coli_MG1655.goa | ./gaf2ofn.pl -s Ecol -n ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-ecocyc.ofn: mirror/ecocyc.gpi.gz
+	gzip -dc mirror/ecocyc.gpi.gz | ./gpi2ofn.pl -s Ecol -n ecocyc > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.fb.gz: 
-	wget --no-check-certificate ftp://ftp.flybase.net/releases/current/precomputed_files/go/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
+mirror/gp_information.fb.gz: 
+	wget --no-check-certificate http://ftp.flybase.net/releases/current/precomputed_files/collaborators/gp_information.fb.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-fb.ofn: mirror/gene_association.fb.gz
-	gzip -dc mirror/gene_association.fb.gz | ./gaf2ofn.pl -s Dmel -n fb > $@.tmp && mv $@.tmp $@
+target/neo-fb.ofn: mirror/gp_information.fb.gz
+	gzip -dc mirror/gp_information.fb.gz | ./gpi2ofn.pl -s Dmel -n fb > $@.tmp && mv $@.tmp $@
 
 
 mirror/Lmajor.gaf.gz: 
@@ -55,7 +55,7 @@ target/neo-genedb_pfalciparum.ofn: mirror/Pfalciparum.gaf.gz
 
 
 mirror/goa_chicken.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken.ofn: mirror/goa_chicken.gpi.gz
@@ -63,7 +63,7 @@ target/neo-goa_chicken.ofn: mirror/goa_chicken.gpi.gz
 
 
 mirror/goa_chicken_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_complex.ofn: mirror/goa_chicken_complex.gpi.gz
@@ -71,7 +71,7 @@ target/neo-goa_chicken_complex.ofn: mirror/goa_chicken_complex.gpi.gz
 
 
 mirror/goa_chicken_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_isoform.ofn: mirror/goa_chicken_isoform.gpi.gz
@@ -79,7 +79,7 @@ target/neo-goa_chicken_isoform.ofn: mirror/goa_chicken_isoform.gpi.gz
 
 
 mirror/goa_chicken_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_chicken_rna.ofn: mirror/goa_chicken_rna.gpi.gz
@@ -87,7 +87,7 @@ target/neo-goa_chicken_rna.ofn: mirror/goa_chicken_rna.gpi.gz
 
 
 mirror/goa_cow.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow.ofn: mirror/goa_cow.gpi.gz
@@ -95,7 +95,7 @@ target/neo-goa_cow.ofn: mirror/goa_cow.gpi.gz
 
 
 mirror/goa_cow_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_complex.ofn: mirror/goa_cow_complex.gpi.gz
@@ -103,7 +103,7 @@ target/neo-goa_cow_complex.ofn: mirror/goa_cow_complex.gpi.gz
 
 
 mirror/goa_cow_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_isoform.ofn: mirror/goa_cow_isoform.gpi.gz
@@ -111,7 +111,7 @@ target/neo-goa_cow_isoform.ofn: mirror/goa_cow_isoform.gpi.gz
 
 
 mirror/goa_cow_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_cow_rna.ofn: mirror/goa_cow_rna.gpi.gz
@@ -119,7 +119,7 @@ target/neo-goa_cow_rna.ofn: mirror/goa_cow_rna.gpi.gz
 
 
 mirror/goa_dog.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog.ofn: mirror/goa_dog.gpi.gz
@@ -127,7 +127,7 @@ target/neo-goa_dog.ofn: mirror/goa_dog.gpi.gz
 
 
 mirror/goa_dog_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_complex.ofn: mirror/goa_dog_complex.gpi.gz
@@ -135,7 +135,7 @@ target/neo-goa_dog_complex.ofn: mirror/goa_dog_complex.gpi.gz
 
 
 mirror/goa_dog_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_isoform.ofn: mirror/goa_dog_isoform.gpi.gz
@@ -143,7 +143,7 @@ target/neo-goa_dog_isoform.ofn: mirror/goa_dog_isoform.gpi.gz
 
 
 mirror/goa_dog_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_dog_rna.ofn: mirror/goa_dog_rna.gpi.gz
@@ -151,7 +151,7 @@ target/neo-goa_dog_rna.ofn: mirror/goa_dog_rna.gpi.gz
 
 
 mirror/goa_human.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human.ofn: mirror/goa_human.gpi.gz
@@ -159,7 +159,7 @@ target/neo-goa_human.ofn: mirror/goa_human.gpi.gz
 
 
 mirror/goa_human_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_complex.ofn: mirror/goa_human_complex.gpi.gz
@@ -167,7 +167,7 @@ target/neo-goa_human_complex.ofn: mirror/goa_human_complex.gpi.gz
 
 
 mirror/goa_human_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_isoform.ofn: mirror/goa_human_isoform.gpi.gz
@@ -175,7 +175,7 @@ target/neo-goa_human_isoform.ofn: mirror/goa_human_isoform.gpi.gz
 
 
 mirror/goa_human_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_human_rna.ofn: mirror/goa_human_rna.gpi.gz
@@ -183,7 +183,7 @@ target/neo-goa_human_rna.ofn: mirror/goa_human_rna.gpi.gz
 
 
 mirror/goa_pig.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig.ofn: mirror/goa_pig.gpi.gz
@@ -191,7 +191,7 @@ target/neo-goa_pig.ofn: mirror/goa_pig.gpi.gz
 
 
 mirror/goa_pig_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_complex.ofn: mirror/goa_pig_complex.gpi.gz
@@ -199,7 +199,7 @@ target/neo-goa_pig_complex.ofn: mirror/goa_pig_complex.gpi.gz
 
 
 mirror/goa_pig_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_isoform.ofn: mirror/goa_pig_isoform.gpi.gz
@@ -207,7 +207,7 @@ target/neo-goa_pig_isoform.ofn: mirror/goa_pig_isoform.gpi.gz
 
 
 mirror/goa_pig_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pig_rna.ofn: mirror/goa_pig_rna.gpi.gz
@@ -215,7 +215,7 @@ target/neo-goa_pig_rna.ofn: mirror/goa_pig_rna.gpi.gz
 
 
 mirror/goa_pdb.gaf.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PDB/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_pdb.ofn: mirror/goa_pdb.gaf.gz
@@ -223,7 +223,7 @@ target/neo-goa_pdb.ofn: mirror/goa_pdb.gaf.gz
 
 
 mirror/goa_uniprot_all.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_uniprot_all.ofn: mirror/goa_uniprot_all.gpi.gz
@@ -231,7 +231,7 @@ target/neo-goa_uniprot_all.ofn: mirror/goa_uniprot_all.gpi.gz
 
 
 mirror/goa_uniprot_gcrp.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-goa_uniprot_gcrp.ofn: mirror/goa_uniprot_gcrp.gpi.gz
@@ -431,19 +431,19 @@ target/neo-sgn.ofn: mirror/gene_association.sgn.gz
 
 
 mirror/gene_association.tair.gz: 
-	wget --no-check-certificate https://www.arabidopsis.org/download_files/GO_and_PO_Annotations/Gene_Ontology_Annotations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://www.arabidopsis.org/api/download-files/download?filePath=GO_and_PO_Annotations/Gene_Ontology_Annotations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-tair.ofn: mirror/gene_association.tair.gz
 	gzip -dc mirror/gene_association.tair.gz | ./gaf2ofn.pl -s Atal -n tair > $@.tmp && mv $@.tmp $@
 
 
-mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz: 
-	wget --no-check-certificate ftp://ftp.wormbase.org/pub/wormbase/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz: 
+	wget --no-check-certificate https://downloads.wormbase.org/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-wb.ofn: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
-	gzip -dc mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz | ./gpi2ofn.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
+target/neo-wb.ofn: mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz
+	gzip -dc mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz | ./gpi2ofn.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
 
 
 mirror/xenbase.gpi.gz: 
