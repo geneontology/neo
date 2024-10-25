@@ -2,463 +2,463 @@ mirror/gene_association.cgd.gz:
 	wget --no-check-certificate http://www.candidagenome.org/download/go/gene_association.cgd.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-cgd.obo: mirror/gene_association.cgd.gz
-	gzip -dc mirror/gene_association.cgd.gz | ./gaf2obo.pl -s cgd -n cgd > $@.tmp && mv $@.tmp $@
+target/neo-cgd.ofn: mirror/gene_association.cgd.gz
+	gzip -dc mirror/gene_association.cgd.gz | ./gaf2ofn.pl -s cgd -n cgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/dictyBase.gpi.gz: 
 	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/contrib/goa/dictyBase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-dictybase.obo: mirror/dictyBase.gpi.gz
-	gzip -dc mirror/dictyBase.gpi.gz | ./gpi2obo.pl -s Ddis -n dictybase > $@.tmp && mv $@.tmp $@
+target/neo-dictybase.ofn: mirror/dictyBase.gpi.gz
+	gzip -dc mirror/dictyBase.gpi.gz | ./gpi2ofn.pl -s Ddis -n dictybase > $@.tmp && mv $@.tmp $@
 
 
-mirror/18.E_coli_MG1655.goa: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/proteomes/18.E_coli_MG1655.goa -O $@.tmp && mv $@.tmp $@
+mirror/ecocyc.gpi.gz: 
+	wget --no-check-certificate https://www.ai.sri.com/~kr/go/latest/ecocyc.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-ecocyc.obo: mirror/18.E_coli_MG1655.goa
-	cat mirror/18.E_coli_MG1655.goa | ./gaf2obo.pl -s Ecol -n ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-ecocyc.ofn: mirror/ecocyc.gpi.gz
+	gzip -dc mirror/ecocyc.gpi.gz | ./gpi2ofn.pl -s Ecol -n ecocyc > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.fb.gz: 
-	wget --no-check-certificate ftp://ftp.flybase.net/releases/current/precomputed_files/go/gene_association.fb.gz -O $@.tmp && mv $@.tmp $@
+mirror/gp_information.fb.gz: 
+	wget --no-check-certificate http://ftp.flybase.net/releases/current/precomputed_files/collaborators/gp_information.fb.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-fb.obo: mirror/gene_association.fb.gz
-	gzip -dc mirror/gene_association.fb.gz | ./gaf2obo.pl -s Dmel -n fb > $@.tmp && mv $@.tmp $@
+target/neo-fb.ofn: mirror/gp_information.fb.gz
+	gzip -dc mirror/gp_information.fb.gz | ./gpi2ofn.pl -s Dmel -n fb > $@.tmp && mv $@.tmp $@
 
 
 mirror/Lmajor.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/project/pathogens/as44/Lmajor.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-genedb_lmajor.obo: mirror/Lmajor.gaf.gz
-	gzip -dc mirror/Lmajor.gaf.gz | ./gaf2obo.pl -s Lmaj -n genedb_lmajor > $@.tmp && mv $@.tmp $@
+target/neo-genedb_lmajor.ofn: mirror/Lmajor.gaf.gz
+	gzip -dc mirror/Lmajor.gaf.gz | ./gaf2ofn.pl -s Lmaj -n genedb_lmajor > $@.tmp && mv $@.tmp $@
 
 
 mirror/Tbruceibrucei927.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/project/pathogens/as44/Tbruceibrucei927.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-genedb_tbrucei.obo: mirror/Tbruceibrucei927.gaf.gz
-	gzip -dc mirror/Tbruceibrucei927.gaf.gz | ./gaf2obo.pl -s Tbru -n genedb_tbrucei > $@.tmp && mv $@.tmp $@
+target/neo-genedb_tbrucei.ofn: mirror/Tbruceibrucei927.gaf.gz
+	gzip -dc mirror/Tbruceibrucei927.gaf.gz | ./gaf2ofn.pl -s Tbru -n genedb_tbrucei > $@.tmp && mv $@.tmp $@
 
 
 mirror/Pfalciparum.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.sanger.ac.uk/pub/project/pathogens/as44/Pfalciparum.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-genedb_pfalciparum.obo: mirror/Pfalciparum.gaf.gz
-	gzip -dc mirror/Pfalciparum.gaf.gz | ./gaf2obo.pl -s Pfal -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
+target/neo-genedb_pfalciparum.ofn: mirror/Pfalciparum.gaf.gz
+	gzip -dc mirror/Pfalciparum.gaf.gz | ./gaf2ofn.pl -s Pfal -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_chicken.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken.obo: mirror/goa_chicken.gpi.gz
-	gzip -dc mirror/goa_chicken.gpi.gz | ./gpi2obo.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken.ofn: mirror/goa_chicken.gpi.gz
+	gzip -dc mirror/goa_chicken.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_chicken_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken_complex.obo: mirror/goa_chicken_complex.gpi.gz
-	gzip -dc mirror/goa_chicken_complex.gpi.gz | ./gpi2obo.pl -s Ggal -n goa_chicken_complex > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken_complex.ofn: mirror/goa_chicken_complex.gpi.gz
+	gzip -dc mirror/goa_chicken_complex.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken_complex > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_chicken_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken_isoform.obo: mirror/goa_chicken_isoform.gpi.gz
-	gzip -dc mirror/goa_chicken_isoform.gpi.gz | ./gpi2obo.pl -s Ggal -n goa_chicken_isoform -I > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken_isoform.ofn: mirror/goa_chicken_isoform.gpi.gz
+	gzip -dc mirror/goa_chicken_isoform.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken_isoform -I > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_chicken_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/CHICKEN/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken_rna.obo: mirror/goa_chicken_rna.gpi.gz
-	gzip -dc mirror/goa_chicken_rna.gpi.gz | ./gpi2obo.pl -s Ggal -n goa_chicken_rna > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken_rna.ofn: mirror/goa_chicken_rna.gpi.gz
+	gzip -dc mirror/goa_chicken_rna.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken_rna > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow.obo: mirror/goa_cow.gpi.gz
-	gzip -dc mirror/goa_cow.gpi.gz | ./gpi2obo.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow.ofn: mirror/goa_cow.gpi.gz
+	gzip -dc mirror/goa_cow.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow_complex.obo: mirror/goa_cow_complex.gpi.gz
-	gzip -dc mirror/goa_cow_complex.gpi.gz | ./gpi2obo.pl -s Btau -n goa_cow_complex > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow_complex.ofn: mirror/goa_cow_complex.gpi.gz
+	gzip -dc mirror/goa_cow_complex.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow_complex > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow_isoform.obo: mirror/goa_cow_isoform.gpi.gz
-	gzip -dc mirror/goa_cow_isoform.gpi.gz | ./gpi2obo.pl -s Btau -n goa_cow_isoform -I > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow_isoform.ofn: mirror/goa_cow_isoform.gpi.gz
+	gzip -dc mirror/goa_cow_isoform.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow_isoform -I > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_cow_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/COW/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow_rna.obo: mirror/goa_cow_rna.gpi.gz
-	gzip -dc mirror/goa_cow_rna.gpi.gz | ./gpi2obo.pl -s Btau -n goa_cow_rna > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow_rna.ofn: mirror/goa_cow_rna.gpi.gz
+	gzip -dc mirror/goa_cow_rna.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow_rna > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_dog.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog.obo: mirror/goa_dog.gpi.gz
-	gzip -dc mirror/goa_dog.gpi.gz | ./gpi2obo.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog.ofn: mirror/goa_dog.gpi.gz
+	gzip -dc mirror/goa_dog.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_dog_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog_complex.obo: mirror/goa_dog_complex.gpi.gz
-	gzip -dc mirror/goa_dog_complex.gpi.gz | ./gpi2obo.pl -s Cfam -n goa_dog_complex > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog_complex.ofn: mirror/goa_dog_complex.gpi.gz
+	gzip -dc mirror/goa_dog_complex.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog_complex > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_dog_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog_isoform.obo: mirror/goa_dog_isoform.gpi.gz
-	gzip -dc mirror/goa_dog_isoform.gpi.gz | ./gpi2obo.pl -s Cfam -n goa_dog_isoform -I > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog_isoform.ofn: mirror/goa_dog_isoform.gpi.gz
+	gzip -dc mirror/goa_dog_isoform.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog_isoform -I > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_dog_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/DOG/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog_rna.obo: mirror/goa_dog_rna.gpi.gz
-	gzip -dc mirror/goa_dog_rna.gpi.gz | ./gpi2obo.pl -s Cfam -n goa_dog_rna > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog_rna.ofn: mirror/goa_dog_rna.gpi.gz
+	gzip -dc mirror/goa_dog_rna.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog_rna > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_human.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human.obo: mirror/goa_human.gpi.gz
-	gzip -dc mirror/goa_human.gpi.gz | ./gpi2obo.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
+target/neo-goa_human.ofn: mirror/goa_human.gpi.gz
+	gzip -dc mirror/goa_human.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_human_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human_complex.obo: mirror/goa_human_complex.gpi.gz
-	gzip -dc mirror/goa_human_complex.gpi.gz | ./gpi2obo.pl -s Hsap -n goa_human_complex > $@.tmp && mv $@.tmp $@
+target/neo-goa_human_complex.ofn: mirror/goa_human_complex.gpi.gz
+	gzip -dc mirror/goa_human_complex.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human_complex > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_human_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human_isoform.obo: mirror/goa_human_isoform.gpi.gz
-	gzip -dc mirror/goa_human_isoform.gpi.gz | ./gpi2obo.pl -s Hsap -n goa_human_isoform -I > $@.tmp && mv $@.tmp $@
+target/neo-goa_human_isoform.ofn: mirror/goa_human_isoform.gpi.gz
+	gzip -dc mirror/goa_human_isoform.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human_isoform -I > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_human_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human_rna.obo: mirror/goa_human_rna.gpi.gz
-	gzip -dc mirror/goa_human_rna.gpi.gz | ./gpi2obo.pl -s Hsap -n goa_human_rna > $@.tmp && mv $@.tmp $@
+target/neo-goa_human_rna.ofn: mirror/goa_human_rna.gpi.gz
+	gzip -dc mirror/goa_human_rna.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human_rna > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pig.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig.obo: mirror/goa_pig.gpi.gz
-	gzip -dc mirror/goa_pig.gpi.gz | ./gpi2obo.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig.ofn: mirror/goa_pig.gpi.gz
+	gzip -dc mirror/goa_pig.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pig_complex.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_complex.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig_complex.obo: mirror/goa_pig_complex.gpi.gz
-	gzip -dc mirror/goa_pig_complex.gpi.gz | ./gpi2obo.pl -s Sscr -n goa_pig_complex > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig_complex.ofn: mirror/goa_pig_complex.gpi.gz
+	gzip -dc mirror/goa_pig_complex.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig_complex > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pig_isoform.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_isoform.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig_isoform.obo: mirror/goa_pig_isoform.gpi.gz
-	gzip -dc mirror/goa_pig_isoform.gpi.gz | ./gpi2obo.pl -s Sscr -n goa_pig_isoform -I > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig_isoform.ofn: mirror/goa_pig_isoform.gpi.gz
+	gzip -dc mirror/goa_pig_isoform.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig_isoform -I > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pig_rna.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PIG/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_rna.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig_rna.obo: mirror/goa_pig_rna.gpi.gz
-	gzip -dc mirror/goa_pig_rna.gpi.gz | ./gpi2obo.pl -s Sscr -n goa_pig_rna > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig_rna.ofn: mirror/goa_pig_rna.gpi.gz
+	gzip -dc mirror/goa_pig_rna.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig_rna > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pdb.gaf.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/PDB/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pdb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pdb.obo: mirror/goa_pdb.gaf.gz
-	gzip -dc mirror/goa_pdb.gaf.gz | ./gaf2obo.pl -s goa_pdb -n goa_pdb > $@.tmp && mv $@.tmp $@
+target/neo-goa_pdb.ofn: mirror/goa_pdb.gaf.gz
+	gzip -dc mirror/goa_pdb.gaf.gz | ./gaf2ofn.pl -s goa_pdb -n goa_pdb > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_uniprot_all.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_uniprot_all.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_uniprot_all.obo: mirror/goa_uniprot_all.gpi.gz
-	gzip -dc mirror/goa_uniprot_all.gpi.gz | ./gpi2obo.pl -s goa_uniprot_all -n goa_uniprot_all > $@.tmp && mv $@.tmp $@
+target/neo-goa_uniprot_all.ofn: mirror/goa_uniprot_all.gpi.gz
+	gzip -dc mirror/goa_uniprot_all.gpi.gz | ./gpi2ofn.pl -s goa_uniprot_all -n goa_uniprot_all > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_uniprot_gcrp.gpi.gz: 
-	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://mirror.geneontology.io/goa_uniprot_gcrp.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_uniprot_gcrp.obo: mirror/goa_uniprot_gcrp.gpi.gz
-	gzip -dc mirror/goa_uniprot_gcrp.gpi.gz | ./gpi2obo.pl -s goa_uniprot_gcrp -n goa_uniprot_gcrp > $@.tmp && mv $@.tmp $@
+target/neo-goa_uniprot_gcrp.ofn: mirror/goa_uniprot_gcrp.gpi.gz
+	gzip -dc mirror/goa_uniprot_gcrp.gpi.gz | ./gpi2ofn.pl -s goa_uniprot_gcrp -n goa_uniprot_gcrp > $@.tmp && mv $@.tmp $@
 
 
 mirror/japonicusdb.gpi.gz: 
 	wget --no-check-certificate https://www.japonicusdb.org/data/annotations/Gene_ontology/japonicusdb.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-japonicusdb.obo: mirror/japonicusdb.gpi.gz
-	gzip -dc mirror/japonicusdb.gpi.gz | ./gpi2obo.pl -s Sjap -n japonicusdb > $@.tmp && mv $@.tmp $@
+target/neo-japonicusdb.ofn: mirror/japonicusdb.gpi.gz
+	gzip -dc mirror/japonicusdb.gpi.gz | ./gpi2ofn.pl -s Sjap -n japonicusdb > $@.tmp && mv $@.tmp $@
 
 
 mirror/mgi.gpi.gz: 
 	wget --no-check-certificate http://www.informatics.jax.org/downloads/reports/mgi.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-mgi.obo: mirror/mgi.gpi.gz
-	gzip -dc mirror/mgi.gpi.gz | ./gpi2obo.pl -s Mmus -n mgi > $@.tmp && mv $@.tmp $@
+target/neo-mgi.ofn: mirror/mgi.gpi.gz
+	gzip -dc mirror/mgi.gpi.gz | ./gpi2ofn.pl -s Mmus -n mgi > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_cgd.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_cgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_cgd.obo: mirror/gene_association.paint_cgd.gaf.gz
-	gzip -dc mirror/gene_association.paint_cgd.gaf.gz | ./gaf2obo.pl -s Calb -n paint_cgd > $@.tmp && mv $@.tmp $@
+target/neo-paint_cgd.ofn: mirror/gene_association.paint_cgd.gaf.gz
+	gzip -dc mirror/gene_association.paint_cgd.gaf.gz | ./gaf2ofn.pl -s Calb -n paint_cgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_dictyBase.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_dictyBase.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_dictybase.obo: mirror/gene_association.paint_dictyBase.gaf.gz
-	gzip -dc mirror/gene_association.paint_dictyBase.gaf.gz | ./gaf2obo.pl -s Ddis -n paint_dictybase > $@.tmp && mv $@.tmp $@
+target/neo-paint_dictybase.ofn: mirror/gene_association.paint_dictyBase.gaf.gz
+	gzip -dc mirror/gene_association.paint_dictyBase.gaf.gz | ./gaf2ofn.pl -s Ddis -n paint_dictybase > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_ecocyc.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_ecocyc.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_ecocyc.obo: mirror/gene_association.paint_ecocyc.gaf.gz
-	gzip -dc mirror/gene_association.paint_ecocyc.gaf.gz | ./gaf2obo.pl -s Ecol -n paint_ecocyc > $@.tmp && mv $@.tmp $@
+target/neo-paint_ecocyc.ofn: mirror/gene_association.paint_ecocyc.gaf.gz
+	gzip -dc mirror/gene_association.paint_ecocyc.gaf.gz | ./gaf2ofn.pl -s Ecol -n paint_ecocyc > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_fb.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_fb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_fb.obo: mirror/gene_association.paint_fb.gaf.gz
-	gzip -dc mirror/gene_association.paint_fb.gaf.gz | ./gaf2obo.pl -s Dmel -n paint_fb > $@.tmp && mv $@.tmp $@
+target/neo-paint_fb.ofn: mirror/gene_association.paint_fb.gaf.gz
+	gzip -dc mirror/gene_association.paint_fb.gaf.gz | ./gaf2ofn.pl -s Dmel -n paint_fb > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_chicken.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_chicken.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_goa_chicken.obo: mirror/gene_association.paint_chicken.gaf.gz
-	gzip -dc mirror/gene_association.paint_chicken.gaf.gz | ./gaf2obo.pl -s Ggal -n paint_goa_chicken > $@.tmp && mv $@.tmp $@
+target/neo-paint_goa_chicken.ofn: mirror/gene_association.paint_chicken.gaf.gz
+	gzip -dc mirror/gene_association.paint_chicken.gaf.gz | ./gaf2ofn.pl -s Ggal -n paint_goa_chicken > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_human.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_human.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_goa_human.obo: mirror/gene_association.paint_human.gaf.gz
-	gzip -dc mirror/gene_association.paint_human.gaf.gz | ./gaf2obo.pl -s Hsap -n paint_goa_human > $@.tmp && mv $@.tmp $@
+target/neo-paint_goa_human.ofn: mirror/gene_association.paint_human.gaf.gz
+	gzip -dc mirror/gene_association.paint_human.gaf.gz | ./gaf2ofn.pl -s Hsap -n paint_goa_human > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_mgi.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_mgi.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_mgi.obo: mirror/gene_association.paint_mgi.gaf.gz
-	gzip -dc mirror/gene_association.paint_mgi.gaf.gz | ./gaf2obo.pl -s Mmus -n paint_mgi > $@.tmp && mv $@.tmp $@
+target/neo-paint_mgi.ofn: mirror/gene_association.paint_mgi.gaf.gz
+	gzip -dc mirror/gene_association.paint_mgi.gaf.gz | ./gaf2ofn.pl -s Mmus -n paint_mgi > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_other.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_other.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_other.obo: mirror/gene_association.paint_other.gaf.gz
-	gzip -dc mirror/gene_association.paint_other.gaf.gz | ./gaf2obo.pl -s paint_other -n paint_other > $@.tmp && mv $@.tmp $@
+target/neo-paint_other.ofn: mirror/gene_association.paint_other.gaf.gz
+	gzip -dc mirror/gene_association.paint_other.gaf.gz | ./gaf2ofn.pl -s paint_other -n paint_other > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_pombase.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_pombase.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_pombase.obo: mirror/gene_association.paint_pombase.gaf.gz
-	gzip -dc mirror/gene_association.paint_pombase.gaf.gz | ./gaf2obo.pl -s Spom -n paint_pombase > $@.tmp && mv $@.tmp $@
+target/neo-paint_pombase.ofn: mirror/gene_association.paint_pombase.gaf.gz
+	gzip -dc mirror/gene_association.paint_pombase.gaf.gz | ./gaf2ofn.pl -s Spom -n paint_pombase > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_rgd.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_rgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_rgd.obo: mirror/gene_association.paint_rgd.gaf.gz
-	gzip -dc mirror/gene_association.paint_rgd.gaf.gz | ./gaf2obo.pl -s Rnor -n paint_rgd > $@.tmp && mv $@.tmp $@
+target/neo-paint_rgd.ofn: mirror/gene_association.paint_rgd.gaf.gz
+	gzip -dc mirror/gene_association.paint_rgd.gaf.gz | ./gaf2ofn.pl -s Rnor -n paint_rgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_sgd.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_sgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_sgd.obo: mirror/gene_association.paint_sgd.gaf.gz
-	gzip -dc mirror/gene_association.paint_sgd.gaf.gz | ./gaf2obo.pl -s Scer -n paint_sgd > $@.tmp && mv $@.tmp $@
+target/neo-paint_sgd.ofn: mirror/gene_association.paint_sgd.gaf.gz
+	gzip -dc mirror/gene_association.paint_sgd.gaf.gz | ./gaf2ofn.pl -s Scer -n paint_sgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_tair.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_tair.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_tair.obo: mirror/gene_association.paint_tair.gaf.gz
-	gzip -dc mirror/gene_association.paint_tair.gaf.gz | ./gaf2obo.pl -s Atal -n paint_tair > $@.tmp && mv $@.tmp $@
+target/neo-paint_tair.ofn: mirror/gene_association.paint_tair.gaf.gz
+	gzip -dc mirror/gene_association.paint_tair.gaf.gz | ./gaf2ofn.pl -s Atal -n paint_tair > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_wb.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_wb.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_wb.obo: mirror/gene_association.paint_wb.gaf.gz
-	gzip -dc mirror/gene_association.paint_wb.gaf.gz | ./gaf2obo.pl -s Cele -n paint_wb > $@.tmp && mv $@.tmp $@
+target/neo-paint_wb.ofn: mirror/gene_association.paint_wb.gaf.gz
+	gzip -dc mirror/gene_association.paint_wb.gaf.gz | ./gaf2ofn.pl -s Cele -n paint_wb > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_xenbase.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_xenbase.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_xenbase.obo: mirror/gene_association.paint_xenbase.gaf.gz
-	gzip -dc mirror/gene_association.paint_xenbase.gaf.gz | ./gaf2obo.pl -s Xenopus -n paint_xenbase > $@.tmp && mv $@.tmp $@
+target/neo-paint_xenbase.ofn: mirror/gene_association.paint_xenbase.gaf.gz
+	gzip -dc mirror/gene_association.paint_xenbase.gaf.gz | ./gaf2ofn.pl -s Xenopus -n paint_xenbase > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.paint_zfin.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_zfin.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-paint_zfin.obo: mirror/gene_association.paint_zfin.gaf.gz
-	gzip -dc mirror/gene_association.paint_zfin.gaf.gz | ./gaf2obo.pl -s Drer -n paint_zfin > $@.tmp && mv $@.tmp $@
+target/neo-paint_zfin.ofn: mirror/gene_association.paint_zfin.gaf.gz
+	gzip -dc mirror/gene_association.paint_zfin.gaf.gz | ./gaf2ofn.pl -s Drer -n paint_zfin > $@.tmp && mv $@.tmp $@
 
 
 mirror/pombase.gpi.gz: 
 	wget --no-check-certificate https://www.pombase.org/data/annotations/Gene_ontology/pombase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pombase.obo: mirror/pombase.gpi.gz
-	gzip -dc mirror/pombase.gpi.gz | ./gpi2obo.pl -s Spom -n pombase > $@.tmp && mv $@.tmp $@
+target/neo-pombase.ofn: mirror/pombase.gpi.gz
+	gzip -dc mirror/pombase.gpi.gz | ./gpi2ofn.pl -s Spom -n pombase > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.pseudocap.gz: 
 	wget --no-check-certificate https://github.com/brinkmanlab/pseudomonas-genome-database/raw/master/pseudocap-annotation-files/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pseudocap.obo: mirror/gene_association.pseudocap.gz
-	gzip -dc mirror/gene_association.pseudocap.gz | ./gaf2obo.pl -s Pseudomonas -n pseudocap > $@.tmp && mv $@.tmp $@
+target/neo-pseudocap.ofn: mirror/gene_association.pseudocap.gz
+	gzip -dc mirror/gene_association.pseudocap.gz | ./gaf2ofn.pl -s Pseudomonas -n pseudocap > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.reactome.gz: 
 	wget --no-check-certificate https://www.reactome.org/download/current/gene_association.reactome.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-reactome.obo: mirror/gene_association.reactome.gz
-	gzip -dc mirror/gene_association.reactome.gz | ./gaf2obo.pl -s reactome -n reactome > $@.tmp && mv $@.tmp $@
+target/neo-reactome.ofn: mirror/gene_association.reactome.gz
+	gzip -dc mirror/gene_association.reactome.gz | ./gaf2ofn.pl -s reactome -n reactome > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.rgd.gz: 
 	wget --no-check-certificate https://github.com/rat-genome-database/rgd-annotation-files/raw/master/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-rgd.obo: mirror/gene_association.rgd.gz
-	gzip -dc mirror/gene_association.rgd.gz | ./gaf2obo.pl -s Rnor -n rgd > $@.tmp && mv $@.tmp $@
+target/neo-rgd.ofn: mirror/gene_association.rgd.gz
+	gzip -dc mirror/gene_association.rgd.gz | ./gaf2ofn.pl -s Rnor -n rgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/rnacentral.gpi.gz: 
 	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/databases/RNAcentral/current_release/gpi/rnacentral.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-rnacentral.obo: mirror/rnacentral.gpi.gz
-	gzip -dc mirror/rnacentral.gpi.gz | ./gpi2obo.pl -s rnacentral -n rnacentral > $@.tmp && mv $@.tmp $@
+target/neo-rnacentral.ofn: mirror/rnacentral.gpi.gz
+	gzip -dc mirror/rnacentral.gpi.gz | ./gpi2ofn.pl -s rnacentral -n rnacentral > $@.tmp && mv $@.tmp $@
 
 
 mirror/gpi.sgd.gz: 
 	wget --no-check-certificate https://downloads.yeastgenome.org/latest/gpi.sgd.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-sgd.obo: mirror/gpi.sgd.gz
-	gzip -dc mirror/gpi.sgd.gz | ./gpi2obo.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
+target/neo-sgd.ofn: mirror/gpi.sgd.gz
+	gzip -dc mirror/gpi.sgd.gz | ./gpi2ofn.pl -s Scer -n sgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.sgn.gz: 
 	wget --no-check-certificate https://solgenomics.net/ftp/ontology/GO/gene_association.sgn.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-sgn.obo: mirror/gene_association.sgn.gz
-	gzip -dc mirror/gene_association.sgn.gz | ./gaf2obo.pl -s Solanaceae -n sgn > $@.tmp && mv $@.tmp $@
+target/neo-sgn.ofn: mirror/gene_association.sgn.gz
+	gzip -dc mirror/gene_association.sgn.gz | ./gaf2ofn.pl -s Solanaceae -n sgn > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.tair.gz: 
-	wget --no-check-certificate https://www.arabidopsis.org/download_files/GO_and_PO_Annotations/Gene_Ontology_Annotations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://www.arabidopsis.org/api/download-files/download?filePath=GO_and_PO_Annotations/Gene_Ontology_Annotations/gene_association.tair.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-tair.obo: mirror/gene_association.tair.gz
-	gzip -dc mirror/gene_association.tair.gz | ./gaf2obo.pl -s Atal -n tair > $@.tmp && mv $@.tmp $@
+target/neo-tair.ofn: mirror/gene_association.tair.gz
+	gzip -dc mirror/gene_association.tair.gz | ./gaf2ofn.pl -s Atal -n tair > $@.tmp && mv $@.tmp $@
 
 
-mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz: 
-	wget --no-check-certificate ftp://ftp.wormbase.org/pub/wormbase/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz: 
+	wget --no-check-certificate https://downloads.wormbase.org/species/c_elegans/PRJNA13758/annotation/gene_product_info/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-wb.obo: mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz
-	gzip -dc mirror/c_elegans.PRJNA13758.current.gene_product_info.gpi.gz | ./gpi2obo.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
+target/neo-wb.ofn: mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz
+	gzip -dc mirror/c_elegans.canonical_bioproject.current.gene_product_info.gpi.gz | ./gpi2ofn.pl -s Cele -n wb > $@.tmp && mv $@.tmp $@
 
 
 mirror/xenbase.gpi.gz: 
 	wget --no-check-certificate https://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-xenbase.obo: mirror/xenbase.gpi.gz
-	gzip -dc mirror/xenbase.gpi.gz | ./gpi2obo.pl -s Xenopus -n xenbase > $@.tmp && mv $@.tmp $@
+target/neo-xenbase.ofn: mirror/xenbase.gpi.gz
+	gzip -dc mirror/xenbase.gpi.gz | ./gpi2ofn.pl -s Xenopus -n xenbase > $@.tmp && mv $@.tmp $@
 
 
 mirror/zfin.gpi.gz: 
 	wget --no-check-certificate https://zfin.org/downloads/zfin.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-zfin.obo: mirror/zfin.gpi.gz
-	gzip -dc mirror/zfin.gpi.gz | ./gpi2obo.pl -s Drer -n zfin > $@.tmp && mv $@.tmp $@
+target/neo-zfin.ofn: mirror/zfin.gpi.gz
+	gzip -dc mirror/zfin.gpi.gz | ./gpi2ofn.pl -s Drer -n zfin > $@.tmp && mv $@.tmp $@
 
 
