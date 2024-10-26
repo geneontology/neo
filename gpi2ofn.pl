@@ -52,10 +52,10 @@ while(<>) {
         print STDERR "SKIPPING line $line_no: see https://github.com/geneontology/go-site/issues/595\n";
         next;
     }
-    my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
+    my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parents_str, $xrefs_str, $props) = @vals;
     if ($gpi_version =~ m@^2@) {
         my $global_id;
-        ($global_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parent, $xrefs_str, $props) = @vals;
+        ($global_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parents_str, $xrefs_str, $props) = @vals;
         if ($global_id =~ m@^(\w+):(\S+)@) {
             ($db, $local_id) = ($1,$2);
         }
@@ -79,6 +79,7 @@ while(<>) {
 
     my @syns = split(/\|/,$syns_str);
     my @xrefs = split(/\|/,$xrefs_str);
+    my @parents = split(/\|/,$parents_str);
 
     # See: https://github.com/geneontology/noctua/issues/663
     push(@syns, $local_id);
@@ -150,10 +151,7 @@ while(<>) {
     print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
     print "SubClassOf($id $type)\n";
     print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
-    if ($parent) {
-        #$parent = expand($parent);
-        print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $parent))\n";
-    }
+    print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $_))\n" foreach @parents;
     print "\n";
 
     $done{$id}++;
