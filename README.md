@@ -137,4 +137,4 @@ Currently NEO builds are manually triggered.
 Sometimes it can be difficult to figure out what's going on with the
 build. For those interested in understanding the build of a single resource target (e.g. mgi.gpi -> mgi-neo.obo), the following command can be useful:
 
-`make clean && TEST_SRCS=mgi make test_obo 2>&1 | tee /tmp/log.txt`
+`make clean && TEST_SRCS=mgi make test_ofn 2>&1 | tee /tmp/log.txt`
