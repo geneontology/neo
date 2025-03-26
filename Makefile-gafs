@@ -54,44 +54,44 @@ target/neo-genedb_pfalciparum.ofn: mirror/Pfalciparum.gaf.gz
 	gzip -dc mirror/Pfalciparum.gaf.gz | ./gaf2ofn.pl -s Pfal -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_chicken.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_chicken_plus.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken.ofn: mirror/goa_chicken.gpi.gz
-	gzip -dc mirror/goa_chicken.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken.ofn: mirror/goa_chicken_plus.gpi.gz
+	gzip -dc mirror/goa_chicken_plus.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_cow.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_cow.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_cow_plus.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow.ofn: mirror/goa_cow.gpi.gz
-	gzip -dc mirror/goa_cow.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow.ofn: mirror/goa_cow_plus.gpi.gz
+	gzip -dc mirror/goa_cow_plus.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_dog.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_dog.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_dog_plus.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog.ofn: mirror/goa_dog.gpi.gz
-	gzip -dc mirror/goa_dog.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog.ofn: mirror/goa_dog_plus.gpi.gz
+	gzip -dc mirror/goa_dog_plus.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_human.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_human.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_human_plus.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/goa_human_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human.ofn: mirror/goa_human.gpi.gz
-	gzip -dc mirror/goa_human.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
+target/neo-goa_human.ofn: mirror/goa_human_plus.gpi.gz
+	gzip -dc mirror/goa_human_plus.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_pig.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_pig.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/goa_pig_plus.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig.ofn: mirror/goa_pig.gpi.gz
-	gzip -dc mirror/goa_pig.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig.ofn: mirror/goa_pig_plus.gpi.gz
+	gzip -dc mirror/goa_pig_plus.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pdb.gaf.gz: 
