@@ -40,7 +40,7 @@ This runs the [Makefile](Makefile) in this repository, and deploys the
 resulting ontology on S3, where it is available in multiple regions
 via cloudfront.
 
-# Contents
+# Contents (abstract)
 
 The contents of NEO are largely driven by the contents of each GOC
 member's GPI file (if a GPI file is not provided, a GAF is used
@@ -68,6 +68,19 @@ members who are gene-centric.
 Currently, the MGI GPI file uses PRO for protein entities, whereas the
 human GPI uses UniProtKB IDs. This means that a Noctua user can use
 PRO for mouse and UniProt for human.
+
+# Contents (developer)
+
+At the top level, the biological entity contents of NEO are mainly defined from the http://s3.amazonaws.com/go-build/metadata/datasets.json file. This file, in turn, is generated from `metadata/datasets/*.yaml` in the `go-site` repo when the NEO pipeline runs every week.
+
+This is filtered againse the `SRCS` variable in the `Makefile` in this repo, currently (2025-06-30) defined as:
+
+`SRCS ?= sgd pombase mgi zfin rgd dictybase fb tair wb goa_human goa_pig xenbase pseudocap ecocyc goa_sars-cov-2 uniprot_reviewed goa_virus_bacteria_taxon_545 goa_virus_bacteria_taxon_574 goa_virus_bacteria_taxon_623 goa_virus_bacteria_taxon_1353 goa_virus_bacteria_taxon_1392 goa_virus_bacteria_taxon_1901 goa_virus_bacteria_taxon_10254 goa_virus_bacteria_taxon_10299 goa_virus_bacteria_taxon_10338 goa_virus_bacteria_taxon_10360 goa_virus_bacteria_taxon_63746 goa_virus_bacteria_taxon_64320 goa_virus_bacteria_taxon_71421 goa_virus_bacteria_taxon_83334 goa_virus_bacteria_taxon_85962 goa_virus_bacteria_taxon_93061 goa_virus_bacteria_taxon_99287 goa_virus_bacteria_taxon_100226 goa_virus_bacteria_taxon_122586 goa_virus_bacteria_taxon_169963 goa_virus_bacteria_taxon_170187 goa_virus_bacteria_taxon_171101 goa_virus_bacteria_taxon_192222 goa_virus_bacteria_taxon_208964 goa_virus_bacteria_taxon_224308 goa_virus_bacteria_taxon_226185 goa_virus_bacteria_taxon_243273 goa_virus_bacteria_taxon_272558 goa_virus_bacteria_taxon_272634 goa_virus_bacteria_taxon_295027 goa_virus_bacteria_taxon_301447 goa_virus_bacteria_taxon_327105 goa_virus_bacteria_taxon_333760 goa_virus_bacteria_taxon_373153 goa_virus_bacteria_taxon_419947 goa_virus_bacteria_taxon_565655 goa_virus_bacteria_taxon_575584 goa_virus_bacteria_taxon_587200 goa_virus_bacteria_taxon_645098 goa_virus_bacteria_taxon_928302 goa_virus_bacteria_taxon_1125630`
+
+In addition, the following exceptions/additions are made:
+
+- `goa_sars-cov-2`: https://raw.githubusercontent.com/Knowledge-Graph-Hub/kg-covid-19/master/curated/ORFs/uniprot_sars-cov-2.gpi
+- `uniprot_reviewed`: http://ftp.ebi.ac.uk/pub/contrib/goa/uniprot_reviewed.gpi.gz (filtered)
 
 # FAQ/TODO
 
