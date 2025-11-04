@@ -23,7 +23,7 @@ target/neo-ecocyc.ofn: mirror/ecocyc.gpi.gz
 
 
 mirror/gp_information.fb.gz: 
-	wget --no-check-certificate http://ftp.flybase.net/releases/current/precomputed_files/collaborators/gp_information.fb.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://s3ftp.flybase.org/releases/current/collaborators/gp_information.fb.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-fb.ofn: mirror/gp_information.fb.gz
@@ -54,44 +54,44 @@ target/neo-genedb_pfalciparum.ofn: mirror/Pfalciparum.gaf.gz
 	gzip -dc mirror/Pfalciparum.gaf.gz | ./gaf2ofn.pl -s Pfal -n genedb_pfalciparum > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_chicken_plus.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_chicken_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/CHICK_9031_UP000000539.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/CHICK_9031_UP000000539.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_chicken.ofn: mirror/goa_chicken_plus.gpi.gz
-	gzip -dc mirror/goa_chicken_plus.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
+target/neo-goa_chicken.ofn: mirror/CHICK_9031_UP000000539.gpi.gz
+	gzip -dc mirror/CHICK_9031_UP000000539.gpi.gz | ./gpi2ofn.pl -s Ggal -n goa_chicken > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_cow_plus.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_cow_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/BOVIN_9913_UP000009136.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/BOVIN_9913_UP000009136.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_cow.ofn: mirror/goa_cow_plus.gpi.gz
-	gzip -dc mirror/goa_cow_plus.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
+target/neo-goa_cow.ofn: mirror/BOVIN_9913_UP000009136.gpi.gz
+	gzip -dc mirror/BOVIN_9913_UP000009136.gpi.gz | ./gpi2ofn.pl -s Btau -n goa_cow > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_dog_plus.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_dog_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/CANLF_9615_UP000805418.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/CANLF_9615_UP000805418.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_dog.ofn: mirror/goa_dog_plus.gpi.gz
-	gzip -dc mirror/goa_dog_plus.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
+target/neo-goa_dog.ofn: mirror/CANLF_9615_UP000805418.gpi.gz
+	gzip -dc mirror/CANLF_9615_UP000805418.gpi.gz | ./gpi2ofn.pl -s Cfam -n goa_dog > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_human_plus.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_human_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HUMAN_9606_UP000005640.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HUMAN_9606_UP000005640.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_human.ofn: mirror/goa_human_plus.gpi.gz
-	gzip -dc mirror/goa_human_plus.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
+target/neo-goa_human.ofn: mirror/HUMAN_9606_UP000005640.gpi.gz
+	gzip -dc mirror/HUMAN_9606_UP000005640.gpi.gz | ./gpi2ofn.pl -s Hsap -n goa_human > $@.tmp && mv $@.tmp $@
 
 
-mirror/goa_pig_plus.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/goa_pig_plus.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/PIG_9823_UP000008227.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/PIG_9823_UP000008227.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_pig.ofn: mirror/goa_pig_plus.gpi.gz
-	gzip -dc mirror/goa_pig_plus.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
+target/neo-goa_pig.ofn: mirror/PIG_9823_UP000008227.gpi.gz
+	gzip -dc mirror/PIG_9823_UP000008227.gpi.gz | ./gpi2ofn.pl -s Sscr -n goa_pig > $@.tmp && mv $@.tmp $@
 
 
 mirror/goa_pdb.gaf.gz: 
@@ -118,340 +118,340 @@ target/neo-goa_uniprot_gcrp.ofn: mirror/goa_uniprot_gcrp.gpi.gz
 	gzip -dc mirror/goa_uniprot_gcrp.gpi.gz | ./gpi2ofn.pl -s goa_uniprot_gcrp -n goa_uniprot_gcrp > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000270272.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000270272.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/CITKO_545_UP000270272.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/CITKO_545_UP000270272.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_545.ofn: mirror/proteome_UP000270272.gpi.gz
-	gzip -dc mirror/proteome_UP000270272.gpi.gz | ./gpi2ofn.pl -s CITKO -n goa_virus_bacteria_taxon_545 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_545.ofn: mirror/CITKO_545_UP000270272.gpi.gz
+	gzip -dc mirror/CITKO_545_UP000270272.gpi.gz | ./gpi2ofn.pl -s CITKO -n goa_virus_bacteria_taxon_545 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000255382.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000255382.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/KLEPO_574_UP000255382.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/KLEPO_574_UP000255382.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_574.ofn: mirror/proteome_UP000255382.gpi.gz
-	gzip -dc mirror/proteome_UP000255382.gpi.gz | ./gpi2ofn.pl -s KLEPO -n goa_virus_bacteria_taxon_574 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_574.ofn: mirror/KLEPO_574_UP000255382.gpi.gz
+	gzip -dc mirror/KLEPO_574_UP000255382.gpi.gz | ./gpi2ofn.pl -s KLEPO -n goa_virus_bacteria_taxon_574 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001006.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001006.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/SHIFL_623_UP000001006.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/SHIFL_623_UP000001006.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_623.ofn: mirror/proteome_UP000001006.gpi.gz
-	gzip -dc mirror/proteome_UP000001006.gpi.gz | ./gpi2ofn.pl -s SHIFL -n goa_virus_bacteria_taxon_623 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_623.ofn: mirror/SHIFL_623_UP000001006.gpi.gz
+	gzip -dc mirror/SHIFL_623_UP000001006.gpi.gz | ./gpi2ofn.pl -s SHIFL -n goa_virus_bacteria_taxon_623 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000254807.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000254807.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ENTGA_1353_UP000254807.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ENTGA_1353_UP000254807.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_1353.ofn: mirror/proteome_UP000254807.gpi.gz
-	gzip -dc mirror/proteome_UP000254807.gpi.gz | ./gpi2ofn.pl -s ENTGA -n goa_virus_bacteria_taxon_1353 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_1353.ofn: mirror/ENTGA_1353_UP000254807.gpi.gz
+	gzip -dc mirror/ENTGA_1353_UP000254807.gpi.gz | ./gpi2ofn.pl -s ENTGA -n goa_virus_bacteria_taxon_1353 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000594.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000594.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/BACAN_1392_UP000000594.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/BACAN_1392_UP000000594.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_1392.ofn: mirror/proteome_UP000000594.gpi.gz
-	gzip -dc mirror/proteome_UP000000594.gpi.gz | ./gpi2ofn.pl -s BACAN -n goa_virus_bacteria_taxon_1392 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_1392.ofn: mirror/BACAN_1392_UP000000594.gpi.gz
+	gzip -dc mirror/BACAN_1392_UP000000594.gpi.gz | ./gpi2ofn.pl -s BACAN -n goa_virus_bacteria_taxon_1392 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000002357.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000002357.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRCL_1901_UP000002357.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRCL_1901_UP000002357.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_1901.ofn: mirror/proteome_UP000002357.gpi.gz
-	gzip -dc mirror/proteome_UP000002357.gpi.gz | ./gpi2ofn.pl -s STRCL -n goa_virus_bacteria_taxon_1901 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_1901.ofn: mirror/STRCL_1901_UP000002357.gpi.gz
+	gzip -dc mirror/STRCL_1901_UP000002357.gpi.gz | ./gpi2ofn.pl -s STRCL -n goa_virus_bacteria_taxon_1901 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000344.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000344.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/VACCW_10254_UP000000344.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/VACCW_10254_UP000000344.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_10254.ofn: mirror/proteome_UP000000344.gpi.gz
-	gzip -dc mirror/proteome_UP000000344.gpi.gz | ./gpi2ofn.pl -s VACCW -n goa_virus_bacteria_taxon_10254 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_10254.ofn: mirror/VACCW_10254_UP000000344.gpi.gz
+	gzip -dc mirror/VACCW_10254_UP000000344.gpi.gz | ./gpi2ofn.pl -s VACCW -n goa_virus_bacteria_taxon_10254 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000009294.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000009294.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HHV11_10299_UP000009294.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HHV11_10299_UP000009294.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_10299.ofn: mirror/proteome_UP000009294.gpi.gz
-	gzip -dc mirror/proteome_UP000009294.gpi.gz | ./gpi2ofn.pl -s HHV11 -n goa_virus_bacteria_taxon_10299 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_10299.ofn: mirror/HHV11_10299_UP000009294.gpi.gz
+	gzip -dc mirror/HHV11_10299_UP000009294.gpi.gz | ./gpi2ofn.pl -s HHV11 -n goa_virus_bacteria_taxon_10299 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000002602.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000002602.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/VZVD_10338_UP000002602.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/VZVD_10338_UP000002602.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_10338.ofn: mirror/proteome_UP000002602.gpi.gz
-	gzip -dc mirror/proteome_UP000002602.gpi.gz | ./gpi2ofn.pl -s VZVD -n goa_virus_bacteria_taxon_10338 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_10338.ofn: mirror/VZVD_10338_UP000002602.gpi.gz
+	gzip -dc mirror/VZVD_10338_UP000002602.gpi.gz | ./gpi2ofn.pl -s VZVD -n goa_virus_bacteria_taxon_10338 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000008992.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000008992.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HCMVA_10360_UP000008992.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HCMVA_10360_UP000008992.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_10360.ofn: mirror/proteome_UP000008992.gpi.gz
-	gzip -dc mirror/proteome_UP000008992.gpi.gz | ./gpi2ofn.pl -s HCMVA -n goa_virus_bacteria_taxon_10360 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_10360.ofn: mirror/HCMVA_10360_UP000008992.gpi.gz
+	gzip -dc mirror/HCMVA_10360_UP000008992.gpi.gz | ./gpi2ofn.pl -s HCMVA -n goa_virus_bacteria_taxon_10360 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000008765.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000008765.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/FMDVO_12118_UP000008765.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/FMDVO_12118_UP000008765.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_12118.ofn: mirror/proteome_UP000008765.gpi.gz
-	gzip -dc mirror/proteome_UP000008765.gpi.gz | ./gpi2ofn.pl -s FMDVO -n goa_virus_bacteria_taxon_12118 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_12118.ofn: mirror/FMDVO_12118_UP000008765.gpi.gz
+	gzip -dc mirror/FMDVO_12118_UP000008765.gpi.gz | ./gpi2ofn.pl -s FMDVO -n goa_virus_bacteria_taxon_12118 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000518.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000518.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HCV77_63746_UP000000518.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HCV77_63746_UP000000518.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_63746.ofn: mirror/proteome_UP000000518.gpi.gz
-	gzip -dc mirror/proteome_UP000000518.gpi.gz | ./gpi2ofn.pl -s HCV77 -n goa_virus_bacteria_taxon_63746 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_63746.ofn: mirror/HCV77_63746_UP000000518.gpi.gz
+	gzip -dc mirror/HCV77_63746_UP000000518.gpi.gz | ./gpi2ofn.pl -s HCV77 -n goa_virus_bacteria_taxon_63746 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000054557.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000054557.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ZIKV_64320_UP000054557.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ZIKV_64320_UP000054557.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_64320.ofn: mirror/proteome_UP000054557.gpi.gz
-	gzip -dc mirror/proteome_UP000054557.gpi.gz | ./gpi2ofn.pl -s ZIKV -n goa_virus_bacteria_taxon_64320 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_64320.ofn: mirror/ZIKV_64320_UP000054557.gpi.gz
+	gzip -dc mirror/ZIKV_64320_UP000054557.gpi.gz | ./gpi2ofn.pl -s ZIKV -n goa_virus_bacteria_taxon_64320 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000579.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000579.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HAEIN_71421_UP000000579.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HAEIN_71421_UP000000579.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_71421.ofn: mirror/proteome_UP000000579.gpi.gz
-	gzip -dc mirror/proteome_UP000000579.gpi.gz | ./gpi2ofn.pl -s HAEIN -n goa_virus_bacteria_taxon_71421 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_71421.ofn: mirror/HAEIN_71421_UP000000579.gpi.gz
+	gzip -dc mirror/HAEIN_71421_UP000000579.gpi.gz | ./gpi2ofn.pl -s HAEIN -n goa_virus_bacteria_taxon_71421 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000558.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000558.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ECO57_83334_UP000000558.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ECO57_83334_UP000000558.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_83334.ofn: mirror/proteome_UP000000558.gpi.gz
-	gzip -dc mirror/proteome_UP000000558.gpi.gz | ./gpi2ofn.pl -s ECO57 -n goa_virus_bacteria_taxon_83334 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_83334.ofn: mirror/ECO57_83334_UP000000558.gpi.gz
+	gzip -dc mirror/ECO57_83334_UP000000558.gpi.gz | ./gpi2ofn.pl -s ECO57 -n goa_virus_bacteria_taxon_83334 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000429.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000429.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HELPY_85962_UP000000429.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HELPY_85962_UP000000429.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_85962.ofn: mirror/proteome_UP000000429.gpi.gz
-	gzip -dc mirror/proteome_UP000000429.gpi.gz | ./gpi2ofn.pl -s HELPY -n goa_virus_bacteria_taxon_85962 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_85962.ofn: mirror/HELPY_85962_UP000000429.gpi.gz
+	gzip -dc mirror/HELPY_85962_UP000000429.gpi.gz | ./gpi2ofn.pl -s HELPY -n goa_virus_bacteria_taxon_85962 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000008816.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000008816.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STAA8_93061_UP000008816.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STAA8_93061_UP000008816.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_93061.ofn: mirror/proteome_UP000008816.gpi.gz
-	gzip -dc mirror/proteome_UP000008816.gpi.gz | ./gpi2ofn.pl -s STAA8 -n goa_virus_bacteria_taxon_93061 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_93061.ofn: mirror/STAA8_93061_UP000008816.gpi.gz
+	gzip -dc mirror/STAA8_93061_UP000008816.gpi.gz | ./gpi2ofn.pl -s STAA8 -n goa_virus_bacteria_taxon_93061 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001014.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001014.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/SALTY_99287_UP000001014.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/SALTY_99287_UP000001014.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_99287.ofn: mirror/proteome_UP000001014.gpi.gz
-	gzip -dc mirror/proteome_UP000001014.gpi.gz | ./gpi2ofn.pl -s SALTY -n goa_virus_bacteria_taxon_99287 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_99287.ofn: mirror/SALTY_99287_UP000001014.gpi.gz
+	gzip -dc mirror/SALTY_99287_UP000001014.gpi.gz | ./gpi2ofn.pl -s SALTY -n goa_virus_bacteria_taxon_99287 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001973.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001973.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRCO_100226_UP000001973.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRCO_100226_UP000001973.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_100226.ofn: mirror/proteome_UP000001973.gpi.gz
-	gzip -dc mirror/proteome_UP000001973.gpi.gz | ./gpi2ofn.pl -s STRCO -n goa_virus_bacteria_taxon_100226 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_100226.ofn: mirror/STRCO_100226_UP000001973.gpi.gz
+	gzip -dc mirror/STRCO_100226_UP000001973.gpi.gz | ./gpi2ofn.pl -s STRCO -n goa_virus_bacteria_taxon_100226 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000425.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000425.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/NEIMB_122586_UP000000425.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/NEIMB_122586_UP000000425.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_122586.ofn: mirror/proteome_UP000000425.gpi.gz
-	gzip -dc mirror/proteome_UP000000425.gpi.gz | ./gpi2ofn.pl -s NEIMB -n goa_virus_bacteria_taxon_122586 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_122586.ofn: mirror/NEIMB_122586_UP000000425.gpi.gz
+	gzip -dc mirror/NEIMB_122586_UP000000425.gpi.gz | ./gpi2ofn.pl -s NEIMB -n goa_virus_bacteria_taxon_122586 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000817.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000817.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/LISMO_169963_UP000000817.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/LISMO_169963_UP000000817.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_169963.ofn: mirror/proteome_UP000000817.gpi.gz
-	gzip -dc mirror/proteome_UP000000817.gpi.gz | ./gpi2ofn.pl -s LISMO -n goa_virus_bacteria_taxon_169963 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_169963.ofn: mirror/LISMO_169963_UP000000817.gpi.gz
+	gzip -dc mirror/LISMO_169963_UP000000817.gpi.gz | ./gpi2ofn.pl -s LISMO -n goa_virus_bacteria_taxon_169963 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000585.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000585.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRPN_170187_UP000000585.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRPN_170187_UP000000585.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_170187.ofn: mirror/proteome_UP000000585.gpi.gz
-	gzip -dc mirror/proteome_UP000000585.gpi.gz | ./gpi2ofn.pl -s STRPN -n goa_virus_bacteria_taxon_170187 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_170187.ofn: mirror/STRPN_170187_UP000000585.gpi.gz
+	gzip -dc mirror/STRPN_170187_UP000000585.gpi.gz | ./gpi2ofn.pl -s STRPN -n goa_virus_bacteria_taxon_170187 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000586.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000586.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRR6_171101_UP000000586.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRR6_171101_UP000000586.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_171101.ofn: mirror/proteome_UP000000586.gpi.gz
-	gzip -dc mirror/proteome_UP000000586.gpi.gz | ./gpi2ofn.pl -s STRR6 -n goa_virus_bacteria_taxon_171101 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_171101.ofn: mirror/STRR6_171101_UP000000586.gpi.gz
+	gzip -dc mirror/STRR6_171101_UP000000586.gpi.gz | ./gpi2ofn.pl -s STRR6 -n goa_virus_bacteria_taxon_171101 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000799.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000799.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/CAMJE_192222_UP000000799.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/CAMJE_192222_UP000000799.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_192222.ofn: mirror/proteome_UP000000799.gpi.gz
-	gzip -dc mirror/proteome_UP000000799.gpi.gz | ./gpi2ofn.pl -s CAMJE -n goa_virus_bacteria_taxon_192222 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_192222.ofn: mirror/CAMJE_192222_UP000000799.gpi.gz
+	gzip -dc mirror/CAMJE_192222_UP000000799.gpi.gz | ./gpi2ofn.pl -s CAMJE -n goa_virus_bacteria_taxon_192222 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000002438.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000002438.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/PSEAE_208964_UP000002438.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/PSEAE_208964_UP000002438.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_208964.ofn: mirror/proteome_UP000002438.gpi.gz
-	gzip -dc mirror/proteome_UP000002438.gpi.gz | ./gpi2ofn.pl -s PSEAE -n goa_virus_bacteria_taxon_208964 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_208964.ofn: mirror/PSEAE_208964_UP000002438.gpi.gz
+	gzip -dc mirror/PSEAE_208964_UP000002438.gpi.gz | ./gpi2ofn.pl -s PSEAE -n goa_virus_bacteria_taxon_208964 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001570.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001570.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/BACSU_224308_UP000001570.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/BACSU_224308_UP000001570.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_224308.ofn: mirror/proteome_UP000001570.gpi.gz
-	gzip -dc mirror/proteome_UP000001570.gpi.gz | ./gpi2ofn.pl -s BACSU -n goa_virus_bacteria_taxon_224308 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_224308.ofn: mirror/BACSU_224308_UP000001570.gpi.gz
+	gzip -dc mirror/BACSU_224308_UP000001570.gpi.gz | ./gpi2ofn.pl -s BACSU -n goa_virus_bacteria_taxon_224308 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001415.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001415.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ENTFA_226185_UP000001415.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ENTFA_226185_UP000001415.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_226185.ofn: mirror/proteome_UP000001415.gpi.gz
-	gzip -dc mirror/proteome_UP000001415.gpi.gz | ./gpi2ofn.pl -s ENTFA -n goa_virus_bacteria_taxon_226185 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_226185.ofn: mirror/ENTFA_226185_UP000001415.gpi.gz
+	gzip -dc mirror/ENTFA_226185_UP000001415.gpi.gz | ./gpi2ofn.pl -s ENTFA -n goa_virus_bacteria_taxon_226185 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000807.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000807.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/MYCGE_243273_UP000000807.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/MYCGE_243273_UP000000807.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_243273.ofn: mirror/proteome_UP000000807.gpi.gz
-	gzip -dc mirror/proteome_UP000000807.gpi.gz | ./gpi2ofn.pl -s MYCGE -n goa_virus_bacteria_taxon_243273 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_243273.ofn: mirror/MYCGE_243273_UP000000807.gpi.gz
+	gzip -dc mirror/MYCGE_243273_UP000000807.gpi.gz | ./gpi2ofn.pl -s MYCGE -n goa_virus_bacteria_taxon_243273 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001258.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001258.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HALH5_272558_UP000001258.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HALH5_272558_UP000001258.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_272558.ofn: mirror/proteome_UP000001258.gpi.gz
-	gzip -dc mirror/proteome_UP000001258.gpi.gz | ./gpi2ofn.pl -s HALH5 -n goa_virus_bacteria_taxon_272558 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_272558.ofn: mirror/HALH5_272558_UP000001258.gpi.gz
+	gzip -dc mirror/HALH5_272558_UP000001258.gpi.gz | ./gpi2ofn.pl -s HALH5 -n goa_virus_bacteria_taxon_272558 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000808.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000808.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/MYCPN_272634_UP000000808.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/MYCPN_272634_UP000000808.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_272634.ofn: mirror/proteome_UP000000808.gpi.gz
-	gzip -dc mirror/proteome_UP000000808.gpi.gz | ./gpi2ofn.pl -s MYCPN -n goa_virus_bacteria_taxon_272634 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_272634.ofn: mirror/MYCPN_272634_UP000000808.gpi.gz
+	gzip -dc mirror/MYCPN_272634_UP000000808.gpi.gz | ./gpi2ofn.pl -s MYCPN -n goa_virus_bacteria_taxon_272634 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000938.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000938.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HCMVM_295027_UP000000938.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HCMVM_295027_UP000000938.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_295027.ofn: mirror/proteome_UP000000938.gpi.gz
-	gzip -dc mirror/proteome_UP000000938.gpi.gz | ./gpi2ofn.pl -s HCMVM -n goa_virus_bacteria_taxon_295027 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_295027.ofn: mirror/HCMVM_295027_UP000000938.gpi.gz
+	gzip -dc mirror/HCMVM_295027_UP000000938.gpi.gz | ./gpi2ofn.pl -s HCMVM -n goa_virus_bacteria_taxon_295027 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000000750.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000000750.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRP1_301447_UP000000750.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRP1_301447_UP000000750.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_301447.ofn: mirror/proteome_UP000000750.gpi.gz
-	gzip -dc mirror/proteome_UP000000750.gpi.gz | ./gpi2ofn.pl -s STRP1 -n goa_virus_bacteria_taxon_301447 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_301447.ofn: mirror/STRP1_301447_UP000000750.gpi.gz
+	gzip -dc mirror/STRP1_301447_UP000000750.gpi.gz | ./gpi2ofn.pl -s STRP1 -n goa_virus_bacteria_taxon_301447 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000007689.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000007689.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HV1AN_327105_UP000007689.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HV1AN_327105_UP000007689.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_327105.ofn: mirror/proteome_UP000007689.gpi.gz
-	gzip -dc mirror/proteome_UP000007689.gpi.gz | ./gpi2ofn.pl -s HV1AN -n goa_virus_bacteria_taxon_327105 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_327105.ofn: mirror/HV1AN_327105_UP000007689.gpi.gz
+	gzip -dc mirror/HV1AN_327105_UP000007689.gpi.gz | ./gpi2ofn.pl -s HV1AN -n goa_virus_bacteria_taxon_327105 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000009251.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000009251.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HPV16_333760_UP000009251.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HPV16_333760_UP000009251.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_333760.ofn: mirror/proteome_UP000009251.gpi.gz
-	gzip -dc mirror/proteome_UP000009251.gpi.gz | ./gpi2ofn.pl -s HPV16 -n goa_virus_bacteria_taxon_333760 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_333760.ofn: mirror/HPV16_333760_UP000009251.gpi.gz
+	gzip -dc mirror/HPV16_333760_UP000009251.gpi.gz | ./gpi2ofn.pl -s HPV16 -n goa_virus_bacteria_taxon_333760 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001452.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001452.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/STRP2_373153_UP000001452.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/STRP2_373153_UP000001452.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_373153.ofn: mirror/proteome_UP000001452.gpi.gz
-	gzip -dc mirror/proteome_UP000001452.gpi.gz | ./gpi2ofn.pl -s STRP2 -n goa_virus_bacteria_taxon_373153 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_373153.ofn: mirror/STRP2_373153_UP000001452.gpi.gz
+	gzip -dc mirror/STRP2_373153_UP000001452.gpi.gz | ./gpi2ofn.pl -s STRP2 -n goa_virus_bacteria_taxon_373153 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000001988.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000001988.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/MYCTA_419947_UP000001988.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/MYCTA_419947_UP000001988.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_419947.ofn: mirror/proteome_UP000001988.gpi.gz
-	gzip -dc mirror/proteome_UP000001988.gpi.gz | ./gpi2ofn.pl -s MYCTA -n goa_virus_bacteria_taxon_419947 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_419947.ofn: mirror/MYCTA_419947_UP000001988.gpi.gz
+	gzip -dc mirror/MYCTA_419947_UP000001988.gpi.gz | ./gpi2ofn.pl -s MYCTA -n goa_virus_bacteria_taxon_419947 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000012675.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000012675.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ENTCA_565655_UP000012675.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ENTCA_565655_UP000012675.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_565655.ofn: mirror/proteome_UP000012675.gpi.gz
-	gzip -dc mirror/proteome_UP000012675.gpi.gz | ./gpi2ofn.pl -s ENTCA -n goa_virus_bacteria_taxon_565655 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_565655.ofn: mirror/ENTCA_565655_UP000012675.gpi.gz
+	gzip -dc mirror/ENTCA_565655_UP000012675.gpi.gz | ./gpi2ofn.pl -s ENTCA -n goa_virus_bacteria_taxon_565655 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000005740.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000005740.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/ACIB2_575584_UP000005740.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/ACIB2_575584_UP000005740.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_575584.ofn: mirror/proteome_UP000005740.gpi.gz
-	gzip -dc mirror/proteome_UP000005740.gpi.gz | ./gpi2ofn.pl -s ACIB2 -n goa_virus_bacteria_taxon_575584 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_575584.ofn: mirror/ACIB2_575584_UP000005740.gpi.gz
+	gzip -dc mirror/ACIB2_575584_UP000005740.gpi.gz | ./gpi2ofn.pl -s ACIB2 -n goa_virus_bacteria_taxon_575584 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000002060.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000002060.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/VAR67_587200_UP000002060.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/VAR67_587200_UP000002060.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_587200.ofn: mirror/proteome_UP000002060.gpi.gz
-	gzip -dc mirror/proteome_UP000002060.gpi.gz | ./gpi2ofn.pl -s VAR67 -n goa_virus_bacteria_taxon_587200 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_587200.ofn: mirror/VAR67_587200_UP000002060.gpi.gz
+	gzip -dc mirror/VAR67_587200_UP000002060.gpi.gz | ./gpi2ofn.pl -s VAR67 -n goa_virus_bacteria_taxon_587200 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000008699.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000008699.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/MEASC_645098_UP000008699.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/MEASC_645098_UP000008699.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_645098.ofn: mirror/proteome_UP000008699.gpi.gz
-	gzip -dc mirror/proteome_UP000008699.gpi.gz | ./gpi2ofn.pl -s MEASC -n goa_virus_bacteria_taxon_645098 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_645098.ofn: mirror/MEASC_645098_UP000008699.gpi.gz
+	gzip -dc mirror/MEASC_645098_UP000008699.gpi.gz | ./gpi2ofn.pl -s MEASC -n goa_virus_bacteria_taxon_645098 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000008591.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000008591.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/HBVCJ_928302_UP000008591.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/HBVCJ_928302_UP000008591.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_928302.ofn: mirror/proteome_UP000008591.gpi.gz
-	gzip -dc mirror/proteome_UP000008591.gpi.gz | ./gpi2ofn.pl -s HBVCJ -n goa_virus_bacteria_taxon_928302 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_928302.ofn: mirror/HBVCJ_928302_UP000008591.gpi.gz
+	gzip -dc mirror/HBVCJ_928302_UP000008591.gpi.gz | ./gpi2ofn.pl -s HBVCJ -n goa_virus_bacteria_taxon_928302 > $@.tmp && mv $@.tmp $@
 
 
-mirror/proteome_UP000007841.gpi.gz: 
-	wget --no-check-certificate https://mirror.geneontology.io/proteome_UP000007841.gpi.gz -O $@.tmp && mv $@.tmp $@
+mirror/KLEPH_1125630_UP000007841.gpi.gz: 
+	wget --no-check-certificate https://mirror.geneontology.io/KLEPH_1125630_UP000007841.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-goa_virus_bacteria_taxon_1125630.ofn: mirror/proteome_UP000007841.gpi.gz
-	gzip -dc mirror/proteome_UP000007841.gpi.gz | ./gpi2ofn.pl -s KLEPH -n goa_virus_bacteria_taxon_1125630 > $@.tmp && mv $@.tmp $@
+target/neo-goa_virus_bacteria_taxon_1125630.ofn: mirror/KLEPH_1125630_UP000007841.gpi.gz
+	gzip -dc mirror/KLEPH_1125630_UP000007841.gpi.gz | ./gpi2ofn.pl -s KLEPH -n goa_virus_bacteria_taxon_1125630 > $@.tmp && mv $@.tmp $@
 
 
 mirror/japonicusdb.gpi.gz: 
@@ -542,6 +542,14 @@ target/neo-paint_pombase.ofn: mirror/gene_association.paint_pombase.gaf.gz
 	gzip -dc mirror/gene_association.paint_pombase.gaf.gz | ./gaf2ofn.pl -s Spom -n paint_pombase > $@.tmp && mv $@.tmp $@
 
 
+mirror/gene_association.paint_japonicusdb.gaf.gz: 
+	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_japonicusdb.gaf.gz -O $@.tmp && mv $@.tmp $@
+
+
+target/neo-paint_japonicusdb.ofn: mirror/gene_association.paint_japonicusdb.gaf.gz
+	gzip -dc mirror/gene_association.paint_japonicusdb.gaf.gz | ./gaf2ofn.pl -s Sjap -n paint_japonicusdb > $@.tmp && mv $@.tmp $@
+
+
 mirror/gene_association.paint_rgd.gaf.gz: 
 	wget --no-check-certificate ftp://ftp.pantherdb.org/downloads/paint/presubmission/gene_association.paint_rgd.gaf.gz -O $@.tmp && mv $@.tmp $@
 
@@ -598,12 +606,12 @@ target/neo-pombase.ofn: mirror/pombase.gpi.gz
 	gzip -dc mirror/pombase.gpi.gz | ./gpi2ofn.pl -s Spom -n pombase > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.pseudocap.gz: 
-	wget --no-check-certificate https://github.com/brinkmanlab/pseudomonas-genome-database/raw/master/pseudocap-annotation-files/gene_association.pseudocap.gz -O $@.tmp && mv $@.tmp $@
+mirror/PSEAE_208964_UP000002438.gaf.gz: 
+	wget --no-check-certificate https://ftp.ebi.ac.uk/pub/contrib/goa/goex/current/gaf/PSEAE_208964_UP000002438.gaf.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-pseudocap.ofn: mirror/gene_association.pseudocap.gz
-	gzip -dc mirror/gene_association.pseudocap.gz | ./gaf2ofn.pl -s Pseudomonas -n pseudocap > $@.tmp && mv $@.tmp $@
+target/neo-pseudocap.ofn: mirror/PSEAE_208964_UP000002438.gaf.gz
+	gzip -dc mirror/PSEAE_208964_UP000002438.gaf.gz | ./gaf2ofn.pl -s Pseudomonas -n pseudocap > $@.tmp && mv $@.tmp $@
 
 
 mirror/gene_association.reactome.gz: 
@@ -614,12 +622,12 @@ target/neo-reactome.ofn: mirror/gene_association.reactome.gz
 	gzip -dc mirror/gene_association.reactome.gz | ./gaf2ofn.pl -s reactome -n reactome > $@.tmp && mv $@.tmp $@
 
 
-mirror/gene_association.rgd.gz: 
-	wget --no-check-certificate https://github.com/rat-genome-database/rgd-annotation-files/raw/master/gene_association.rgd.gz -O $@.tmp && mv $@.tmp $@
+mirror/rgd.gpi.gz: 
+	wget --no-check-certificate https://github.com/rat-genome-database/rgd-annotation-files/raw/master/rgd.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
-target/neo-rgd.ofn: mirror/gene_association.rgd.gz
-	gzip -dc mirror/gene_association.rgd.gz | ./gaf2ofn.pl -s Rnor -n rgd > $@.tmp && mv $@.tmp $@
+target/neo-rgd.ofn: mirror/rgd.gpi.gz
+	gzip -dc mirror/rgd.gpi.gz | ./gpi2ofn.pl -s Rnor -n rgd > $@.tmp && mv $@.tmp $@
 
 
 mirror/rnacentral.gpi.gz: 
@@ -663,7 +671,7 @@ target/neo-wb.ofn: mirror/c_elegans.canonical_bioproject.current.gene_product_in
 
 
 mirror/xenbase.gpi.gz: 
-	wget --no-check-certificate https://ftp.xenbase.org/pub/GenePageReports/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
+	wget --no-check-certificate https://go-build.s3.us-east-1.amazonaws.com/xenbase.gpi.gz -O $@.tmp && mv $@.tmp $@
 
 
 target/neo-xenbase.ofn: mirror/xenbase.gpi.gz
