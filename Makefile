@@ -28,11 +28,11 @@ trigger:
 	touch $@
 
 IMPORTS = imports/pr_import.obo
-neo.ofn: $(OFN_SRCS) $(IMPORTS)
-	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f ofn -o $@.tmp && mv $@.tmp $@
+neo.owl: $(OFN_SRCS) $(IMPORTS)
+	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f owl -o $@.tmp && mv $@.tmp $@
 
-neo.ofn.gz: neo.ofn
-	gzip --keep neo.ofn
+neo.owl.gz: neo.owl
+	gzip --keep neo.owl
 
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
