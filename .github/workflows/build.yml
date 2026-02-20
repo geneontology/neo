@@ -20,4 +20,4 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - run: make target neo.ofn.gz
+      - run: make target neo.owl.gz
