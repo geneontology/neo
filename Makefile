@@ -31,6 +31,9 @@ IMPORTS = imports/pr_import.obo
 neo.owl: $(OFN_SRCS) $(IMPORTS)
 	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f owl -o $@.tmp && mv $@.tmp $@
 
+neo.owl.gz: neo.owl
+	gzip --keep neo.owl
+
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
 datasets.json: trigger
