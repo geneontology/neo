@@ -40,6 +40,12 @@ This runs the [Makefile](Makefile) in this repository, and deploys the
 resulting ontology on S3, where it is available in multiple regions
 via cloudfront.
 
+Gzipped OWL builds are also published as `neo.owl.gz` assets on
+[GitHub Releases](https://github.com/geneontology/neo/releases), tagged with
+the release date (`vYYYY-MM-DD`). Each ontology keeps the IRI
+`http://purl.obolibrary.org/obo/go/noctua/neo.owl` and has a version IRI such as
+`http://purl.obolibrary.org/obo/go/noctua/releases/2026-09-11/neo.owl`.
+
 # Contents (abstract)
 
 The contents of NEO are largely driven by the contents of each GOC
@@ -143,7 +149,21 @@ used.
 
 ## Build frequency
 
-Currently NEO builds are manually triggered.
+The GitHub Actions [Build workflow](.github/workflows/build.yml) runs every
+Friday at 06:17 UTC. After a successful build on `master`, it tags the exact
+commit that was built and publishes a dated release with `neo.owl.gz` attached.
+The release date is captured once in UTC and used for both the tag and the
+ontology version IRI. An existing release for that date is not overwritten.
+
+The workflow can also be triggered manually from the Actions tab. Runs on
+other branches build and upload a workflow artifact without publishing a
+release, so PR changes can be tested before merging. The weekly schedule
+becomes active once the workflow is merged into `master`.
+
+For a local build, `make target neo.owl.gz` defaults to today's UTC date.
+Override it with `make target neo.owl.gz RELEASE_DATE=2026-09-11`. If an
+ontology has already been built, remove `neo.owl` and `neo.owl.gz` first to
+rebuild it with a different version IRI.
 
 ## Troubleshooting
 

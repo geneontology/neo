@@ -1,23 +1,67 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Build
 
-# Controls when the action will run. 
 on:
-  # Allows you to run this workflow manually from the Actions tab
+  schedule:
+    # Every Friday at 06:17 UTC.
+    - cron: '17 6 * * 5'
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  contents: read
+
+concurrency:
+  group: neo-build-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     container: obolibrary/odkfull:v1.5.4
+    outputs:
+      release_date: ${{ steps.release-date.outputs.date }}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - run: make target neo.owl.gz
+      - name: Set release date
+        id: release-date
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Build neo.owl.gz
+        env:
+          RELEASE_DATE: ${{ steps.release-date.outputs.date }}
+        run: make target neo.owl.gz RELEASE_DATE="$RELEASE_DATE"
+
+      - name: Check compressed ontology
+        run: gzip -t neo.owl.gz
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: neo-${{ steps.release-date.outputs.date }}
+          path: neo.owl.gz
+          if-no-files-found: error
+          compression-level: 0
+
+  release:
+    needs: build
+    if: github.repository == 'geneontology/neo' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_DATE: ${{ needs.build.outputs.release_date }}
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: neo-${{ needs.build.outputs.release_date }}
+
+      - name: Tag and publish release
+        run: |
+          gh release create "v$RELEASE_DATE" neo.owl.gz \
+            --target "$GITHUB_SHA" \
+            --title "NEO $RELEASE_DATE" \
+            --notes "NEO release for $RELEASE_DATE. Version IRI: http://purl.obolibrary.org/obo/go/noctua/releases/$RELEASE_DATE/neo.owl" \
+            --latest

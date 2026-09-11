@@ -1,4 +1,5 @@
 OBO = http://purl.obolibrary.org/obo
+RELEASE_DATE ?= $(shell date -u +%Y-%m-%d)
 
 all: target all_ofn neo.obo neo.owl
 
@@ -29,10 +30,13 @@ trigger:
 
 IMPORTS = imports/pr_import.obo
 neo.owl: $(OFN_SRCS) $(IMPORTS)
-	$(ROBOT) merge $(addprefix -i ,$^) annotate --ontology-iri 'http://purl.obolibrary.org/obo/go/noctua/neo.owl' convert -f owl -o $@.tmp && mv $@.tmp $@
+	$(ROBOT) merge $(addprefix -i ,$^) annotate \
+		--ontology-iri '$(OBO)/go/noctua/neo.owl' \
+		--version-iri '$(OBO)/go/noctua/releases/$(RELEASE_DATE)/neo.owl' \
+		convert -f owl -o $@.tmp && mv $@.tmp $@
 
 neo.owl.gz: neo.owl
-	gzip --keep neo.owl
+	gzip -c $< > $@.tmp && mv $@.tmp $@
 
 ## datasets.json is created as a throwaway in the NEO versions of the
 ## pipeline and is based on the go-site master data.
