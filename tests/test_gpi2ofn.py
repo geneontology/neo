@@ -73,7 +73,7 @@ class GpiConversionTest(unittest.TestCase):
                 self.assertIn(f'SubClassOf(WB:entity {entity_type})', output)
                 self.assertNotIn('CHEBI:33695)', output)
 
-    def test_malformed_version_header_is_rejected(self):
+    def test_malformed_gpi_2_version_header_is_rejected(self):
         # GPI_Header requires one literal space after the colon. Invalid
         # headers must not silently select the default GPI 1.2 column layout.
         row = [
@@ -96,6 +96,31 @@ class GpiConversionTest(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertIn("Invalid GPI version header on line 1", result.stderr)
                 self.assertNotIn("Declaration(Class(", result.stdout)
+
+    def test_gpi_1_2_legacy_header_compatibility(self):
+        row = [
+            "WB", "WBGene00000001", "aap-1", "", "", "protein",
+            "taxon:6239", "", "", "",
+        ]
+        expected = self.convert("1.2", [row])
+        # These were all accepted before GPI 2.x header validation was added,
+        # either by recognizing version 1.2 or by retaining the default.
+        for header in (
+            "!gpi-version:1.2\n", "!gpi-version:  1.2\n",
+            "!gpi-version:\t1.2\n", "!gpi-version: 1.2 \n",
+            "!gpi-version: 1.2\r\n", "",
+        ):
+            with self.subTest(header=header):
+                result = subprocess.run(
+                    ["perl", "gpi2ofn.pl", "-s", "Cele", "-n", "wb"],
+                    cwd=ROOT,
+                    input=header + "\t".join(row) + "\n",
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                self.assertEqual(result.stderr, "")
+                self.assertEqual(result.stdout, expected)
 
     def test_gpi_1_2_legacy_mapping(self):
         for entity_type, parent_type, category in (

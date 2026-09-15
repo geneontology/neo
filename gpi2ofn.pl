@@ -39,9 +39,14 @@ while(<>) {
     chomp;
     $line_no++;
     if (m@^\!@) {
-        if (m@^\!gpi-version:@) {
-            m@^\!gpi-version: (\d+\.\d+)$@
+        # Invalid GPI 2.x headers must not fall back to the 1.2 column layout.
+        if (m@^\!gpi-version:\s*2@) {
+            m@^\!gpi-version: (2\.\d+)$@
                 or die "Invalid GPI version header on line $line_no: expected '!gpi-version: <version>' with exactly one space after ':'\n";
+            $gpi_version = $1;
+        }
+        # Preserve the historical header handling for legacy GPI sources.
+        elsif (m@^\!gpi-version: (\S+)@) {
             $gpi_version = $1;
         }
     }
