@@ -20,7 +20,7 @@ test_ofn: target $(patsubst %,target/neo-%.ofn,$(TEST_SRCS))
 
 #test: touch_trigger test_obo
 test:
-	echo "tests disabled until its easier to run perl on travis"
+	python3 -B -m unittest discover -s tests -v
 
 touch_trigger:
 	touch trigger
