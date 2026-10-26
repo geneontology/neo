@@ -90,6 +90,10 @@ while(<>) {
     my @xrefs = split(/\|/,$xrefs_str);
     my @parents = split(/\|/,$parents_str);
 
+    # Keep only xrefs to entity namespaces (prefixes as in go-site db-xrefs.yaml);
+    # these also become related synonyms below.
+    @xrefs = grep { m@^(UniProtKB|RNAcentral|ComplexPortal):@ } @xrefs;
+
     # See: https://github.com/geneontology/noctua/issues/663
     push(@syns, $local_id);
 
@@ -162,6 +166,11 @@ while(<>) {
     # GPI 2.0 supplies ontology IDs (including specific SO RNA/gene types).
     # Preserve those IDs; GPI 1.x still needs the textual type mapping above.
     @types = ($type) unless $gpi_version =~ m@^2@;
+    # Every entry except complexes is also asserted to be an information
+    # biomacromolecule, for backwards compatibility with consumers that expect
+    # CHEBI:33695. Complexes keep only GO:0032991, as before.
+    push(@types, 'CHEBI:33695')
+        unless $bltype eq 'MacromolecularComplex' || grep { $_ eq 'CHEBI:33695' } @types;
     print "SubClassOf($id $_)\n" foreach @types;
     print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
     print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $_))\n" foreach @parents;

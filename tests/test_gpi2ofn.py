@@ -39,10 +39,10 @@ class GpiConversionTest(unittest.TestCase):
             'AnnotationAssertion(oboInOwl:hasDbXref WB:WBGene00000001 "UniProtKB:G5EDP9")',
             'AnnotationAssertion(biolink:category WB:WBGene00000001 biolink:Protein)',
             'SubClassOf(WB:WBGene00000001 PR:000000001)',
+            'SubClassOf(WB:WBGene00000001 CHEBI:33695)',
             'SubClassOf(WB:WBGene00000001 ObjectSomeValuesFrom(obo:RO_0002162 NCBITaxon:6239))',
         ]:
             self.assertIn(axiom, output)
-        self.assertNotIn('CHEBI:33695)', output)
 
     def test_gpi_2_relationship_columns_and_multiple_types(self):
         output = self.convert("2.0", [[
@@ -53,6 +53,7 @@ class GpiConversionTest(unittest.TestCase):
         ]])
         self.assertIn('SubClassOf(WB:complex GO:0032991)', output)
         self.assertIn('SubClassOf(WB:complex GO:1990391)', output)
+        self.assertNotIn('SubClassOf(WB:complex CHEBI:33695)', output)
         self.assertIn('AnnotationAssertion(biolink:category WB:complex biolink:MacromolecularComplex)', output)
         self.assertIn('SubClassOf(WB:complex ObjectSomeValuesFrom(neo:has_gene_template WB:gene1))', output)
         self.assertIn('SubClassOf(WB:complex ObjectSomeValuesFrom(neo:has_gene_template WB:gene2))', output)
@@ -71,7 +72,32 @@ class GpiConversionTest(unittest.TestCase):
                 ]])
                 self.assertIn('Prefix(SO:=<http://purl.obolibrary.org/obo/SO_>)', output)
                 self.assertIn(f'SubClassOf(WB:entity {entity_type})', output)
-                self.assertNotIn('CHEBI:33695)', output)
+                self.assertIn('SubClassOf(WB:entity CHEBI:33695)', output)
+
+    def test_xrefs_limited_to_entity_namespaces(self):
+        for version, row in (
+            ("2.0", [
+                "WB:entity", "entity", "", "", "PR:000000001", "NCBITaxon:6239",
+                "", "", "", "{xrefs}", "",
+            ]),
+            ("1.2", [
+                "WB", "entity", "entity", "", "", "protein", "taxon:6239",
+                "", "{xrefs}", "",
+            ]),
+        ):
+            with self.subTest(version=version):
+                xrefs = ("UniProtKB:P1|RNAcentral:URS1_6239|ComplexPortal:CPX-1|"
+                         "EMBL:AB1|RefSeq:NP_1|HGNC:HGNC:1|UniProtKB-KW:KW-0001|"
+                         "uniprotkb:P2")
+                output = self.convert(version, [[c.format(xrefs=xrefs) for c in row]])
+                for kept, synonym in (("UniProtKB:P1", "P1"),
+                                      ("RNAcentral:URS1_6239", "URS1_6239"),
+                                      ("ComplexPortal:CPX-1", "CPX-1")):
+                    self.assertIn(f'AnnotationAssertion(oboInOwl:hasDbXref WB:entity "{kept}")', output)
+                    self.assertIn(f'AnnotationAssertion(oboInOwl:hasRelatedSynonym WB:entity "{synonym}")', output)
+                self.assertEqual(output.count('oboInOwl:hasDbXref'), 3)
+                for dropped in ("AB1", "NP_1", "HGNC:1", "KW-0001", "P2"):
+                    self.assertNotIn(f'"{dropped}"', output)
 
     def test_malformed_gpi_2_version_header_is_rejected(self):
         # GPI_Header requires one literal space after the colon. Invalid
@@ -123,11 +149,11 @@ class GpiConversionTest(unittest.TestCase):
                 self.assertEqual(result.stdout, expected)
 
     def test_gpi_1_2_legacy_mapping(self):
-        for entity_type, parent_type, category in (
-            ("protein", "CHEBI:36080", "Protein"),
-            ("transcript", "CHEBI:33697", "RNAProduct"),
-            ("protein_complex", "GO:0032991", "MacromolecularComplex"),
-            ("gene", "CHEBI:33695", "GeneProduct"),
+        for entity_type, parent_type, category, chebi_33695 in (
+            ("protein", "CHEBI:36080", "Protein", 1),
+            ("transcript", "CHEBI:33697", "RNAProduct", 1),
+            ("protein_complex", "GO:0032991", "MacromolecularComplex", 0),
+            ("gene", "CHEBI:33695", "GeneProduct", 1),
         ):
             with self.subTest(entity_type=entity_type):
                 output = self.convert("1.2", [[
@@ -135,6 +161,7 @@ class GpiConversionTest(unittest.TestCase):
                     "taxon:6239", "WB:gene1|WB:gene2", "UniProtKB:xref", "",
                 ]])
                 self.assertIn(f'SubClassOf(WB:entity {parent_type})', output)
+                self.assertEqual(output.count('SubClassOf(WB:entity CHEBI:33695)'), chebi_33695)
                 self.assertIn('AnnotationAssertion(oboInOwl:hasExactSynonym WB:entity "Full entity name Cele")', output)
                 self.assertIn(f'AnnotationAssertion(biolink:category WB:entity biolink:{category})', output)
                 self.assertIn('AnnotationAssertion(oboInOwl:hasDbXref WB:entity "UniProtKB:xref")', output)
