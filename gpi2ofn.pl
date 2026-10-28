@@ -39,7 +39,14 @@ while(<>) {
     chomp;
     $line_no++;
     if (m@^\!@) {
-        if (m@^\!gpi-version: (\S+)@) {
+        # Invalid GPI 2.x headers must not fall back to the 1.2 column layout.
+        if (m@^\!gpi-version:\s*2@) {
+            m@^\!gpi-version: (2\.\d+)$@
+                or die "Invalid GPI version header on line $line_no: expected '!gpi-version: <version>' with exactly one space after ':'\n";
+            $gpi_version = $1;
+        }
+        # Preserve the historical header handling for legacy GPI sources.
+        elsif (m@^\!gpi-version: (\S+)@) {
             $gpi_version = $1;
         }
     }
@@ -54,8 +61,10 @@ while(<>) {
     }
     my ($db, $local_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parents_str, $xrefs_str, $props) = @vals;
     if ($gpi_version =~ m@^2@) {
-        my $global_id;
-        ($global_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parents_str, $xrefs_str, $props) = @vals;
+        my ($global_id, $canonical_ids, $complex_members);
+        # GPI 2.0 adds canonical IDs and complex members before DB xrefs.
+        ($global_id, $symbol, $fullname, $syns_str, $type_str, $tax_id, $parents_str,
+         $canonical_ids, $complex_members, $xrefs_str, $props) = @vals;
         if ($global_id =~ m@^(\w+):(\S+)@) {
             ($db, $local_id) = ($1,$2);
         }
@@ -81,12 +90,16 @@ while(<>) {
     my @xrefs = split(/\|/,$xrefs_str);
     my @parents = split(/\|/,$parents_str);
 
+    # Keep only xrefs to entity namespaces (prefixes as in go-site db-xrefs.yaml);
+    # these also become related synonyms below.
+    @xrefs = grep { m@^(UniProtKB|RNAcentral|ComplexPortal):@ } @xrefs;
+
     # See: https://github.com/geneontology/noctua/issues/663
     push(@syns, $local_id);
 
     @syns = map {dequote($_)} @syns;
     $symbol = dequote($symbol);
-    $fullname = dequote($symbol);
+    $fullname = dequote($fullname);
 
     my $id = $db eq 'MGI' ? $local_id : "$db:$local_id";
 
@@ -115,7 +128,8 @@ while(<>) {
 
     my $bltype = 'GeneProduct';
     my $type = 'CHEBI:33695'; #information biomacromolecule
-    if ($type_str eq 'protein') {
+    my @types = split(/\|/, $type_str);
+    if ($type_str eq 'protein' || grep { $_ eq 'PR:000000001' } @types) {
         $type = 'CHEBI:36080'; #protein
         $bltype = 'Protein';
     }
@@ -128,7 +142,7 @@ while(<>) {
         $bltype = 'MacromolecularComplex';
     }
     ## Attempt to address https://github.com/geneontology/noctua/issues/880
-    elsif ($type_str eq 'GO:0032991') {
+    elsif (grep { $_ eq 'GO:0032991' } @types) {
         $type = 'GO:0032991'; #macromolecular complex
         $bltype = 'MacromolecularComplex';
     }
@@ -149,7 +163,15 @@ while(<>) {
     print "AnnotationAssertion(oboInOwl:hasDbXref $id \"$_\")\n" foreach @xrefs;
     print "AnnotationAssertion(biolink:category $id biolink:MacromolecularMachine)\n";
     print "AnnotationAssertion(biolink:category $id biolink:$bltype)\n";
-    print "SubClassOf($id $type)\n";
+    # GPI 2.0 supplies ontology IDs (including specific SO RNA/gene types).
+    # Preserve those IDs; GPI 1.x still needs the textual type mapping above.
+    @types = ($type) unless $gpi_version =~ m@^2@;
+    # Every entry except complexes is also asserted to be an information
+    # biomacromolecule, for backwards compatibility with consumers that expect
+    # CHEBI:33695. Complexes keep only GO:0032991, as before.
+    push(@types, 'CHEBI:33695')
+        unless $bltype eq 'MacromolecularComplex' || grep { $_ eq 'CHEBI:33695' } @types;
+    print "SubClassOf($id $_)\n" foreach @types;
     print "SubClassOf($id ObjectSomeValuesFrom(obo:RO_0002162 $tax_id))\n";
     print "SubClassOf($id ObjectSomeValuesFrom(neo:has_gene_template $_))\n" foreach @parents;
     print "\n";
