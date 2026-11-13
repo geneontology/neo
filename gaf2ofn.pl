@@ -147,5 +147,10 @@ sub expand {
     s@^MGI:@MGI:MGI:@;
     # Work around colon in TAIR prefix
     s@^TAIR:locus:@TAIR_locus:@;
+    # Arabidopsis loci belong in the AGI_LocusCode namespace. Some upstream
+    # GAFs have carried "TAIR" in the DB column instead (GOEx-pipeline#20);
+    # accept both spellings and always emit AGI_LocusCode. Input that already
+    # uses AGI_LocusCode is untouched.
+    s@^TAIR:(?!locus:)@AGI_LocusCode:@;
     return $_;
 }
