@@ -147,10 +147,13 @@ sub expand {
     s@^MGI:@MGI:MGI:@;
     # Work around colon in TAIR prefix
     s@^TAIR:locus:@TAIR_locus:@;
-    # Arabidopsis loci belong in the AGI_LocusCode namespace. Some upstream
-    # GAFs have carried "TAIR" in the DB column instead (GOEx-pipeline#20);
-    # accept both spellings and always emit AGI_LocusCode. Input that already
-    # uses AGI_LocusCode is untouched.
+    # WORKAROUND, remove when upstream is stable: the Arabidopsis GAF should
+    # have AGI_LocusCode in the DB column, but some upstream files have had
+    # TAIR there instead; see
+    # https://github.com/geneontology/GOEx-pipeline/issues/20
+    # Rewrite TAIR to AGI_LocusCode so the emitted IDs are the same for both.
+    # Input that already uses AGI_LocusCode is unchanged. Applies to this
+    # one prefix only; TAIR:locus: is handled by the line above.
     s@^TAIR:(?!locus:)@AGI_LocusCode:@;
     return $_;
 }
