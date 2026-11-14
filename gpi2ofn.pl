@@ -39,6 +39,14 @@ while(<>) {
     chomp;
     $line_no++;
     if (m@^\!@) {
+        # WORKAROUND, remove when upstream is stable: some GPI files have
+        # trailing whitespace on their header lines (the WormBase file has
+        # "!gpi-version: 2.0" followed by tabs); see
+        # https://github.com/geneontology/go-site/issues/2791
+        # Trim it so the version check below sees the bare value. Applies to
+        # header ("!") lines only; data rows are not touched, and the rule
+        # of exactly one space after the colon is still enforced.
+        s@\s+$@@;
         # Invalid GPI 2.x headers must not fall back to the 1.2 column layout.
         if (m@^\!gpi-version:\s*2@) {
             m@^\!gpi-version: (2\.\d+)$@
