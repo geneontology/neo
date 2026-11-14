@@ -109,7 +109,7 @@ class GpiConversionTest(unittest.TestCase):
         ]
         for header in (
             "!gpi-version:2.0", "!gpi-version:  2.0",
-            "!gpi-version:\t2.0", "!gpi-version: 2.0 ",
+            "!gpi-version:\t2.0", "!gpi-version: 2.0 x",
         ):
             with self.subTest(header=header):
                 result = subprocess.run(
@@ -122,6 +122,33 @@ class GpiConversionTest(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertIn("Invalid GPI version header on line 1", result.stderr)
                 self.assertNotIn("Declaration(Class(", result.stdout)
+
+    def test_gpi_2_header_trailing_whitespace_is_trimmed(self):
+        # go-site#2791: the WormBase GPI 2.0 file has trailing tabs on its
+        # header lines. Trailing whitespace must not change the output.
+        row = [
+            "WB:WBGene00000001", "aap-1",
+            "phosphoinositide kinase AdAPter subunit", "CELE_Y110A7A.10",
+            "PR:000000001", "NCBITaxon:6239", "", "WB:WBGene00000001", "",
+            "UniProtKB:G5EDP9", "",
+        ]
+        expected = self.convert("2.0", [row])
+        self.assertIn('SubClassOf(WB:WBGene00000001 PR:000000001)', expected)
+        for header in (
+            "!gpi-version: 2.0\t\t\t\n!generated-by: WB\t\t\t\t\n",
+            "!gpi-version: 2.0 \n", "!gpi-version: 2.0\r\n",
+        ):
+            with self.subTest(header=header):
+                result = subprocess.run(
+                    ["perl", "gpi2ofn.pl", "-s", "Cele", "-n", "wb"],
+                    cwd=ROOT,
+                    input=header + "\t".join(row) + "\n",
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                self.assertEqual(result.stderr, "")
+                self.assertEqual(result.stdout, expected)
 
     def test_gpi_1_2_legacy_header_compatibility(self):
         row = [
